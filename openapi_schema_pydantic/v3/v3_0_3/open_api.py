@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 from .info import Info
 from .server import Server
+from .components import Components
 
 class OpenAPI(BaseModel):
     """This is the root document object of the OpenAPI document."""

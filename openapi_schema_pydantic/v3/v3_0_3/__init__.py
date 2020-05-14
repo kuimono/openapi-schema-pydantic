@@ -4,7 +4,7 @@ from .contact import Contact
 from .license import License
 from .server import Server
 from .server_variable import ServerVariable
-# - [Components Object](#componentsObject)
+from .components import Components
 # - [Paths Object](#pathsObject)
 # - [Path Item Object](#pathItemObject)
 # - [Operation Object](#operationObject)
@@ -20,7 +20,7 @@ from .server_variable import ServerVariable
 # - [Link Object](#linkObject)
 # - [Header Object](#headerObject)
 # - [Tag Object](#tagObject)
-# - [Reference Object](#referenceObject)
+from .reference import Reference
 # - [Schema Object](#schemaObject)
 # - [Discriminator Object](#discriminatorObject)
 # - [XML Object](#xmlObject)
