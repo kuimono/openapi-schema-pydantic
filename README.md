@@ -1,5 +1,5 @@
 # openapi-schema-pydantic
-OpenAPI (v3) specification schema as pydantic class 
+OpenAPI (v3) specification schema as Pydantic classes 
 
 ## Try me
 
@@ -63,3 +63,7 @@ assert open_api_1 == open_api_2
 # print the result openapi.json
 print(open_api_1.json(exclude_none=True, indent=2))
 ```
+
+## Use Pydantic classes as schema
+
+TODO: add description

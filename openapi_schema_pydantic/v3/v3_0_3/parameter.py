@@ -100,7 +100,7 @@ class Parameter(BaseModel):
     The default value is `false`.
     """
 
-    param_schema: Optional[Union[Schema, Reference]] = Field(default=None, alias="schema")
+    param_schema: Optional[Union[Reference, Schema]] = Field(default=None, alias="schema")
     """
     The schema defining the type used for the parameter.
     """

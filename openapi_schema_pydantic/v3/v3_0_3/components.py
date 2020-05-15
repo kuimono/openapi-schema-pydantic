@@ -21,7 +21,7 @@ class Components(BaseModel):
     unless they are explicitly referenced from properties outside the components object.
     """
 
-    schemas: Optional[Dict[str, Union[Schema, Reference]]] = None
+    schemas: Optional[Dict[str, Union[Reference, Schema]]] = None
     """An object to hold reusable [Schema Objects](#schemaObject)."""
 
     responses: Optional[Dict[str, Union[Response, Reference]]] = None
