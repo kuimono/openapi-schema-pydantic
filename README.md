@@ -4,17 +4,11 @@ OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/
 ## Try me
 
 ```python
-from openapi_schema_pydantic import (
-    Info,
-    OpenAPI,
-    Operation,
-    PathItem,
-    Response
-)
+from openapi_schema_pydantic import Info, OpenAPI, Operation, PathItem, Response
 
 def readme_example_1() -> OpenAPI:
     """Construct OpenAPI using data class"""
-    open_api = OpenAPI(
+    return OpenAPI(
         info=Info(
             title="My own API",
             version="v0.0.1",
@@ -32,11 +26,9 @@ def readme_example_1() -> OpenAPI:
         }
     )
 
-    return open_api
-
 def readme_example_2() -> OpenAPI:
     """Construct OpenAPI from raw data object"""
-    open_api = OpenAPI.parse_obj({
+    return OpenAPI.parse_obj({
         "info": {
             "title": "My own API",
             "version": "v0.0.1"
@@ -53,8 +45,6 @@ def readme_example_2() -> OpenAPI:
             }
         }
     })
-
-    return open_api
 
 open_api_1 = readme_example_1()
 open_api_2 = readme_example_2()
@@ -98,19 +88,8 @@ Result:
 ```python
 from pydantic import BaseModel
 
-from openapi_schema_pydantic import (
-    Info,
-    MediaType,
-    OpenAPI,
-    Operation,
-    PathItem,
-    RequestBody,
-    Response,
-)
-from openapi_schema_pydantic.util import (
-    PydanticSchema,
-    construct_open_api_with_schema_class,
-)
+from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathItem, RequestBody, Response
+from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 def construct_base_open_api() -> OpenAPI:
     """Construct OpenAPI using data class"""
@@ -148,7 +127,6 @@ def construct_base_open_api() -> OpenAPI:
         }
     )
 
-
 class PingRequest(BaseModel):
     """Ping Request"""
 
@@ -158,7 +136,6 @@ class PingRequest(BaseModel):
     req_bar: str = ...
     """bar value of the request"""
 
-
 class PingResponse(BaseModel):
     """Ping response"""
 
@@ -167,7 +144,6 @@ class PingResponse(BaseModel):
 
     resp_bar: str
     """bar value of the response"""
-
 
 open_api = construct_base_open_api()
 open_api = construct_open_api_with_schema_class(open_api, [])

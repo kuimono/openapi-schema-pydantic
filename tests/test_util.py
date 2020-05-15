@@ -2,19 +2,8 @@ import logging
 
 from pydantic import BaseModel
 
-from openapi_schema_pydantic import (
-    Info,
-    MediaType,
-    OpenAPI,
-    Operation,
-    PathItem,
-    RequestBody,
-    Response,
-)
-from openapi_schema_pydantic.util import (
-    PydanticSchema,
-    construct_open_api_with_schema_class,
-)
+from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathItem, RequestBody, Response
+from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 
 def test_construct_open_api_with_schema_class():
