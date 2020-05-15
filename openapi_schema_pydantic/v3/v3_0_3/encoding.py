@@ -2,7 +2,6 @@ from typing import Dict, Optional, Union
 
 from pydantic import BaseModel
 
-from .header import Header
 from .reference import Reference
 
 
@@ -23,7 +22,7 @@ class Encoding(BaseModel):
     or a comma-separated list of the two types.
     """
 
-    headers = Optional[Dict[str, Union[Header, Reference]]] = None
+    headers: Optional[Dict[str, Union["Header", Reference]]] = None
     """
     A map allowing additional information to be provided as headers, for example `Content-Disposition`.
     
@@ -31,7 +30,7 @@ class Encoding(BaseModel):
     This property SHALL be ignored if the request body media type is not a `multipart`.
     """
 
-    style = Optional[str] = None
+    style: Optional[str] = None
     """
     Describes how a specific property value will be serialized depending on its type.
     

@@ -2,6 +2,7 @@ from typing import Any, Dict, Optional, Union
 
 from pydantic import BaseModel, Field
 
+from .encoding import Encoding
 from .example import Example
 from .reference import Reference
 from .schema import Schema
@@ -39,7 +40,7 @@ class MediaType(BaseModel):
     the `examples` value SHALL _override_ the example provided by the schema.
     """
 
-    encoding: Optional[Dict[str, "Encoding"]] = None
+    encoding: Optional[Dict[str, Encoding]] = None
     """
     A map between a property name and its encoding information.
     The key, being the property name, MUST exist in the schema as a property.

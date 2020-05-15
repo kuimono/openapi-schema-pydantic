@@ -33,6 +33,6 @@ from .schema import Schema
 from .discriminator import Discriminator
 from .xml import XML
 from .security_scheme import SecurityScheme
-# - [OAuth Flows Object](#oauthFlowsObject)
-# - [OAuth Flow Object](#oauthFlowObject)
-# - [Security Requirement Object](#securityRequirementObject)
+from .oauth_flows import OAuthFlows
+from .oauth_flow import OAuthFlow
+from .security_requirement import SecurityRequirement
