@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="openapi-schema-pydantic", # Replace with your own username
+    name="openapi-schema-pydantic",
     version="0.0.1",
     author="Kuimono",
     author_email="cheng.kuimono@gmail.com",

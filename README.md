@@ -1,5 +1,5 @@
 # openapi-schema-pydantic
-OpenAPI (v3) specification schema as Pydantic classes 
+OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/pydantic) classes 
 
 ## Try me
 
@@ -114,7 +114,7 @@ from openapi_schema_pydantic.util import (
 
 def construct_base_open_api() -> OpenAPI:
     """Construct OpenAPI using data class"""
-    open_api = OpenAPI(
+    return OpenAPI(
         info=Info(
             title="My own API",
             version="v0.0.1",
@@ -148,8 +148,6 @@ def construct_base_open_api() -> OpenAPI:
         }
     )
 
-    return open_api
-
 
 class PingRequest(BaseModel):
     """Ping Request"""
@@ -169,6 +167,7 @@ class PingResponse(BaseModel):
 
     resp_bar: str
     """bar value of the response"""
+
 
 open_api = construct_base_open_api()
 open_api = construct_open_api_with_schema_class(open_api, [])
@@ -263,6 +262,19 @@ Result:
     }
   }
 }
+```
+
+## Note
+
+When using `OpenAPI.json()` function, arguments `by_alias=True, exclude_none=True` has to be in place.
+Otherwise the result json will not fit the OpenAPI standard.
+
+```python
+# OK
+open_api.json(by_alias=True, exclude_none=True, indent=2)
+
+# Not good
+open_api.json(indent=2)
 ```
 
 ## License

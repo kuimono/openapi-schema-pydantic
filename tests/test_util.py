@@ -16,6 +16,7 @@ from openapi_schema_pydantic.util import (
     construct_open_api_with_schema_class,
 )
 
+
 def test_construct_open_api_with_schema_class():
     open_api = construct_base_open_api()
     open_api_1 = construct_open_api_with_schema_class(open_api, [PingRequest, PingResponse])
@@ -29,7 +30,7 @@ def test_construct_open_api_with_schema_class():
 
 def construct_base_open_api() -> OpenAPI:
     """Construct OpenAPI using data class"""
-    open_api = OpenAPI(
+    return OpenAPI(
         info=Info(
             title="My own API",
             version="v0.0.1",
@@ -62,8 +63,6 @@ def construct_base_open_api() -> OpenAPI:
             )
         }
     )
-
-    return open_api
 
 
 class PingRequest(BaseModel):
