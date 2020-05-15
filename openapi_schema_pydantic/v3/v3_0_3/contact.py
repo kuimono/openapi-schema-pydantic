@@ -2,6 +2,7 @@ from typing import Optional
 
 from pydantic import BaseModel, AnyUrl
 
+
 class Contact(BaseModel):
     """
     Contact information for the exposed API.

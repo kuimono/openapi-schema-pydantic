@@ -2,16 +2,22 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-from .info import Info
-from .server import Server
 from .components import Components
+from .external_documentation import ExternalDocumentation
+from .info import Info
+from .paths import Paths
+from .security_requirement import SecurityRequirement
+from .server import Server
+from .tag import Tag
+
 
 class OpenAPI(BaseModel):
     """This is the root document object of the OpenAPI document."""
 
     openapi: str = "3.0.3"
     """
-    **REQUIRED**. This string MUST be the [semantic version number](https://semver.org/spec/v2.0.0.html) of the [OpenAPI Specification version](#versions) that the OpenAPI document uses. 
+    **REQUIRED**. This string MUST be the [semantic version number](https://semver.org/spec/v2.0.0.html)
+    of the [OpenAPI Specification version](#versions) that the OpenAPI document uses. 
     The `openapi` field SHOULD be used by tooling specifications and clients to interpret the OpenAPI document. 
     This is *not* related to the API [`info.version`](#infoVersion) string.
     """
@@ -24,7 +30,8 @@ class OpenAPI(BaseModel):
     servers: List[Server] = [Server(url="/")]
     """
     An array of Server Objects, which provide connectivity information to a target server. 
-    If the `servers` property is not provided, or is an empty array, the default value would be a [Server Object](#serverObject) with a [url](#serverUrl) value of `/`.
+    If the `servers` property is not provided, or is an empty array,
+    the default value would be a [Server Object](#serverObject) with a [url](#serverUrl) value of `/`.
     """
 
     paths: Paths = ...

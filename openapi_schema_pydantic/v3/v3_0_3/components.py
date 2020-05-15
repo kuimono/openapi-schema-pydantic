@@ -2,13 +2,23 @@ from typing import Dict, Optional, Union
 
 from pydantic import BaseModel
 
+from .callback import Callback
+from .example import Example
+from .header import Header
+from .link import Link
+from .parameter import Parameter
 from .reference import Reference
+from .request_body import RequestBody
+from .response import Response
+from .schema import Schema
+from .security_scheme import SecurityScheme
 
 
 class Components(BaseModel):
     """
     Holds a set of reusable objects for different aspects of the OAS.
-    All objects defined within the components object will have no effect on the API unless they are explicitly referenced from properties outside the components object.
+    All objects defined within the components object will have no effect on the API
+    unless they are explicitly referenced from properties outside the components object.
     """
 
     schemas: Optional[Dict[str, Union[Schema, Reference]]] = None
@@ -29,8 +39,8 @@ class Components(BaseModel):
     headers: Optional[Dict[str, Union[Header, Reference]]] = None
     """An object to hold reusable [Header Objects](#headerObject)."""
 
-    securitySchemes: Optional[Dict[str, Union[SecuritySchema, Reference]]] = None
-    """An object to hold reusable [Security Schema Objects](#securitySchemeObject)."""
+    securitySchemes: Optional[Dict[str, Union[SecurityScheme, Reference]]] = None
+    """An object to hold reusable [Security Scheme Objects](#securitySchemeObject)."""
 
     links: Optional[Dict[str, Union[Link, Reference]]] = None
     """An object to hold reusable [Link Objects](#linkObject)."""

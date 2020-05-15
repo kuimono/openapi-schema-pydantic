@@ -5,10 +5,12 @@ from pydantic import BaseModel, AnyUrl
 from .contact import Contact
 from .license import License
 
+
 class Info(BaseModel):
     """
     The object provides metadata about the API.
-    The metadata MAY be used by the clients if needed, and MAY be presented in editing or documentation generation tools for convenience.
+    The metadata MAY be used by the clients if needed,
+    and MAY be presented in editing or documentation generation tools for convenience.
     """
 
     title: str = ...
@@ -40,7 +42,8 @@ class Info(BaseModel):
 
     version: str = ...
     """
-    **REQUIRED**. The version of the OpenAPI document (which is distinct from the [OpenAPI Specification version](#oasVersion) or the API implementation version).
+    **REQUIRED**. The version of the OpenAPI document
+    (which is distinct from the [OpenAPI Specification version](#oasVersion) or the API implementation version).
     """
 
     class Config:

@@ -43,7 +43,8 @@ class Server(BaseModel):
                     "variables": {
                         "username": {
                             "default": "demo",
-                            "description": "this value is assigned by the service provider, in this example `gigantic-server.com`"
+                            "description": "this value is assigned by the service provider, "
+                                           "in this example `gigantic-server.com`"
                         },
                         "port": {
                             "enum": [

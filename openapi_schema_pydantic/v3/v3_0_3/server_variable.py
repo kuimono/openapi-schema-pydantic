@@ -14,8 +14,10 @@ class ServerVariable(BaseModel):
 
     default: str = ...
     """
-    **REQUIRED**. The default value to use for substitution, which SHALL be sent if an alternate value is _not_ supplied.
-    Note this behavior is different than the [Schema Object's](#schemaObject) treatment of default values, because in those cases parameter values are optional.
+    **REQUIRED**. The default value to use for substitution,
+    which SHALL be sent if an alternate value is _not_ supplied.
+    Note this behavior is different than the [Schema Object's](#schemaObject) treatment of default values, 
+    because in those cases parameter values are optional.
     If the [`enum`](#serverVariableEnum) is defined, the value SHOULD exist in the enum's values.
     """
 

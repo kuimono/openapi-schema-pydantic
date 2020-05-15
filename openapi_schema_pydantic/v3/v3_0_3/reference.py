@@ -20,6 +20,12 @@ class Reference(BaseModel):
             'examples': [
                 {
                     "$ref": "#/components/schemas/Pet"
+                },
+                {
+                    "$ref": "Pet.json"
+                },
+                {
+                    "$ref": "definitions.json#/Pet"
                 }
             ]
         }

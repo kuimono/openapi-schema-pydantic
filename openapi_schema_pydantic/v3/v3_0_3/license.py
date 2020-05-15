@@ -2,6 +2,7 @@ from typing import Optional
 
 from pydantic import BaseModel, AnyUrl
 
+
 class License(BaseModel):
     """
     License information for the exposed API.
