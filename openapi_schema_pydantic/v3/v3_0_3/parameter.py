@@ -30,7 +30,7 @@ class Parameter(BaseModel):
     - For all other cases, the `name` corresponds to the parameter name used by the [`in`](#parameterIn) property.
     """
 
-    parm_in: str = Field(alias="in")
+    param_in: str = Field(alias="in")
     """
     **REQUIRED**. The location of the parameter. Possible values are `"query"`, `"header"`, `"path"` or `"cookie"`.
     """
@@ -100,7 +100,7 @@ class Parameter(BaseModel):
     The default value is `false`.
     """
 
-    schema: Optional[Union[Schema, Reference]] = None
+    param_schema: Optional[Union[Schema, Reference]] = Field(default=None, alias="schema")
     """
     The schema defining the type used for the parameter.
     """
@@ -142,7 +142,7 @@ class Parameter(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "name": "token",
                     "in": "header",

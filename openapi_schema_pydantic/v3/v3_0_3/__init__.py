@@ -25,14 +25,14 @@ from .responses import Responses
 from .response import Response
 from .callback import Callback
 from .example import Example
-# - [Link Object](#linkObject)
-# - [Header Object](#headerObject)
-# - [Tag Object](#tagObject)
+from .link import Link
+from .header import Header
+from .tag import Tag
 from .reference import Reference
 from .schema import Schema
-# - [Discriminator Object](#discriminatorObject)
-# - [XML Object](#xmlObject)
-# - [Security Scheme Object](#securitySchemeObject)
+from .discriminator import Discriminator
+from .xml import XML
+from .security_scheme import SecurityScheme
 # - [OAuth Flows Object](#oauthFlowsObject)
 # - [OAuth Flow Object](#oauthFlowObject)
 # - [Security Requirement Object](#securityRequirementObject)

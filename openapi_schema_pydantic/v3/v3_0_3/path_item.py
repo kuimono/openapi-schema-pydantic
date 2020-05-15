@@ -93,7 +93,7 @@ class PathItem(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "get": {
                         "description": "Returns pets based on ID",

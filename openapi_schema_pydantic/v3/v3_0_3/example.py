@@ -34,7 +34,7 @@ class Example(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "summary": "A foo example",
                     "value": {

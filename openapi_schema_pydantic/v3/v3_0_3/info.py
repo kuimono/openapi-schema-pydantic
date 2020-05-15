@@ -48,7 +48,7 @@ class Info(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "title": "Sample Pet Store App",
                     "description": "This is a sample server for a pet store.",

@@ -62,7 +62,7 @@ class Encoding(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "contentType": "image/png, image/jpeg",
                     "headers": {

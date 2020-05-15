@@ -17,7 +17,7 @@ class Reference(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "$ref": "#/components/schemas/Pet"
                 },

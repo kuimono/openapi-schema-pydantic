@@ -45,7 +45,7 @@ class Response(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "description": "A complex object array response",
                     "content": {

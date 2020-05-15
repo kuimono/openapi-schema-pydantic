@@ -1,0 +1,29 @@
+from pydantic import Field
+
+from .parameter import Parameter
+
+
+class Header(Parameter):
+    """
+    The Header Object follows the structure of the [Parameter Object](#parameterObject) with the following changes:
+
+    1. `name` MUST NOT be specified, it is given in the corresponding `headers` map.
+    2. `in` MUST NOT be specified, it is implicitly in `header`.
+    3. All traits that are affected by the location MUST be applicable to a location of `header`
+       (for example, [`style`](#parameterStyle)).
+    """
+
+    name = Field(default="", const="")
+    param_in = Field(default="header", const="header", alias="in")
+
+    class Config:
+        schema_extra = {
+            "examples": [
+                {
+                    "description": "The number of allowed requests in the current period",
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ]
+        }

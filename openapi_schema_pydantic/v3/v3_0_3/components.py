@@ -50,7 +50,7 @@ class Components(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "schemas": {
                         "GeneralError": {

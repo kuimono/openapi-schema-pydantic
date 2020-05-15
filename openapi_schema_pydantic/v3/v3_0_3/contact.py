@@ -27,7 +27,7 @@ class Contact(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "name": "API Support",
                     "url": "http://www.example.com/support",

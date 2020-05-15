@@ -32,7 +32,7 @@ class RequestBody(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "description": "user to add to the system",
                     "content": {

@@ -20,7 +20,7 @@ class ExternalDocumentation(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "description": "Find more info here",
                     "url": "https://example.com"

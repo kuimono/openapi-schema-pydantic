@@ -105,7 +105,7 @@ class Operation(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "tags": [
                         "pet"

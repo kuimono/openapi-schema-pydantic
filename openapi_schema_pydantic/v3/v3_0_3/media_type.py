@@ -1,8 +1,7 @@
 from typing import Any, Dict, Optional, Union
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-from .encoding import Encoding
 from .example import Example
 from .reference import Reference
 from .schema import Schema
@@ -11,7 +10,7 @@ from .schema import Schema
 class MediaType(BaseModel):
     """Each Media Type Object provides schema and examples for the media type identified by its key."""
 
-    schema: Optional[Union[Schema, Reference]] = None
+    media_type_schema: Optional[Union[Schema, Reference]] = Field(default=None, alias="schema")
     """
     The schema defining the content of the request, response, or parameter.
     """
@@ -40,7 +39,7 @@ class MediaType(BaseModel):
     the `examples` value SHALL _override_ the example provided by the schema.
     """
 
-    encoding: Optional[Dict[str, Encoding]] = None
+    encoding: Optional[Dict[str, "Encoding"]] = None
     """
     A map between a property name and its encoding information.
     The key, being the property name, MUST exist in the schema as a property.
@@ -50,7 +49,7 @@ class MediaType(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "application/json": {
                         "schema": {

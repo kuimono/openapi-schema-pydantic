@@ -32,7 +32,7 @@ class Server(BaseModel):
 
     class Config:
         schema_extra = {
-            'examples': [
+            "examples": [
                 {
                     "url": "https://development.gigantic-server.com/v1",
                     "description": "Development server"
