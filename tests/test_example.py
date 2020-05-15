@@ -1,9 +1,5 @@
-# openapi-schema-pydantic
-OpenAPI (v3) specification schema as pydantic class 
+import logging
 
-## Try me
-
-```python
 from openapi_schema_pydantic import (
     Info,
     OpenAPI,
@@ -11,6 +7,17 @@ from openapi_schema_pydantic import (
     PathItem,
     Response
 )
+
+def test_readme_example():
+    open_api_1 = readme_example_1()
+    assert open_api_1
+    open_api_json_1 = open_api_1.json(exclude_none=True, indent=2)
+    logging.debug(open_api_json_1)
+    assert open_api_json_1
+
+    open_api_2 = readme_example_2()
+    assert open_api_1 == open_api_2
+
 
 def readme_example_1() -> OpenAPI:
     """Construct OpenAPI using data class"""
@@ -34,6 +41,7 @@ def readme_example_1() -> OpenAPI:
 
     return open_api
 
+
 def readme_example_2() -> OpenAPI:
     """Construct OpenAPI from raw data object"""
     open_api = OpenAPI.parse_obj({
@@ -55,11 +63,3 @@ def readme_example_2() -> OpenAPI:
     })
 
     return open_api
-
-open_api_1 = readme_example_1()
-open_api_2 = readme_example_2()
-assert open_api_1 == open_api_2
-
-# print the result openapi.json
-print(open_api_1.json(exclude_none=True, indent=2))
-```

@@ -81,7 +81,7 @@ class PathItem(BaseModel):
     An alternative `server` array to service all operations in this path.
     """
 
-    parameters: List[Union[Parameter, Reference]]
+    parameters: Optional[List[Union[Parameter, Reference]]] = None
     """
     A list of parameters that are applicable for all the operations described under this path.
     These parameters can be overridden at the operation level, but cannot be removed there.
