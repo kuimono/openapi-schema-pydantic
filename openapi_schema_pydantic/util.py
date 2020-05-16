@@ -113,6 +113,6 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
 
 
 def _construct_ref_obj(pydantic_schema: PydanticSchema):
-    ref_obj = Reference.parse_obj({"$ref": ref_prefix + pydantic_schema.schema_class.__name__})
+    ref_obj = Reference(ref=ref_prefix + pydantic_schema.schema_class.__name__)
     logging.debug(f"ref_obj={ref_obj}")
     return ref_obj

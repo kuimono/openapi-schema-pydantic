@@ -56,18 +56,14 @@ def construct_base_open_api_2() -> OpenAPI:
                 post=Operation(
                     requestBody=RequestBody(
                         content={
-                            "application/json": MediaType(
-                                schema=Reference.parse_obj({"$ref": "#/components/schemas/PingRequest"})
-                            )
+                            "application/json": MediaType(schema=Reference(ref="#/components/schemas/PingRequest"))
                         }
                     ),
                     responses={
                         "200": Response(
                             description="pong",
                             content={
-                                "application/json": MediaType(
-                                    schema=Reference.parse_obj({"$ref": "#/components/schemas/PingResponse"})
-                                )
+                                "application/json": MediaType(schema=Reference(ref="#/components/schemas/PingResponse"))
                             },
                         )
                     },

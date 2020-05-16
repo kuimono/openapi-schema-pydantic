@@ -232,6 +232,12 @@ open_api.json(by_alias=True, exclude_none=True, indent=2)
 open_api.json(indent=2)
 ```
 
+More info about field alias:
+
+| OpenAPI version | Field alias info |
+| --------------- | ---------------- |
+| 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md) |
+
 ## License
 
 [MIT License](https://github.com/kuimono/openapi-schema-pydantic/blob/master/LICENSE)

@@ -17,6 +17,7 @@ class Header(Parameter):
     param_in = Field(default="header", const=True, alias="in")
 
     class Config:
+        allow_population_by_field_name = True,
         schema_extra = {
             "examples": [
                 {"description": "The number of allowed requests in the current period", "schema": {"type": "integer"}}
