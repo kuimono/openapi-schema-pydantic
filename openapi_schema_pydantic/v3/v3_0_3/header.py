@@ -13,8 +13,8 @@ class Header(Parameter):
        (for example, [`style`](#parameterStyle)).
     """
 
-    name = Field(default="", const="")
-    param_in = Field(default="header", const="header", alias="in")
+    name = Field(default="", const=True)
+    param_in = Field(default="header", const=True, alias="in")
 
     class Config:
         schema_extra = {
