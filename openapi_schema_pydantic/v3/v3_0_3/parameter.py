@@ -141,7 +141,7 @@ class Parameter(BaseModel):
     """
 
     class Config:
-        allow_population_by_field_name = True,
+        allow_population_by_field_name = True
         schema_extra = {
             "examples": [
                 {
@@ -171,7 +171,7 @@ class Parameter(BaseModel):
                 {
                     "in": "query",
                     "name": "freeForm",
-                    "schema": {"type": "object", "additionalProperties": {"type": "integer"},},
+                    "schema": {"type": "object", "additionalProperties": {"type": "integer"}},
                     "style": "form",
                 },
                 {

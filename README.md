@@ -7,6 +7,7 @@ OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/
 ```python
 from openapi_schema_pydantic import Info, OpenAPI, Operation, PathItem, Response
 
+# Construct OpenAPI by pydantic objects
 open_api = OpenAPI(
     info=Info(
         title="My own API",
@@ -22,7 +23,7 @@ open_api = OpenAPI(
                 }
             )
         )
-    }
+    },
 )
 print(open_api.json(by_alias=True, exclude_none=True, indent=2))
 ```
@@ -56,6 +57,36 @@ Result:
 }
 ```
 
+## Take advantage of Pydantic
+
+Pydantic is a great tool, allow you to use object / dict / mixed data for for input.
+
+The following examples give the same OpenAPI result as above:
+
+```python
+from openapi_schema_pydantic import OpenAPI, PathItem, Response
+
+# Construct OpenAPI from dict
+open_api = OpenAPI.parse_obj({
+    "info": {"title": "My own API", "version": "v0.0.1"},
+    "paths": {
+        "/ping": {
+            "get": {"responses": {"200": {"description": "pong"}}}
+        }
+    },
+})
+
+# Construct OpenAPI with mix of dict/object
+open_api = OpenAPI.parse_obj({
+    "info": {"title": "My own API", "version": "v0.0.1"},
+    "paths": {
+        "/ping": PathItem(
+            get={"responses": {"200": Response(description="pong")}}
+        )
+    },
+})
+```
+
 ## Use Pydantic classes as schema
 
 - The [Schema Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schemaObject)
@@ -71,44 +102,28 @@ The approach to deal with this:
 ```python
 from pydantic import BaseModel, Field
 
-from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathItem, RequestBody, Response
+from openapi_schema_pydantic import OpenAPI
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 def construct_base_open_api() -> OpenAPI:
-    """Construct OpenAPI using data class"""
-    return OpenAPI(
-        info=Info(
-            title="My own API",
-            version="v0.0.1",
-        ),
-        paths={
-            "/ping": PathItem(
-                post=Operation(
-                    requestBody=RequestBody(
-                        content={
-                            "application/json": MediaType(
-                                schema=PydanticSchema(
-                                    schema_class=PingRequest
-                                )
-                            )
-                        }
-                    ),
-                    responses={
-                        "200": Response(
-                            description="pong",
-                            content={
-                                "application/json": MediaType(
-                                    schema=PydanticSchema(
-                                        schema_class=PingResponse
-                                    )
-                                )
-                            }
-                        )
-                    }
-                )
-            )
-        }
-    )
+    return OpenAPI.parse_obj({
+        "info": {"title": "My own API", "version": "v0.0.1"},
+        "paths": {
+            "/ping": {
+                "post": {
+                    "requestBody": {"content": {"application/json": {
+                        "schema": PydanticSchema(schema_class=PingRequest)
+                    }}},
+                    "responses": {"200": {
+                        "description": "pong",
+                        "content": {"application/json": {
+                            "schema": PydanticSchema(schema_class=PingResponse)
+                        }},
+                    }},
+                }
+            }
+        },
+    })
 
 class PingRequest(BaseModel):
     """Ping Request"""

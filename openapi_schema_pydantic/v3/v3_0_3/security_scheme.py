@@ -66,12 +66,12 @@ class SecurityScheme(BaseModel):
     """
 
     class Config:
-        allow_population_by_field_name = True,
+        allow_population_by_field_name = True
         schema_extra = {
             "examples": [
                 {"type": "http", "scheme": "basic"},
                 {"type": "apiKey", "name": "api_key", "in": "header"},
-                {"type": "http", "scheme": "bearer", "bearerFormat": "JWT",},
+                {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"},
                 {
                     "type": "oauth2",
                     "flows": {

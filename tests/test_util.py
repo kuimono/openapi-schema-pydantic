@@ -26,29 +26,29 @@ def test_construct_open_api_with_schema_class_2():
 
 
 def construct_base_open_api_1() -> OpenAPI:
-    """Construct OpenAPI using data class"""
-    return OpenAPI(
-        info=Info(title="My own API", version="v0.0.1",),
-        paths={
-            "/ping": PathItem(
-                post=Operation(
-                    requestBody=RequestBody(
-                        content={"application/json": MediaType(schema=PydanticSchema(schema_class=PingRequest))}
-                    ),
-                    responses={
-                        "200": Response(
-                            description="pong",
-                            content={"application/json": MediaType(schema=PydanticSchema(schema_class=PingResponse))},
-                        )
-                    },
-                )
-            )
-        },
+    return OpenAPI.parse_obj(
+        {
+            "info": {"title": "My own API", "version": "v0.0.1"},
+            "paths": {
+                "/ping": {
+                    "post": {
+                        "requestBody": {
+                            "content": {"application/json": {"schema": PydanticSchema(schema_class=PingRequest)}}
+                        },
+                        "responses": {
+                            "200": {
+                                "description": "pong",
+                                "content": {"application/json": {"schema": PydanticSchema(schema_class=PingResponse)}},
+                            }
+                        },
+                    }
+                }
+            },
+        }
     )
 
 
 def construct_base_open_api_2() -> OpenAPI:
-    """Construct OpenAPI using data class"""
     return OpenAPI(
         info=Info(title="My own API", version="v0.0.1",),
         paths={

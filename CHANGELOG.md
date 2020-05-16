@@ -1,5 +1,12 @@
 # Change Log
 
+## v0.1.3 - Unreleased
+
+### Updated
+- Updated README.md
+- Minor code formatting
+
+
 ## v0.1.2 - 2020-05-16
 
 ### Added

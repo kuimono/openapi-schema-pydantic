@@ -13,6 +13,9 @@ def test_readme_example():
     open_api_2 = readme_example_2()
     assert open_api_1 == open_api_2
 
+    open_api_3 = readme_example_3()
+    assert open_api_1 == open_api_3
+
 
 def readme_example_1() -> OpenAPI:
     """Construct OpenAPI using data class"""
@@ -28,5 +31,15 @@ def readme_example_2() -> OpenAPI:
         {
             "info": {"title": "My own API", "version": "v0.0.1"},
             "paths": {"/ping": {"get": {"responses": {"200": {"description": "pong"}}}}},
+        }
+    )
+
+
+def readme_example_3() -> OpenAPI:
+    """Construct OpenAPI from mixed object"""
+    return OpenAPI.parse_obj(
+        {
+            "info": {"title": "My own API", "version": "v0.0.1"},
+            "paths": {"/ping": PathItem(get={"responses": {"200": Response(description="pong")}})},
         }
     )
