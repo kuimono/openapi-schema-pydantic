@@ -6,52 +6,24 @@ OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/
 ```python
 from openapi_schema_pydantic import Info, OpenAPI, Operation, PathItem, Response
 
-def readme_example_1() -> OpenAPI:
-    """Construct OpenAPI using data class"""
-    return OpenAPI(
-        info=Info(
-            title="My own API",
-            version="v0.0.1",
-        ),
-        paths={
-            "/ping": PathItem(
-                get=Operation(
-                    responses={
-                        "200": Response(
-                            description="pong"
-                        )
-                    }
-                )
-            )
-        }
-    )
-
-def readme_example_2() -> OpenAPI:
-    """Construct OpenAPI from raw data object"""
-    return OpenAPI.parse_obj({
-        "info": {
-            "title": "My own API",
-            "version": "v0.0.1"
-        },
-        "paths": {
-            "/ping": {
-                "get": {
-                    "responses": {
-                        "200": {
-                            "description": "pong"
-                        }
-                    }
+open_api = OpenAPI(
+    info=Info(
+        title="My own API",
+        version="v0.0.1",
+    ),
+    paths={
+        "/ping": PathItem(
+            get=Operation(
+                responses={
+                    "200": Response(
+                        description="pong"
+                    )
                 }
-            }
-        }
-    })
-
-open_api_1 = readme_example_1()
-open_api_2 = readme_example_2()
-assert open_api_1 == open_api_2
-
-# print the result openapi.json
-print(open_api_1.json(by_alias=True, exclude_none=True, indent=2))
+            )
+        )
+    }
+)
+print(open_api.json(by_alias=True, exclude_none=True, indent=2))
 ```
 
 Result:
@@ -83,7 +55,42 @@ Result:
 }
 ```
 
+This would also gives the same result:
+
+```python
+from openapi_schema_pydantic import OpenAPI
+
+open_api = OpenAPI.parse_obj({
+    "info": {
+        "title": "My own API",
+        "version": "v0.0.1"
+    },
+    "paths": {
+        "/ping": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "pong"
+                    }
+                }
+            }
+        }
+    }
+})
+print(open_api.json(by_alias=True, exclude_none=True, indent=2))
+```
+
 ## Use Pydantic classes as schema
+
+- The [Schema Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schemaObject)
+  in OpenAPI has definitions and tweaks in JSON Schema, which is hard to comprehend and define a good data class
+- Pydantic already has a good way to [create JSON schema](https://pydantic-docs.helpmanual.io/usage/schema/),
+  let's not re-invent the wheel
+  
+The approach to deal with this:
+
+1. Use `PydanticSchema` objects to represent the `Schema` in `OpenAPI` object
+2. Invoke `construct_open_api_with_schema_class` to resolve the JSON schemas a references
 
 ```python
 from pydantic import BaseModel
@@ -146,7 +153,7 @@ class PingResponse(BaseModel):
     """bar value of the response"""
 
 open_api = construct_base_open_api()
-open_api = construct_open_api_with_schema_class(open_api, [])
+open_api = construct_open_api_with_schema_class(open_api)
 
 # print the result openapi.json
 print(open_api.json(by_alias=True, exclude_none=True, indent=2))

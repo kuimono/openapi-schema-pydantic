@@ -17,10 +17,14 @@ class PydanticSchema(Schema):
     """the class that is used for generate the schema"""
 
 
-def construct_open_api_with_schema_class(open_api: OpenAPI, schema_classes: List[Type[PydanticType]],
-                                         scan_for_pydantic_schema_reference: bool = True) -> OpenAPI:
+def construct_open_api_with_schema_class(
+    open_api: OpenAPI,
+    schema_classes: List[Type[PydanticType]] = None,
+    scan_for_pydantic_schema_reference: bool = True
+) -> OpenAPI:
     """
     Construct a new OpenAPI object, with the use of pydantic classes to produce JSON schemas
+
     :param open_api: the base `OpenAPI` object
     :param schema_classes: pydanitic classes that their schema will be used "#/components/schemas" values
     :param scan_for_pydantic_schema_reference: flag to indicate if scanning for `PydanticSchemaReference` class
@@ -30,7 +34,11 @@ def construct_open_api_with_schema_class(open_api: OpenAPI, schema_classes: List
     """
     new_open_api: OpenAPI = open_api.copy(deep=True)
     if scan_for_pydantic_schema_reference:
-        schema_classes = list({*schema_classes, *_handle_pydantic_schema_reference(new_open_api)})
+        extracted_schema_classes = _handle_pydantic_schema(new_open_api)
+        if schema_classes:
+            schema_classes = list({*schema_classes, *_handle_pydantic_schema(new_open_api)})
+        else:
+            schema_classes = extracted_schema_classes
 
     if not schema_classes:
         return open_api
@@ -59,7 +67,19 @@ def construct_open_api_with_schema_class(open_api: OpenAPI, schema_classes: List
     return new_open_api
 
 
-def _handle_pydantic_schema_reference(open_api: OpenAPI) -> List[Type[PydanticType]]:
+def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
+    """
+    This function traverses the `OpenAPI` object and
+
+    1. Replaces the `PydanticSchema` object with `Reference` object, with correct ref value;
+    2. Extracts the involved schema class from `PydanticSchema` object.
+
+    **This function will mutate the input `OpenAPI` object.**
+
+    :param open_api: the `OpenAPI` object to be traversed and mutated
+    :return: a list of schema classes extracted from `PydanticSchema` objects
+    """
+
     pydantic_types: Set[Type[PydanticType]] = set()
 
     def _traverse(obj: Any):
