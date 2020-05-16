@@ -1,6 +1,6 @@
 import logging
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathItem, Reference, RequestBody, Response
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
@@ -101,19 +101,11 @@ def construct_base_open_api_2() -> OpenAPI:
 
 class PingRequest(BaseModel):
     """Ping Request"""
-
-    req_foo: str = ...
-    """foo value of the request"""
-
-    req_bar: str = ...
-    """bar value of the request"""
+    req_foo: str = Field(description="foo value of the request")
+    req_bar: str = Field(description="bar value of the request")
 
 
 class PingResponse(BaseModel):
     """Ping response"""
-
-    resp_foo: str
-    """foo value of the response"""
-
-    resp_bar: str
-    """bar value of the response"""
+    resp_foo: str = Field(description="foo value of the response")
+    resp_bar: str = Field(description="bar value of the response")

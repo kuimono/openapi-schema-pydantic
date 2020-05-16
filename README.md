@@ -1,4 +1,5 @@
 # openapi-schema-pydantic
+
 OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/pydantic) classes 
 
 ## Try me
@@ -90,10 +91,10 @@ print(open_api.json(by_alias=True, exclude_none=True, indent=2))
 The approach to deal with this:
 
 1. Use `PydanticSchema` objects to represent the `Schema` in `OpenAPI` object
-2. Invoke `construct_open_api_with_schema_class` to resolve the JSON schemas a references
+2. Invoke `construct_open_api_with_schema_class` to resolve the JSON schemas and references
 
 ```python
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathItem, RequestBody, Response
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
@@ -136,21 +137,13 @@ def construct_base_open_api() -> OpenAPI:
 
 class PingRequest(BaseModel):
     """Ping Request"""
-
-    req_foo: str = ...
-    """foo value of the request"""
-
-    req_bar: str = ...
-    """bar value of the request"""
+    req_foo: str = Field(description="foo value of the request")
+    req_bar: str = Field(description="bar value of the request")
 
 class PingResponse(BaseModel):
     """Ping response"""
-
-    resp_foo: str
-    """foo value of the response"""
-
-    resp_bar: str
-    """bar value of the response"""
+    resp_foo: str = Field(description="foo value of the response")
+    resp_bar: str = Field(description="bar value of the response")
 
 open_api = construct_base_open_api()
 open_api = construct_open_api_with_schema_class(open_api)
@@ -205,42 +198,46 @@ Result:
   "components": {
     "schemas": {
       "PingRequest": {
-        "required": [
-          "req_foo",
-          "req_bar"
-        ],
         "properties": {
           "req_foo": {
             "title": "Req Foo",
+            "description": "foo value of the request",
             "type": "string"
           },
           "req_bar": {
             "title": "Req Bar",
+            "description": "bar value of the request",
             "type": "string"
           }
         },
-        "title": "PingRequest",
         "description": "Ping Request",
-        "type": "object"
+        "required": [
+          "req_foo",
+          "req_bar"
+        ],
+        "type": "object",
+        "title": "PingRequest"
       },
       "PingResponse": {
-        "required": [
-          "resp_foo",
-          "resp_bar"
-        ],
         "properties": {
           "resp_foo": {
             "title": "Resp Foo",
+            "description": "foo value of the response",
             "type": "string"
           },
           "resp_bar": {
             "title": "Resp Bar",
+            "description": "bar value of the response",
             "type": "string"
           }
         },
-        "title": "PingResponse",
         "description": "Ping response",
-        "type": "object"
+        "required": [
+          "resp_foo",
+          "resp_bar"
+        ],
+        "type": "object",
+        "title": "PingResponse"
       }
     }
   }
