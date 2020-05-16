@@ -56,31 +56,6 @@ Result:
 }
 ```
 
-This would also gives the same result:
-
-```python
-from openapi_schema_pydantic import OpenAPI
-
-open_api = OpenAPI.parse_obj({
-    "info": {
-        "title": "My own API",
-        "version": "v0.0.1"
-    },
-    "paths": {
-        "/ping": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "pong"
-                    }
-                }
-            }
-        }
-    }
-})
-print(open_api.json(by_alias=True, exclude_none=True, indent=2))
-```
-
 ## Use Pydantic classes as schema
 
 - The [Schema Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schemaObject)
