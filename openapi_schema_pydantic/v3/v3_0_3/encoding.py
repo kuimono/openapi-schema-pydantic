@@ -67,11 +67,9 @@ class Encoding(BaseModel):
                     "headers": {
                         "X-Rate-Limit-Limit": {
                             "description": "The number of allowed requests in the current period",
-                            "schema": {
-                                "type": "integer"
-                            }
+                            "schema": {"type": "integer"},
                         }
-                    }
+                    },
                 }
             ]
         }

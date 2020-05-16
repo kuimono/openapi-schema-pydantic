@@ -103,27 +103,14 @@ class PathItem(BaseModel):
                             "200": {
                                 "description": "pet response",
                                 "content": {
-                                    "*/*": {
-                                        "schema": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Pet"
-                                            }
-                                        }
-                                    }
-                                }
+                                    "*/*": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/Pet"}}}
+                                },
                             },
                             "default": {
                                 "description": "error payload",
-                                "content": {
-                                    "text/html": {
-                                        "schema": {
-                                            "$ref": "#/components/schemas/ErrorModel"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                                "content": {"text/html": {"schema": {"$ref": "#/components/schemas/ErrorModel"}}},
+                            },
+                        },
                     },
                     "parameters": [
                         {
@@ -131,15 +118,10 @@ class PathItem(BaseModel):
                             "in": "path",
                             "description": "ID of pet to use",
                             "required": True,
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "style": "simple"
+                            "schema": {"type": "array", "items": {"type": "string"}},
+                            "style": "simple",
                         }
-                    ]
+                    ],
                 }
             ]
         }

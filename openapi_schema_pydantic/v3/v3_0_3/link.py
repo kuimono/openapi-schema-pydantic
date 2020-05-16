@@ -65,17 +65,10 @@ class Link(BaseModel):
     class Config:
         schema_extra = {
             "examples": [
-                {
-                    "operationId": "getUserAddressByUUID",
-                    "parameters": {
-                        "userUuid": "$response.body#/uuid"
-                    }
-                },
+                {"operationId": "getUserAddressByUUID", "parameters": {"userUuid": "$response.body#/uuid"}},
                 {
                     "operationRef": "#/paths/~12.0~1repositories~1{username}/get",
-                    "parameters": {
-                        "username": "$response.body#/username"
-                    }
-                }
+                    "parameters": {"username": "$response.body#/username"},
+                },
             ]
         }

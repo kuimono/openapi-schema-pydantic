@@ -148,48 +148,30 @@ class Parameter(BaseModel):
                     "in": "header",
                     "description": "token to be passed as a header",
                     "required": True,
-                    "schema": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    "style": "simple"
+                    "schema": {"type": "array", "items": {"type": "integer", "format": "int64"}},
+                    "style": "simple",
                 },
                 {
                     "name": "username",
                     "in": "path",
                     "description": "username to fetch",
                     "required": True,
-                    "schema": {
-                        "type": "string"
-                    }
+                    "schema": {"type": "string"},
                 },
                 {
                     "name": "id",
                     "in": "query",
                     "description": "ID of the object to fetch",
                     "required": False,
-                    "schema": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
+                    "schema": {"type": "array", "items": {"type": "string"}},
                     "style": "form",
-                    "explode": True
+                    "explode": True,
                 },
                 {
                     "in": "query",
                     "name": "freeForm",
-                    "schema": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "integer"
-                        },
-                    },
-                    "style": "form"
+                    "schema": {"type": "object", "additionalProperties": {"type": "integer"},},
+                    "style": "form",
                 },
                 {
                     "in": "query",
@@ -198,21 +180,11 @@ class Parameter(BaseModel):
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "required": [
-                                    "lat",
-                                    "long"
-                                ],
-                                "properties": {
-                                    "lat": {
-                                        "type": "number"
-                                    },
-                                    "long": {
-                                        "type": "number"
-                                    }
-                                }
+                                "required": ["lat", "long"],
+                                "properties": {"lat": {"type": "number"}, "long": {"type": "number"}},
                             }
                         }
-                    }
-                }
+                    },
+                },
             ]
         }

@@ -56,39 +56,18 @@ class Components(BaseModel):
                         "GeneralError": {
                             "type": "object",
                             "properties": {
-                                "code": {
-                                    "type": "integer",
-                                    "format": "int32"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            }
+                                "code": {"type": "integer", "format": "int32"},
+                                "message": {"type": "string"},
+                            },
                         },
                         "Category": {
                             "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "integer",
-                                    "format": "int64"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            }
+                            "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
                         },
                         "Tag": {
                             "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "integer",
-                                    "format": "int64"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            }
-                        }
+                            "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+                        },
                     },
                     "parameters": {
                         "skipParam": {
@@ -96,46 +75,26 @@ class Components(BaseModel):
                             "in": "query",
                             "description": "number of items to skip",
                             "required": True,
-                            "schema": {
-                                "type": "integer",
-                                "format": "int32"
-                            }
+                            "schema": {"type": "integer", "format": "int32"},
                         },
                         "limitParam": {
                             "name": "limit",
                             "in": "query",
                             "description": "max records to return",
                             "required": True,
-                            "schema": {
-                                "type": "integer",
-                                "format": "int32"
-                            }
-                        }
+                            "schema": {"type": "integer", "format": "int32"},
+                        },
                     },
                     "responses": {
-                        "NotFound": {
-                            "description": "Entity not found."
-                        },
-                        "IllegalInput": {
-                            "description": "Illegal input for operation."
-                        },
+                        "NotFound": {"description": "Entity not found."},
+                        "IllegalInput": {"description": "Illegal input for operation."},
                         "GeneralError": {
                             "description": "General Error",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "$ref": "#/components/schemas/GeneralError"
-                                    }
-                                }
-                            }
-                        }
+                            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/GeneralError"}}},
+                        },
                     },
                     "securitySchemes": {
-                        "api_key": {
-                            "type": "apiKey",
-                            "name": "api_key",
-                            "in": "header"
-                        },
+                        "api_key": {"type": "apiKey", "name": "api_key", "in": "header"},
                         "petstore_auth": {
                             "type": "oauth2",
                             "flows": {
@@ -143,12 +102,12 @@ class Components(BaseModel):
                                     "authorizationUrl": "http://example.org/api/oauth/dialog",
                                     "scopes": {
                                         "write:pets": "modify pets in your account",
-                                        "read:pets": "read your pets"
-                                    }
+                                        "read:pets": "read your pets",
+                                    },
                                 }
-                            }
-                        }
-                    }
+                            },
+                        },
+                    },
                 }
             ]
         }

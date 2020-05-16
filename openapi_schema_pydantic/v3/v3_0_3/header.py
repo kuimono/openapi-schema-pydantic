@@ -19,11 +19,6 @@ class Header(Parameter):
     class Config:
         schema_extra = {
             "examples": [
-                {
-                    "description": "The number of allowed requests in the current period",
-                    "schema": {
-                        "type": "integer"
-                    }
-                }
+                {"description": "The number of allowed requests in the current period", "schema": {"type": "integer"}}
             ]
         }

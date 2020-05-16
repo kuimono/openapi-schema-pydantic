@@ -17,15 +17,5 @@ class Reference(BaseModel):
 
     class Config:
         schema_extra = {
-            "examples": [
-                {
-                    "$ref": "#/components/schemas/Pet"
-                },
-                {
-                    "$ref": "Pet.json"
-                },
-                {
-                    "$ref": "definitions.json#/Pet"
-                }
-            ]
+            "examples": [{"$ref": "#/components/schemas/Pet"}, {"$ref": "Pet.json"}, {"$ref": "definitions.json#/Pet"}]
         }

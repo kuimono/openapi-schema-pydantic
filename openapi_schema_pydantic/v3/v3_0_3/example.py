@@ -35,19 +35,11 @@ class Example(BaseModel):
     class Config:
         schema_extra = {
             "examples": [
-                {
-                    "summary": "A foo example",
-                    "value": {
-                        "foo": "bar"
-                    }
-                },
+                {"summary": "A foo example", "value": {"foo": "bar"}},
                 {
                     "summary": "This is an example in XML",
-                    "externalValue": "http://example.org/examples/address-example.xml"
+                    "externalValue": "http://example.org/examples/address-example.xml",
                 },
-                {
-                    "summary": "This is a text example",
-                    "externalValue": "http://foo.bar/examples/address-example.txt"
-                }
+                {"summary": "This is a text example", "externalValue": "http://foo.bar/examples/address-example.txt"},
             ]
         }

@@ -20,11 +20,4 @@ class License(BaseModel):
     """
 
     class Config:
-        schema_extra = {
-            "examples": [
-                {
-                    "name": "Apache 2.0",
-                    "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
-                }
-            ]
-        }
+        schema_extra = {"examples": [{"name": "Apache 2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0.html"}]}

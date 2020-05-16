@@ -1,3 +1,6 @@
+/*.egg-info
 /.idea
 /.pytest_cache
+/build
+/dist
 __pycache__

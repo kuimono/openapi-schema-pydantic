@@ -33,10 +33,7 @@ class Server(BaseModel):
     class Config:
         schema_extra = {
             "examples": [
-                {
-                    "url": "https://development.gigantic-server.com/v1",
-                    "description": "Development server"
-                },
+                {"url": "https://development.gigantic-server.com/v1", "description": "Development server"},
                 {
                     "url": "https://{username}.gigantic-server.com:{port}/{basePath}",
                     "description": "The production API server",
@@ -44,19 +41,11 @@ class Server(BaseModel):
                         "username": {
                             "default": "demo",
                             "description": "this value is assigned by the service provider, "
-                                           "in this example `gigantic-server.com`"
+                            "in this example `gigantic-server.com`",
                         },
-                        "port": {
-                            "enum": [
-                                "8443",
-                                "443"
-                            ],
-                            "default": "8443"
-                        },
-                        "basePath": {
-                            "default": "v2"
-                        }
-                    }
-                }
+                        "port": {"enum": ["8443", "443"], "default": "8443"},
+                        "basePath": {"default": "v2"},
+                    },
+                },
             ]
         }

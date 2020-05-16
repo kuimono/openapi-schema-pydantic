@@ -1,0 +1,11 @@
+# project dependencies
+pydantic==1.5.1
+
+# code formatting
+black==19.10b0
+
+# test tool
+pytest==5.4.2
+
+# PyPi
+twine==3.1.1

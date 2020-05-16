@@ -50,59 +50,29 @@ class Response(BaseModel):
                     "description": "A complex object array response",
                     "content": {
                         "application/json": {
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/VeryComplexType"
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "description": "A simple string response",
-                    "content": {
-                        "text/plain": {
-                            "schema": {
-                                "type": "string"
-                            }
-                        }
-                    }
-
-                },
-                {
-                    "description": "A simple string response",
-                    "content": {
-                        "text/plain": {
-                            "schema": {
-                                "type": "string",
-                                "example": "whoa!"
-                            }
+                            "schema": {"type": "array", "items": {"$ref": "#/components/schemas/VeryComplexType"}}
                         }
                     },
+                },
+                {"description": "A simple string response", "content": {"text/plain": {"schema": {"type": "string"}}}},
+                {
+                    "description": "A simple string response",
+                    "content": {"text/plain": {"schema": {"type": "string", "example": "whoa!"}}},
                     "headers": {
                         "X-Rate-Limit-Limit": {
                             "description": "The number of allowed requests in the current period",
-                            "schema": {
-                                "type": "integer"
-                            }
+                            "schema": {"type": "integer"},
                         },
                         "X-Rate-Limit-Remaining": {
                             "description": "The number of remaining requests in the current period",
-                            "schema": {
-                                "type": "integer"
-                            }
+                            "schema": {"type": "integer"},
                         },
                         "X-Rate-Limit-Reset": {
                             "description": "The number of seconds left in the current period",
-                            "schema": {
-                                "type": "integer"
-                            }
-                        }
-                    }
+                            "schema": {"type": "integer"},
+                        },
+                    },
                 },
-                {
-                    "description": "object created"
-                }
+                {"description": "object created"},
             ]
         }

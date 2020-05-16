@@ -53,20 +53,17 @@ class MediaType(BaseModel):
             "examples": [
                 {
                     "application/json": {
-                        "schema": {
-                            "$ref": "#/components/schemas/Pet"
-                        },
+                        "schema": {"$ref": "#/components/schemas/Pet"},
                         "examples": {
                             "cat": {
                                 "summary": "An example of a cat",
-                                "value":
-                                    {
-                                        "name": "Fluffy",
-                                        "petType": "Cat",
-                                        "color": "White",
-                                        "gender": "male",
-                                        "breed": "Persian"
-                                    }
+                                "value": {
+                                    "name": "Fluffy",
+                                    "petType": "Cat",
+                                    "color": "White",
+                                    "gender": "male",
+                                    "breed": "Persian",
+                                },
                             },
                             "dog": {
                                 "summary": "An example of a dog with a cat's name",
@@ -75,13 +72,11 @@ class MediaType(BaseModel):
                                     "petType": "Dog",
                                     "color": "Black",
                                     "gender": "Female",
-                                    "breed": "Mixed"
+                                    "breed": "Mixed",
                                 },
-                                "frog": {
-                                    "$ref": "#/components/examples/frog-example"
-                                }
-                            }
-                        }
+                                "frog": {"$ref": "#/components/examples/frog-example"},
+                            },
+                        },
                     }
                 }
             ]

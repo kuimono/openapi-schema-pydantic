@@ -37,32 +37,28 @@ class RequestBody(BaseModel):
                     "description": "user to add to the system",
                     "content": {
                         "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User"
-                            },
+                            "schema": {"$ref": "#/components/schemas/User"},
                             "examples": {
                                 "user": {
                                     "summary": "User Example",
-                                    "externalValue": "http://foo.bar/examples/user-example.json"
+                                    "externalValue": "http://foo.bar/examples/user-example.json",
                                 }
-                            }
+                            },
                         },
                         "application/xml": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User"
-                            },
+                            "schema": {"$ref": "#/components/schemas/User"},
                             "examples": {
                                 "user": {
                                     "summary": "User example in XML",
-                                    "externalValue": "http://foo.bar/examples/user-example.xml"
+                                    "externalValue": "http://foo.bar/examples/user-example.xml",
                                 }
-                            }
+                            },
                         },
                         "text/plain": {
                             "examples": {
                                 "user": {
                                     "summary": "User example in Plain text",
-                                    "externalValue": "http://foo.bar/examples/user-example.txt"
+                                    "externalValue": "http://foo.bar/examples/user-example.txt",
                                 }
                             }
                         },
@@ -70,24 +66,15 @@ class RequestBody(BaseModel):
                             "examples": {
                                 "user": {
                                     "summary": "User example in other format",
-                                    "externalValue": "http://foo.bar/examples/user-example.whatever"
+                                    "externalValue": "http://foo.bar/examples/user-example.whatever",
                                 }
                             }
-                        }
-                    }
+                        },
+                    },
                 },
                 {
                     "description": "user to add to the system",
-                    "content": {
-                        "text/plain": {
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
+                    "content": {"text/plain": {"schema": {"type": "array", "items": {"type": "string"}}}},
+                },
             ]
         }

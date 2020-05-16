@@ -39,18 +39,12 @@ class OAuthFlow(BaseModel):
             "examples": [
                 {
                     "authorizationUrl": "https://example.com/api/oauth/dialog",
-                    "scopes": {
-                        "write:pets": "modify pets in your account",
-                        "read:pets": "read your pets"
-                    }
+                    "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
                 },
                 {
                     "authorizationUrl": "https://example.com/api/oauth/dialog",
                     "tokenUrl": "https://example.com/api/oauth/token",
-                    "scopes": {
-                        "write:pets": "modify pets in your account",
-                        "read:pets": "read your pets"
-                    }
-                }
+                    "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
+                },
             ]
         }

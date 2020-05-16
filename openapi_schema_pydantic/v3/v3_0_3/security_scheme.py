@@ -68,31 +68,17 @@ class SecurityScheme(BaseModel):
     class Config:
         schema_extra = {
             "examples": [
-                {
-                    "type": "http",
-                    "scheme": "basic"
-                },
-                {
-                    "type": "apiKey",
-                    "name": "api_key",
-                    "in": "header"
-                },
-                {
-                    "type": "http",
-                    "scheme": "bearer",
-                    "bearerFormat": "JWT",
-                },
+                {"type": "http", "scheme": "basic"},
+                {"type": "apiKey", "name": "api_key", "in": "header"},
+                {"type": "http", "scheme": "bearer", "bearerFormat": "JWT",},
                 {
                     "type": "oauth2",
                     "flows": {
                         "implicit": {
                             "authorizationUrl": "https://example.com/api/oauth/dialog",
-                            "scopes": {
-                                "write:pets": "modify pets in your account",
-                                "read:pets": "read your pets"
-                            }
+                            "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
                         }
-                    }
-                }
+                    },
+                },
             ]
         }

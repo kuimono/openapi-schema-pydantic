@@ -18,9 +18,7 @@ class PydanticSchema(Schema):
 
 
 def construct_open_api_with_schema_class(
-    open_api: OpenAPI,
-    schema_classes: List[Type[PydanticType]] = None,
-    scan_for_pydantic_schema_reference: bool = True
+    open_api: OpenAPI, schema_classes: List[Type[PydanticType]] = None, scan_for_pydantic_schema_reference: bool = True
 ) -> OpenAPI:
     """
     Construct a new OpenAPI object, with the use of pydantic classes to produce JSON schemas
@@ -53,16 +51,16 @@ def construct_open_api_with_schema_class(
     if new_open_api.components.schemas:
         for existing_key in new_open_api.components.schemas:
             if existing_key in schema_definitions.get("definitions"):
-                logging.warning(f"\"{existing_key}\" already exists in {ref_prefix}. "
-                                f"The value of \"{ref_prefix}{existing_key}\" will be overwritten.")
-        new_open_api.components.schemas.update({
-            key: Schema.parse_obj(schema_dict)
-            for key, schema_dict in schema_definitions.get("definitions").items()
-        })
+                logging.warning(
+                    f'"{existing_key}" already exists in {ref_prefix}. '
+                    f'The value of "{ref_prefix}{existing_key}" will be overwritten.'
+                )
+        new_open_api.components.schemas.update(
+            {key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions.get("definitions").items()}
+        )
     else:
         new_open_api.components.schemas = {
-            key: Schema.parse_obj(schema_dict)
-            for key, schema_dict in schema_definitions.get("definitions").items()
+            key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions.get("definitions").items()
         }
     return new_open_api
 

@@ -28,11 +28,4 @@ class Tag(BaseModel):
     """
 
     class Config:
-        schema_extra = {
-            "examples": [
-                {
-                    "name": "pet",
-                    "description": "Pets operations"
-                }
-            ]
-        }
+        schema_extra = {"examples": [{"name": "pet", "description": "Pets operations"}]}

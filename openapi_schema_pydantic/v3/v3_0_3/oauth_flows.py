@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 from .oauth_flow import OAuthFlow
 
+
 class OAuthFlows(BaseModel):
     """
     Allows configuration of the supported OAuth Flows.

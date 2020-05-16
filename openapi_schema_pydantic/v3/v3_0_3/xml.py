@@ -50,13 +50,7 @@ class XML(BaseModel):
     class Config:
         schema_extra = {
             "examples": [
-                {
-                    "namespace": "http://example.com/schema/sample",
-                    "prefix": "sample"
-                },
-                {
-                    "name": "aliens",
-                    "wrapped": True
-                }
+                {"namespace": "http://example.com/schema/sample", "prefix": "sample"},
+                {"name": "aliens", "wrapped": True},
             ]
         }

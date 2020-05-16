@@ -56,13 +56,10 @@ class Info(BaseModel):
                     "contact": {
                         "name": "API Support",
                         "url": "http://www.example.com/support",
-                        "email": "support@example.com"
+                        "email": "support@example.com",
                     },
-                    "license": {
-                        "name": "Apache 2.0",
-                        "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
-                    },
-                    "version": "1.0.1"
+                    "license": {"name": "Apache 2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0.html"},
+                    "version": "1.0.1",
                 }
             ]
         }

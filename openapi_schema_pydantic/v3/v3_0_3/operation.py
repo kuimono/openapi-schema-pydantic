@@ -107,9 +107,7 @@ class Operation(BaseModel):
         schema_extra = {
             "examples": [
                 {
-                    "tags": [
-                        "pet"
-                    ],
+                    "tags": ["pet"],
                     "summary": "Updates a pet in the store with form data",
                     "operationId": "updatePetWithForm",
                     "parameters": [
@@ -118,9 +116,7 @@ class Operation(BaseModel):
                             "in": "path",
                             "description": "ID of pet that needs to be updated",
                             "required": True,
-                            "schema": {
-                                "type": "string"
-                            }
+                            "schema": {"type": "string"},
                         }
                     ],
                     "requestBody": {
@@ -129,16 +125,10 @@ class Operation(BaseModel):
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "name": {
-                                            "description": "Updated name of the pet",
-                                            "type": "string"
-                                        },
-                                        "status": {
-                                            "description": "Updated status of the pet",
-                                            "type": "string"
-                                        }
+                                        "name": {"description": "Updated name of the pet", "type": "string"},
+                                        "status": {"description": "Updated status of the pet", "type": "string"},
                                     },
-                                    "required": ["status"]
+                                    "required": ["status"],
                                 }
                             }
                         }
@@ -146,27 +136,14 @@ class Operation(BaseModel):
                     "responses": {
                         "200": {
                             "description": "Pet updated.",
-                            "content": {
-                                "application/json": {},
-                                "application/xml": {}
-                            }
+                            "content": {"application/json": {}, "application/xml": {}},
                         },
                         "405": {
                             "description": "Method Not Allowed",
-                            "content": {
-                                "application/json": {},
-                                "application/xml": {}
-                            }
-                        }
+                            "content": {"application/json": {}, "application/xml": {}},
+                        },
                     },
-                    "security": [
-                        {
-                            "petstore_auth": [
-                                "write:pets",
-                                "read:pets"
-                            ]
-                        }
-                    ]
+                    "security": [{"petstore_auth": ["write:pets", "read:pets"]}],
                 }
             ]
         }

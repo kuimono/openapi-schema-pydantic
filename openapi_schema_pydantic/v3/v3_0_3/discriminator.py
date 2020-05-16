@@ -31,8 +31,8 @@ class Discriminator(BaseModel):
                     "propertyName": "petType",
                     "mapping": {
                         "dog": "#/components/schemas/Dog",
-                        "monster": "https://gigantic-server.com/schemas/Monster/schema.json"
-                    }
+                        "monster": "https://gigantic-server.com/schemas/Monster/schema.json",
+                    },
                 }
             ]
         }
