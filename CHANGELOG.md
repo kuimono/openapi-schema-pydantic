@@ -4,8 +4,7 @@
 
 ### Added
 - Added field definitions of `Schema` class
-- Added `allow_population_by_field_name = True` to schema types
-    - to allow [Specification Extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#specificationExtensions)
+- Added config `extra = Extra.allow` to schema types to allow [Specification Extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#specificationExtensions)
 - Added test cases on field alias
 
 ### Updated

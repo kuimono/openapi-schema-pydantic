@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseModel, AnyUrl
+from pydantic import AnyUrl, BaseModel, Extra
 
 
 class License(BaseModel):
@@ -20,4 +20,5 @@ class License(BaseModel):
     """
 
     class Config:
+        extra = Extra.allow
         schema_extra = {"examples": [{"name": "Apache 2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0.html"}]}

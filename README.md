@@ -198,46 +198,46 @@ Result:
   "components": {
     "schemas": {
       "PingRequest": {
-        "properties": {
-          "req_foo": {
-            "title": "Req Foo",
-            "description": "foo value of the request",
-            "type": "string"
-          },
-          "req_bar": {
-            "title": "Req Bar",
-            "description": "bar value of the request",
-            "type": "string"
-          }
-        },
-        "description": "Ping Request",
+        "title": "PingRequest",
         "required": [
           "req_foo",
           "req_bar"
         ],
         "type": "object",
-        "title": "PingRequest"
-      },
-      "PingResponse": {
         "properties": {
-          "resp_foo": {
-            "title": "Resp Foo",
-            "description": "foo value of the response",
-            "type": "string"
+          "req_foo": {
+            "title": "Req Foo",
+            "type": "string",
+            "description": "foo value of the request"
           },
-          "resp_bar": {
-            "title": "Resp Bar",
-            "description": "bar value of the response",
-            "type": "string"
+          "req_bar": {
+            "title": "Req Bar",
+            "type": "string",
+            "description": "bar value of the request"
           }
         },
-        "description": "Ping response",
+        "description": "Ping Request"
+      },
+      "PingResponse": {
+        "title": "PingResponse",
         "required": [
           "resp_foo",
           "resp_bar"
         ],
         "type": "object",
-        "title": "PingResponse"
+        "properties": {
+          "resp_foo": {
+            "title": "Resp Foo",
+            "type": "string",
+            "description": "foo value of the response"
+          },
+          "resp_bar": {
+            "title": "Resp Bar",
+            "type": "string",
+            "description": "bar value of the response"
+          }
+        },
+        "description": "Ping response"
       }
     }
   }

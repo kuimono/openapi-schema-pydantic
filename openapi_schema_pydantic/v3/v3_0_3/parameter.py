@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Union
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Extra, Field
 
 from .example import Example
 from .media_type import MediaType
@@ -141,6 +141,7 @@ class Parameter(BaseModel):
     """
 
     class Config:
+        extra = Extra.allow
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [

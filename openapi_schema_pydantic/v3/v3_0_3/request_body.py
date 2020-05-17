@@ -1,6 +1,6 @@
 from typing import Dict, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 from .media_type import MediaType
 
@@ -31,6 +31,7 @@ class RequestBody(BaseModel):
     """
 
     class Config:
+        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {

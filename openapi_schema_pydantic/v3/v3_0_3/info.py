@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseModel, AnyUrl
+from pydantic import AnyUrl, BaseModel, Extra
 
 from .contact import Contact
 from .license import License
@@ -47,6 +47,7 @@ class Info(BaseModel):
     """
 
     class Config:
+        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {
