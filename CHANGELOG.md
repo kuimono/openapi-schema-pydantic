@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.2.0 - Unreleased
+## v0.2.0 - 2020-05-17
 
 ### Added
 - Added field definitions of `Schema` class
@@ -10,6 +10,7 @@
 ### Updated
 - Updated README.md
 - Minor code formatting
+
 
 ## v0.1.2 - 2020-05-16
 
