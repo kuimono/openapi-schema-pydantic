@@ -14,6 +14,8 @@ the following fields are used with [alias](https://pydantic-docs.helpmanual.io/u
 | PathItem | ref | $ref |
 | Reference | ref | $ref |
 | SecurityScheme | security_scheme_in | in |
+| Schema | schema_format | format |
+| Schema | schema_not | not |
 
 > <a name="header_param_in"></a>The "in" field in Header object is actually a constant (`{"in": "header"}`).
 

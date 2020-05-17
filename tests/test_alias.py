@@ -43,3 +43,10 @@ def test_security_scheme():
     security_scheme_2 = SecurityScheme.parse_obj({"type": "apiKey", "security_scheme_in": "header"})
     security_scheme_3 = SecurityScheme.parse_obj({"type": "apiKey", "in": "header"})
     assert security_scheme_1 == security_scheme_2 == security_scheme_3
+
+
+def test_schema():
+    schema_1 = Schema(schema_not=Schema(), schema_format="email")
+    schema_2 = Schema.parse_obj({"schema_not": Schema(), "schema_format": "email"})
+    schema_3 = Schema.parse_obj({"not": Schema(), "format": "email"})
+    assert schema_1 == schema_2 == schema_3
