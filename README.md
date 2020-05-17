@@ -1,14 +1,21 @@
 # openapi-schema-pydantic
 
+[![PyPI](https://img.shields.io/pypi/v/openapi-schema-pydantic)](https://pypi.org/project/openapi-schema-pydantic/)
+[![PyPI - License](https://img.shields.io/pypi/l/openapi-schema-pydantic)](https://github.com/kuimono/openapi-schema-pydantic/blob/master/LICENSE)
+
 OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/pydantic) classes.
 
 The naming of the classes follows the schema in 
 [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schema).
 
+## Installation
+
+`pip install openapi-schema-pydantic`
+
 ## Try me
 
 ```python
-from openapi_schema_pydantic import Info, OpenAPI, Operation, PathItem, Response
+from openapi_schema_pydantic import OpenAPI, Info, PathItem, Operation, Response
 
 # Construct OpenAPI by pydantic objects
 open_api = OpenAPI(
