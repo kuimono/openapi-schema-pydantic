@@ -53,32 +53,30 @@ class MediaType(BaseModel):
         schema_extra = {
             "examples": [
                 {
-                    "application/json": {
-                        "schema": {"$ref": "#/components/schemas/Pet"},
-                        "examples": {
-                            "cat": {
-                                "summary": "An example of a cat",
-                                "value": {
-                                    "name": "Fluffy",
-                                    "petType": "Cat",
-                                    "color": "White",
-                                    "gender": "male",
-                                    "breed": "Persian",
-                                },
-                            },
-                            "dog": {
-                                "summary": "An example of a dog with a cat's name",
-                                "value": {
-                                    "name": "Puma",
-                                    "petType": "Dog",
-                                    "color": "Black",
-                                    "gender": "Female",
-                                    "breed": "Mixed",
-                                },
-                                "frog": {"$ref": "#/components/examples/frog-example"},
+                    "schema": {"$ref": "#/components/schemas/Pet"},
+                    "examples": {
+                        "cat": {
+                            "summary": "An example of a cat",
+                            "value": {
+                                "name": "Fluffy",
+                                "petType": "Cat",
+                                "color": "White",
+                                "gender": "male",
+                                "breed": "Persian",
                             },
                         },
-                    }
+                        "dog": {
+                            "summary": "An example of a dog with a cat's name",
+                            "value": {
+                                "name": "Puma",
+                                "petType": "Dog",
+                                "color": "Black",
+                                "gender": "Female",
+                                "breed": "Mixed",
+                            },
+                            "frog": {"$ref": "#/components/examples/frog-example"},
+                        },
+                    },
                 }
             ]
         }

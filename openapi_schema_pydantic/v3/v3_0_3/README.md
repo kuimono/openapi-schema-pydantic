@@ -7,7 +7,7 @@ the following fields are used with [alias](https://pydantic-docs.helpmanual.io/u
 
 | Class | Field name in the class | Alias (as in OpenAPI spec) |
 | ----- | ----------------------- | -------------------------- |
-| Header | param_in | in |
+| Header[*](#header_param_in) | param_in | in |
 | MediaType | media_type_schema | schema |
 | Parameter | param_in | in |
 | Parameter | param_schema | schema |
@@ -15,7 +15,23 @@ the following fields are used with [alias](https://pydantic-docs.helpmanual.io/u
 | Reference | ref | $ref |
 | SecurityScheme | security_scheme_in | in |
 
+> <a name="header_param_in"></a>The "in" field in Header object is actually a constant (`{"in": "header"}`).
+
 > For convenience of object creation, the classes mentioned in above
 > has configured `allow_population_by_field_name=True`.
 >
 > Reference: [Pydantic's Model Config](https://pydantic-docs.helpmanual.io/usage/model_config/)
+
+## Non-pydantic schema types
+
+Due to the constriants of python typing structure (not able to handle dynamic field names),
+the following schema classes are actually just a typing of `Dict`:
+
+| Schema Type | Implementation |
+| ----------- | -------------- |
+| Callback | `Callback = Dict[str, PathItem]` |
+| Paths | `Paths = Dict[str, PathItem]` |
+| Responses | `Responses = Dict[str, Union[Response, Reference]]` |
+| SecurityRequirement | `SecurityRequirement = Dict[str, List[str]]` |
+
+On creating such schema instances, please use python's `dict` type instead to instantiate.

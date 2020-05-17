@@ -2,10 +2,12 @@
 
 ## v0.1.3 - Unreleased
 
+### Added
+- Added test cases on field alias
+
 ### Updated
 - Updated README.md
 - Minor code formatting
-
 
 ## v0.1.2 - 2020-05-16
 

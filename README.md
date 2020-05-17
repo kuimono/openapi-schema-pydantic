@@ -1,6 +1,9 @@
 # openapi-schema-pydantic
 
-OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/pydantic) classes 
+OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/pydantic) classes.
+
+The naming of the classes follows the schema in 
+[OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schema).
 
 ## Try me
 
@@ -234,7 +237,9 @@ Result:
 }
 ```
 
-## Note
+## Notes
+
+### Use of OpenAPI.json()
 
 When using `OpenAPI.json()` function, arguments `by_alias=True, exclude_none=True` has to be in place.
 Otherwise the result json will not fit the OpenAPI standard.
@@ -251,7 +256,16 @@ More info about field alias:
 
 | OpenAPI version | Field alias info |
 | --------------- | ---------------- |
-| 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md) |
+| 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md#alias) |
+
+### Non-pydantic schema types
+
+Some schema types are not implemented as pydantic classes.
+Please refer to the following for more info:
+
+| OpenAPI version | Non-pydantic schema type info |
+| --------------- | ----------------------------- |
+| 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md#non-pydantic-schema-types) |
 
 ## License
 

@@ -74,4 +74,4 @@ def _assert_config_examples(schema_type):
         examples = schema_type.Config.schema_extra.get("examples")
         for example_dict in examples:
             obj = schema_type(**example_dict)
-            assert obj
+            assert obj.__fields_set__
