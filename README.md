@@ -246,9 +246,10 @@ Result:
 
 ## Notes
 
-### Use of OpenAPI.json()
+### Use of OpenAPI.json() / OpenAPI.dict()
 
-When using `OpenAPI.json()` function, arguments `by_alias=True, exclude_none=True` has to be in place.
+When using `OpenAPI.json()` / `OpenAPI.dict()` function,
+arguments `by_alias=True, exclude_none=True` has to be in place.
 Otherwise the result json will not fit the OpenAPI standard.
 
 ```python
