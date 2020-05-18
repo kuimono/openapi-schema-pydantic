@@ -223,7 +223,7 @@ class Schema(BaseModel):
     types defined by keyword.  Recall: "number" includes "integer".
     """
 
-    allOf: Optional[List[Union["Schema", Reference]]] = None
+    allOf: Optional[List[Union[Reference, "Schema"]]] = None
     """
     **From OpenAPI spec:
     Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.**
@@ -240,7 +240,7 @@ class Schema(BaseModel):
     value.
     """
 
-    oneOf: Optional[List[Union["Schema", Reference]]] = None
+    oneOf: Optional[List[Union[Reference, "Schema"]]] = None
     """
     **From OpenAPI spec:
     Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.**
@@ -257,7 +257,7 @@ class Schema(BaseModel):
     keyword's value.
     """
 
-    anyOf: Optional[List[Union["Schema", Reference]]] = None
+    anyOf: Optional[List[Union[Reference, "Schema"]]] = None
     """
     **From OpenAPI spec:
     Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.**
@@ -274,7 +274,7 @@ class Schema(BaseModel):
     keyword's value.
     """
 
-    schema_not: Optional[Union["Schema", Reference]] = Field(default=None, alias="not")
+    schema_not: Optional[Union[Reference, "Schema"]] = Field(default=None, alias="not")
     """
     **From OpenAPI spec:
     Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.**
@@ -287,7 +287,7 @@ class Schema(BaseModel):
     successfully against the schema defined by this keyword.
     """
 
-    items: Optional[Union["Schema", Reference]] = None
+    items: Optional[Union[Reference, "Schema"]] = None
     """
     **From OpenAPI spec:
     Value MUST be an object and not an array.
@@ -310,7 +310,7 @@ class Schema(BaseModel):
       less than, or equal to, the size of "items".
     """
 
-    properties: Optional[Dict[str, Union["Schema", Reference]]] = None
+    properties: Optional[Dict[str, Union[Reference, "Schema"]]] = None
     """
     **From OpenAPI spec:
     Property definitions MUST be a [Schema Object](#schemaObject)
@@ -324,7 +324,7 @@ class Schema(BaseModel):
     If absent, it can be considered the same as an empty object.
     """
 
-    additionalProperties: Optional[Union[bool, "Schema", Reference]] = None
+    additionalProperties: Optional[Union[bool, Reference, "Schema"]] = None
     """
     **From OpenAPI spec:
     Value can be boolean or object.

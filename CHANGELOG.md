@@ -1,5 +1,12 @@
 # Change Log
 
+## v0.2.2 - 2020-05-18
+
+### Fixed
+- Fixed issue of `Refeence` type incorrectly parsed in `Schema` object (due to incorrect union field order)
+    - [Reference: pydantic Union type](https://pydantic-docs.helpmanual.io/usage/types/#unions)
+
+
 ## v0.2.1 - 2020-05-18
 
 ### Updated
