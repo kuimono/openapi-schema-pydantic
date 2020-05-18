@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel
 
 from .reference import Reference
 
@@ -60,7 +60,6 @@ class Encoding(BaseModel):
     """
 
     class Config:
-        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {

@@ -1,10 +1,21 @@
 # Change Log
 
+## v0.2.1 - 2020-05-18
+
+### Updated
+- Remove `extra = Extra.allow` config, so the schema classes does not support 
+  [Specification Extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#specificationExtensions)
+  in general.
+    - If an extension field (e.g. `x-examples` in `Schema`) is needed,
+      one may create a child class to specify the addition field (with correct typing and properties).
+
+
 ## v0.2.0 - 2020-05-17
 
 ### Added
 - Added field definitions of `Schema` class
-- Added config `extra = Extra.allow` to schema types to allow [Specification Extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#specificationExtensions)
+- Added config `extra = Extra.allow` to schema types to allow
+  [Specification Extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#specificationExtensions)
 - Added test cases on field alias
 
 ### Updated

@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel
 
 from .server import Server
 
@@ -63,7 +63,6 @@ class Link(BaseModel):
     """
 
     class Config:
-        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {"operationId": "getUserAddressByUUID", "parameters": {"userUuid": "$response.body#/uuid"}},

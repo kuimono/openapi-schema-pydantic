@@ -1,6 +1,6 @@
 from typing import Dict, Optional
 
-from pydantic import AnyUrl, BaseModel, Extra
+from pydantic import AnyUrl, BaseModel
 
 
 class OAuthFlow(BaseModel):
@@ -35,7 +35,6 @@ class OAuthFlow(BaseModel):
     """
 
     class Config:
-        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {

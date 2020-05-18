@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel
 
 from .components import Components
 from .external_documentation import ExternalDocumentation
@@ -66,6 +66,3 @@ class OpenAPI(BaseModel):
     """
     Additional external documentation.
     """
-
-    class Config:
-        extra = Extra.allow

@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel
 
 
 class Example(BaseModel):
@@ -33,7 +33,6 @@ class Example(BaseModel):
     """
 
     class Config:
-        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {"summary": "A foo example", "value": {"foo": "bar"}},

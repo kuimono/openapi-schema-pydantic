@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel
 
 from .external_documentation import ExternalDocumentation
 
@@ -28,5 +28,4 @@ class Tag(BaseModel):
     """
 
     class Config:
-        extra = Extra.allow
         schema_extra = {"examples": [{"name": "pet", "description": "Pets operations"}]}

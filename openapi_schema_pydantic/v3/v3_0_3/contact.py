@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import AnyUrl, BaseModel, Extra
+from pydantic import AnyUrl, BaseModel
 
 
 class Contact(BaseModel):
@@ -26,7 +26,6 @@ class Contact(BaseModel):
     """
 
     class Config:
-        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {"name": "API Support", "url": "http://www.example.com/support", "email": "support@example.com"}
