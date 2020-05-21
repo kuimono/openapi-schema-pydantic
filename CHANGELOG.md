@@ -1,5 +1,15 @@
 # Change Log
 
+## v0.3.0 - 2020-05-22
+
+## Updated
+- Use `extra = Extra.forbid` config, so the schema classes does not support 
+  [Specification Extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#specificationExtensions)
+  in general.
+    - If an extension field (e.g. `x-examples` in `Schema`) is needed,
+      one may create a child class to specify the addition field (with correct typing and properties).
+
+
 ## v0.2.2 - 2020-05-18
 
 ### Fixed

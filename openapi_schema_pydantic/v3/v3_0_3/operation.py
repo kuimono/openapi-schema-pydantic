@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional, Union
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 from .callback import Callback
 from .external_documentation import ExternalDocumentation
@@ -104,6 +104,7 @@ class Operation(BaseModel):
     """
 
     class Config:
+        extra = Extra.forbid
         schema_extra = {
             "examples": [
                 {

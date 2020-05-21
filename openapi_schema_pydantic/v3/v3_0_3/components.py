@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 from .callback import Callback
 from .example import Example
@@ -49,6 +49,7 @@ class Components(BaseModel):
     """An object to hold reusable [Callback Objects](#callbackObject)."""
 
     class Config:
+        extra = Extra.forbid
         schema_extra = {
             "examples": [
                 {

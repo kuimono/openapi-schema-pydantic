@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import AnyUrl, BaseModel
+from pydantic import AnyUrl, BaseModel, Extra
 
 
 class ExternalDocumentation(BaseModel):
@@ -19,4 +19,5 @@ class ExternalDocumentation(BaseModel):
     """
 
     class Config:
+        extra = Extra.forbid
         schema_extra = {"examples": [{"description": "Find more info here", "url": "https://example.com"}]}

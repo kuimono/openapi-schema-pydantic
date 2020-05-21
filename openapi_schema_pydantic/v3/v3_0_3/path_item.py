@@ -1,6 +1,6 @@
 from typing import List, Optional, Union
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Extra, Field
 
 from .operation import Operation
 from .parameter import Parameter
@@ -92,6 +92,7 @@ class PathItem(BaseModel):
     """
 
     class Config:
+        extra = Extra.forbid
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [

@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Union
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Extra, Field
 
 from .encoding import Encoding
 from .example import Example
@@ -49,6 +49,7 @@ class MediaType(BaseModel):
     """
 
     class Config:
+        extra = Extra.forbid
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [
@@ -74,7 +75,6 @@ class MediaType(BaseModel):
                                 "gender": "Female",
                                 "breed": "Mixed",
                             },
-                            "frog": {"$ref": "#/components/examples/frog-example"},
                         },
                     },
                 }

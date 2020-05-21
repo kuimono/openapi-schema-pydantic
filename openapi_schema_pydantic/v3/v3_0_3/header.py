@@ -1,4 +1,4 @@
-from pydantic import Field
+from pydantic import Extra, Field
 
 from .parameter import Parameter
 
@@ -17,6 +17,7 @@ class Header(Parameter):
     param_in = Field(default="header", const=True, alias="in")
 
     class Config:
+        extra = Extra.forbid
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [
