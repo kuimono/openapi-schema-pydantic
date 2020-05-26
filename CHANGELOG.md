@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.0.0 - 2020-05-26
+
+Official release
+
 ## v0.3.0 - 2020-05-22
 
 ## Updated
