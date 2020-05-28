@@ -1,8 +1,15 @@
 # Change Log
 
+## v1.1.0 - 2020-05-28
+
+### Added
+- Add `by_alias` parameter in `util.construct_open_api_with_schema_class` function, to allow construct JSON schema by alias
+
+
 ## v1.0.0 - 2020-05-26
 
 Official release
+
 
 ## v0.3.0 - 2020-05-22
 

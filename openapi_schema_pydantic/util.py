@@ -18,7 +18,10 @@ class PydanticSchema(Schema):
 
 
 def construct_open_api_with_schema_class(
-    open_api: OpenAPI, schema_classes: List[Type[PydanticType]] = None, scan_for_pydantic_schema_reference: bool = True
+    open_api: OpenAPI,
+    schema_classes: List[Type[PydanticType]] = None,
+    scan_for_pydantic_schema_reference: bool = True,
+    by_alias: bool = True,
 ) -> OpenAPI:
     """
     Construct a new OpenAPI object, with the use of pydantic classes to produce JSON schemas
@@ -27,6 +30,7 @@ def construct_open_api_with_schema_class(
     :param schema_classes: pydanitic classes that their schema will be used "#/components/schemas" values
     :param scan_for_pydantic_schema_reference: flag to indicate if scanning for `PydanticSchemaReference` class
                                                is needed for "#/components/schemas" value updates
+    :param by_alias: construct schema by alias (default is True)
     :return: new OpenAPI object with "#/components/schemas" values updated.
              If there is no update in "#/components/schemas" values, the original `open_api` will be returned.
     """
@@ -42,10 +46,10 @@ def construct_open_api_with_schema_class(
         return open_api
 
     schema_classes.sort(key=lambda x: x.__name__)
-    logging.debug(f"{schema_classes=}")
+    logging.debug(f"schema_classes{schema_classes}")
 
     # update new_open_api with new #/components/schemas
-    schema_definitions = schema(schema_classes, ref_prefix=ref_prefix)
+    schema_definitions = schema(schema_classes, by_alias=by_alias, ref_prefix=ref_prefix)
     if not new_open_api.components:
         new_open_api.components = Components()
     if new_open_api.components.schemas:
