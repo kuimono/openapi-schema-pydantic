@@ -1,5 +1,5 @@
 # project dependencies
-pydantic==1.5.1
+pydantic==1.6.2
 
 # code formatting
 black==19.10b0
