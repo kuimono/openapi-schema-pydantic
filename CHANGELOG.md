@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.2.0 - Unreleased
+
+### Added
+- Support OpenAPI schema v3.1.0
+
+
 ## v1.1.0 - 2020-05-28
 
 ### Added
