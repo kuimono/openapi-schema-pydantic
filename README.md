@@ -6,7 +6,7 @@
 OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/pydantic) classes.
 
 The naming of the classes follows the schema in 
-[OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schema).
+[OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.1.0.md#schema).
 
 ## Installation
 
@@ -42,7 +42,7 @@ Result:
 
 ```json
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "My own API",
     "version": "v0.0.1"
@@ -156,7 +156,7 @@ Result:
 
 ```json
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "My own API",
     "version": "v0.0.1"
@@ -264,6 +264,7 @@ More info about field alias:
 
 | OpenAPI version | Field alias info |
 | --------------- | ---------------- |
+| 3.1.0 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_1_0/README.md#alias) |
 | 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md#alias) |
 
 ### Non-pydantic schema types
@@ -273,6 +274,7 @@ Please refer to the following for more info:
 
 | OpenAPI version | Non-pydantic schema type info |
 | --------------- | ----------------------------- |
+| 3.1.0 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_1_0/README.md#non-pydantic-schema-types) |
 | 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md#non-pydantic-schema-types) |
 
 ## License
