@@ -277,6 +277,16 @@ Please refer to the following for more info:
 | 3.1.0 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_1_0/README.md#non-pydantic-schema-types) |
 | 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md#non-pydantic-schema-types) |
 
+### Use OpenAPI 3.0.3 instead of 3.1.0
+
+Some UI renderings (e.g. Swagger) still does not support OpenAPI 3.1.0,
+so user may still use the 3.0.3 version by importing from different paths:
+
+```python
+from openapi_schema_pydantic.v3.v3_0_3 import OpenAPI, ...
+from openapi_schema_pydantic.v3.v3_0_3.util import PydanticSchema, construct_open_api_with_schema_class
+```
+
 ## License
 
 [MIT License](https://github.com/kuimono/openapi-schema-pydantic/blob/master/LICENSE)
