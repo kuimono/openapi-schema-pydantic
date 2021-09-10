@@ -5,6 +5,7 @@
 ### Added
 - Add `v3.v3_0_3.util` for users who still wants to use v3.0.3 OpenAPI with `PydanticSchema`
 
+
 ## v1.2.0 - 2021-06-28
 
 ### Added

@@ -279,8 +279,8 @@ Please refer to the following for more info:
 
 ### Use OpenAPI 3.0.3 instead of 3.1.0
 
-Some UI renderings (e.g. Swagger) still does not support OpenAPI 3.1.0,
-so user may still use the 3.0.3 version by importing from different paths:
+Some UI renderings (e.g. Swagger) still do not support OpenAPI 3.1.0.
+It is allowed to use the old 3.0.3 version by importing from different paths:
 
 ```python
 from openapi_schema_pydantic.v3.v3_0_3 import OpenAPI, ...
