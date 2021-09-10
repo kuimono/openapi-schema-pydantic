@@ -5,14 +5,14 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="openapi-schema-pydantic",
-    version="1.2.0",
+    version="1.2.1",
     author="Kuimono",
     description="OpenAPI (v3) specification schema as pydantic class",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/kuimono/openapi-schema-pydantic",
     packages=setuptools.find_packages(exclude=["tests"]),
-    install_requires=["pydantic>=1.5.1"],
+    install_requires=["pydantic>=1.8.2"],
     tests_require=["pytest"],
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -914,6 +914,3 @@ class Schema(BaseModel):
                 },
             ]
         }
-
-
-Schema.update_forward_refs()
