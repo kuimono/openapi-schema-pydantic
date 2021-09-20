@@ -20,7 +20,10 @@ def test_readme_example():
 def readme_example_1() -> OpenAPI:
     """Construct OpenAPI using data class"""
     return OpenAPI(
-        info=Info(title="My own API", version="v0.0.1",),
+        info=Info(
+            title="My own API",
+            version="v0.0.1",
+        ),
         paths={"/ping": PathItem(get=Operation(responses={"200": Response(description="pong")}))},
     )
 

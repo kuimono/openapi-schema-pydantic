@@ -2,7 +2,16 @@ import logging
 
 from pydantic import BaseModel, Field
 
-from openapi_schema_pydantic.v3.v3_0_3 import Info, MediaType, OpenAPI, Operation, PathItem, Reference, RequestBody, Response
+from openapi_schema_pydantic.v3.v3_0_3 import (
+    Info,
+    MediaType,
+    OpenAPI,
+    Operation,
+    PathItem,
+    Reference,
+    RequestBody,
+    Response,
+)
 from openapi_schema_pydantic.v3.v3_0_3.util import PydanticSchema, construct_open_api_with_schema_class
 
 
@@ -96,7 +105,10 @@ def construct_base_open_api_2() -> OpenAPI:
 
 def construct_base_open_api_3() -> OpenAPI:
     return OpenAPI(
-        info=Info(title="My own API", version="v0.0.1",),
+        info=Info(
+            title="My own API",
+            version="v0.0.1",
+        ),
         paths={
             "/ping": PathItem(
                 post=Operation(

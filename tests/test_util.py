@@ -67,7 +67,10 @@ def construct_base_open_api_1() -> OpenAPI:
 
 def construct_base_open_api_2() -> OpenAPI:
     return OpenAPI(
-        info=Info(title="My own API", version="v0.0.1",),
+        info=Info(
+            title="My own API",
+            version="v0.0.1",
+        ),
         paths={
             "/ping": PathItem(
                 post=Operation(
@@ -96,7 +99,10 @@ def construct_base_open_api_2() -> OpenAPI:
 
 def construct_base_open_api_3() -> OpenAPI:
     return OpenAPI(
-        info=Info(title="My own API", version="v0.0.1",),
+        info=Info(
+            title="My own API",
+            version="v0.0.1",
+        ),
         paths={
             "/ping": PathItem(
                 post=Operation(
