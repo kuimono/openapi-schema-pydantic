@@ -243,7 +243,7 @@ class Schema(BaseModel):
     object.
     """
 
-    additionalProperties: Optional[Union[Reference, "Schema"]] = None
+    additionalProperties: Optional[Union[Reference, "Schema", bool]] = None
     """
     The value of "additionalProperties" MUST be a valid JSON Schema.
 
