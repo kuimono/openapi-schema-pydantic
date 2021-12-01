@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.2.2 - Unreleased
+
+### Fixed
+- [4](https://github.com/kuimono/openapi-schema-pydantic/issues/4) Allow `Schema` type `additionalProperties` field to be boolean
+
+
 ## v1.2.1 - 2021-09-10
 
 ### Added
