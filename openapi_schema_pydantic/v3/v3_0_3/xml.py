@@ -48,7 +48,7 @@ class XML(BaseModel):
     """
 
     class Config:
-        extra = Extra.forbid
+        extra = Extra.ignore
         schema_extra = {
             "examples": [
                 {"namespace": "http://example.com/schema/sample", "prefix": "sample"},

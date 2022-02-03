@@ -33,7 +33,7 @@ class Example(BaseModel):
     """
 
     class Config:
-        extra = Extra.forbid
+        extra = Extra.ignore
         schema_extra = {
             "examples": [
                 {"summary": "A foo example", "value": {"foo": "bar"}},

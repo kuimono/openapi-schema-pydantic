@@ -1,9 +1,11 @@
 # Change Log
 
-## v1.2.2 - Unreleased
+## v1.2.2 - 2022-02-03
 
 ### Fixed
 - [4](https://github.com/kuimono/openapi-schema-pydantic/issues/4) Allow `Schema` type `additionalProperties` field to be boolean
+- [5](https://github.com/kuimono/openapi-schema-pydantic/issues/5) Allow URL fields in `SecurityScheme` / `OAuthFlow` to be string
+- [9](https://github.com/kuimono/openapi-schema-pydantic/issues/9) Switch to use `extra = Extra.ignore` instead of `Extra.forbid`
 
 
 ## v1.2.1 - 2021-09-10

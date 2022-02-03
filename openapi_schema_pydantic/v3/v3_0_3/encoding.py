@@ -60,7 +60,7 @@ class Encoding(BaseModel):
     """
 
     class Config:
-        extra = Extra.forbid
+        extra = Extra.ignore
         schema_extra = {
             "examples": [
                 {
