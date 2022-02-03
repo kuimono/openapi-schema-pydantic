@@ -471,7 +471,7 @@ class Schema(BaseModel):
     """
 
     class Config:
-        extra = Extra.forbid
+        extra = Extra.ignore
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [
