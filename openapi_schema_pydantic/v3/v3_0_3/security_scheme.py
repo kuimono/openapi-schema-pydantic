@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 
 from pydantic import AnyUrl, BaseModel, Extra, Field
 
@@ -32,7 +32,7 @@ class SecurityScheme(BaseModel):
     **REQUIRED** for `apiKey`. The name of the header, query or cookie parameter to be used.
     """
 
-    security_scheme_in: Optional[str] = Field(alias="in")
+    security_scheme_in: Optional[str] = Field(alias="in", default=None)
     """
     **REQUIRED** for `apiKey`. The location of the API key. Valid values are `"query"`, `"header"` or `"cookie"`.
     """
@@ -59,7 +59,7 @@ class SecurityScheme(BaseModel):
     **REQUIRED** for `oauth2`. An object containing configuration information for the flow types supported.
     """
 
-    openIdConnectUrl: Optional[AnyUrl] = None
+    openIdConnectUrl: Optional[Union[AnyUrl, str]] = None
     """
     **REQUIRED** for `openIdConnect`. OpenId Connect URL to discover OAuth2 configuration values.
     This MUST be in the form of a URL.
@@ -82,5 +82,7 @@ class SecurityScheme(BaseModel):
                         }
                     },
                 },
+                {"type": "openIdConnect", "openIdConnectUrl": "https://example.com/openIdConnect"},
+                {"type": "openIdConnect", "openIdConnectUrl": "openIdConnect"},     # #5: allow relative path
             ]
         }
