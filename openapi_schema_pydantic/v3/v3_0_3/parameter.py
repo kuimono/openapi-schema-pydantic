@@ -17,6 +17,7 @@ class ParameterLocation(str, enum.Enum):
     PATH = "path"
     COOKIE = "cookie"
 
+
 class Parameter(BaseModel):
     """
     Describes a single operation parameter.

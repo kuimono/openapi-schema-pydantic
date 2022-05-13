@@ -8,6 +8,7 @@ from .media_type import MediaType
 from .reference import Reference
 from .schema import Schema
 
+
 class ParameterLocation(str, enum.Enum):
     """The location of a given parameter."""
 
@@ -15,6 +16,7 @@ class ParameterLocation(str, enum.Enum):
     HEADER = "header"
     PATH = "path"
     COOKIE = "cookie"
+
 
 class Parameter(BaseModel):
     """
