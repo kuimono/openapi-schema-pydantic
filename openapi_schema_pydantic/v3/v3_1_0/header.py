@@ -1,6 +1,6 @@
 from pydantic import Extra, Field
 
-from .parameter import Parameter
+from .parameter import Parameter, ParameterLocation
 
 
 class Header(Parameter):
@@ -14,7 +14,7 @@ class Header(Parameter):
     """
 
     name = Field(default="", const=True)
-    param_in = Field(default="header", const=True, alias="in")
+    param_in = Field(default=ParameterLocation.HEADER, const=True, alias="in")
 
     class Config:
         extra = Extra.ignore

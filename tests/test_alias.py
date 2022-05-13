@@ -1,11 +1,12 @@
-from openapi_schema_pydantic import Header, MediaType, Parameter, PathItem, Reference, Schema, SecurityScheme
+from openapi_schema_pydantic import Header, MediaType, Parameter, ParameterLocation, PathItem, Reference, Schema, SecurityScheme
 
 
 def test_header_alias():
     header_1 = Header(param_in="header")
     header_2 = Header.parse_obj({"param_in": "header"})
     header_3 = Header.parse_obj({"in": "header"})
-    assert header_1 == header_2 == header_3
+    header_4 = Header.parse_obj({"in": ParameterLocation.HEADER})
+    assert header_1 == header_2 == header_3 == header_4
 
 
 def test_media_type_alias():
