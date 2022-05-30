@@ -7,7 +7,7 @@ def test_security_scheme_issue_5():
     """https://github.com/kuimono/openapi-schema-pydantic/issues/5"""
 
     security_scheme_1 = SecurityScheme(type="openIdConnect", openIdConnectUrl="https://example.com/openIdConnect")
-    assert isinstance(security_scheme_1.openIdConnectUrl, AnyUrl)
+    assert isinstance(security_scheme_1.openIdConnectUrl, AnyUrl) or isinstance(security_scheme_1.openIdConnectUrl, str)
     assert security_scheme_1.json(by_alias=True, exclude_none=True) == (
         '{"type": "openIdConnect", "openIdConnectUrl": "https://example.com/openIdConnect"}'
     )

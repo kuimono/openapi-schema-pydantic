@@ -1,10 +1,21 @@
-from typing import Literal, Union
+from typing_extensions import Literal
+from typing import Union
 
 from pydantic import BaseModel, Field
 from pydantic.schema import schema
 
-from openapi_schema_pydantic import OpenAPI, Info, PathItem, Operation, RequestBody, MediaType, Response, Schema, \
-    Reference, Discriminator
+from openapi_schema_pydantic import (
+    OpenAPI,
+    Info,
+    PathItem,
+    Operation,
+    RequestBody,
+    MediaType,
+    Response,
+    Schema,
+    Reference,
+    Discriminator,
+)
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 
