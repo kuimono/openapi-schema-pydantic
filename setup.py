@@ -12,6 +12,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/kuimono/openapi-schema-pydantic",
     packages=setuptools.find_packages(exclude=["tests"]),
+    package_data={"openapi_schema_pydantic": ["py.typed"]},
     install_requires=["pydantic>=1.8.2"],
     tests_require=["pytest"],
     classifiers=[
