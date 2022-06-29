@@ -1,5 +1,5 @@
 # project dependencies
-pydantic==1.9.0
+pydantic==1.9.1
 
 # PyPi
 twine==3.8.0

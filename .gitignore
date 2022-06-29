@@ -3,4 +3,5 @@
 /.pytest_cache
 /build
 /dist
+/.venv
 __pycache__
