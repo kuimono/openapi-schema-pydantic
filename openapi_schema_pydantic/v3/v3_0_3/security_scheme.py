@@ -83,6 +83,6 @@ class SecurityScheme(BaseModel):
                     },
                 },
                 {"type": "openIdConnect", "openIdConnectUrl": "https://example.com/openIdConnect"},
-                {"type": "openIdConnect", "openIdConnectUrl": "openIdConnect"},     # #5: allow relative path
+                {"type": "openIdConnect", "openIdConnectUrl": "openIdConnect"},  # #5: allow relative path
             ]
         }
