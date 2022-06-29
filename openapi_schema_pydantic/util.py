@@ -6,6 +6,8 @@ from pydantic.schema import schema
 
 from . import Components, OpenAPI, Reference, Schema
 
+logger = logging.getLogger(__name__)
+
 PydanticType = TypeVar("PydanticType", bound=BaseModel)
 ref_prefix = "#/components/schemas/"
 
@@ -46,7 +48,7 @@ def construct_open_api_with_schema_class(
         return open_api
 
     schema_classes.sort(key=lambda x: x.__name__)
-    logging.debug(f"schema_classes{schema_classes}")
+    logger.debug(f"schema_classes{schema_classes}")
 
     # update new_open_api with new #/components/schemas
     schema_definitions = schema(schema_classes, by_alias=by_alias, ref_prefix=ref_prefix)
@@ -55,7 +57,7 @@ def construct_open_api_with_schema_class(
     if new_open_api.components.schemas:
         for existing_key in new_open_api.components.schemas:
             if existing_key in schema_definitions.get("definitions"):
-                logging.warning(
+                logger.warning(
                     f'"{existing_key}" already exists in {ref_prefix}. '
                     f'The value of "{ref_prefix}{existing_key}" will be overwritten.'
                 )
@@ -90,7 +92,7 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
             for field in fields:
                 child_obj = obj.__getattribute__(field)
                 if isinstance(child_obj, PydanticSchema):
-                    logging.debug(f"PydanticSchema found in {obj.__repr_name__()}: {child_obj}")
+                    logger.debug(f"PydanticSchema found in {obj.__repr_name__()}: {child_obj}")
                     obj.__setattr__(field, _construct_ref_obj(child_obj))
                     pydantic_types.add(child_obj.schema_class)
                 else:
@@ -98,7 +100,7 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
         elif isinstance(obj, list):
             for index, elem in enumerate(obj):
                 if isinstance(elem, PydanticSchema):
-                    logging.debug(f"PydanticSchema found in list: {elem}")
+                    logger.debug(f"PydanticSchema found in list: {elem}")
                     obj[index] = _construct_ref_obj(elem)
                     pydantic_types.add(elem.schema_class)
                 else:
@@ -106,7 +108,7 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
         elif isinstance(obj, dict):
             for key, value in obj.items():
                 if isinstance(value, PydanticSchema):
-                    logging.debug(f"PydanticSchema found in dict: {value}")
+                    logger.debug(f"PydanticSchema found in dict: {value}")
                     obj[key] = _construct_ref_obj(value)
                     pydantic_types.add(value.schema_class)
                 else:
@@ -118,5 +120,5 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
 
 def _construct_ref_obj(pydantic_schema: PydanticSchema):
     ref_obj = Reference(ref=ref_prefix + pydantic_schema.schema_class.__name__)
-    logging.debug(f"ref_obj={ref_obj}")
+    logger.debug(f"ref_obj={ref_obj}")
     return ref_obj
