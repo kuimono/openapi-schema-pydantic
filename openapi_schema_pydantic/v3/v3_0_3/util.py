@@ -15,7 +15,7 @@ ref_prefix = "#/components/schemas/"
 class PydanticSchema(Schema, Generic[PydanticType]):
     """Special `Schema` class to indicate a reference from pydantic class"""
 
-    schema_class: Type[PydanticType] = ...
+    schema_class: Type[PydanticType]
     """the class that is used for generate the schema"""
 
 

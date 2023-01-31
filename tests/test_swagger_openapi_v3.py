@@ -31,4 +31,4 @@ class ExtendedPathItem(PathItem):
 
 
 class ExtendedOpenAPI(OpenAPI):
-    paths: Dict[str, ExtendedPathItem] = ...
+    paths: Dict[str, ExtendedPathItem]
