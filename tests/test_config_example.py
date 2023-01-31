@@ -32,7 +32,7 @@ from openapi_schema_pydantic import (
 )
 
 
-def test_config_example():
+def test_config_example() -> None:
     all_types = [
         OpenAPI,
         Info,
@@ -69,9 +69,11 @@ def test_config_example():
         _assert_config_examples(schema_type)
 
 
-def _assert_config_examples(schema_type):
-    if getattr(schema_type, "Config", None) and getattr(schema_type.Config, "schema_extra", None):
-        examples = schema_type.Config.schema_extra.get("examples")
+def _assert_config_examples(schema_type: object) -> None:
+    Config = getattr(schema_type, "Config", None)
+    schema_extra = getattr(Config, "schema_extra", None)
+    if schema_extra is not None:
+        examples = schema_extra["examples"]
         for example_dict in examples:
-            obj = schema_type(**example_dict)
+            obj = schema_type(**example_dict)  # type: ignore[operator]
             assert obj.__fields_set__

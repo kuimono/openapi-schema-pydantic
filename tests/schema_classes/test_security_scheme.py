@@ -3,7 +3,7 @@ from pydantic import AnyUrl
 from openapi_schema_pydantic import SecurityScheme
 
 
-def test_security_scheme_issue_5():
+def test_security_scheme_issue_5() -> None:
     """https://github.com/kuimono/openapi-schema-pydantic/issues/5"""
 
     security_scheme_1 = SecurityScheme(type="openIdConnect", openIdConnectUrl="https://example.com/openIdConnect")

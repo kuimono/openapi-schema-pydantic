@@ -6,7 +6,7 @@ from pydantic.schema import schema
 from openapi_schema_pydantic import Schema, Reference
 
 
-def test_schema():
+def test_schema() -> None:
     schema = Schema.parse_obj(
         {
             "title": "reference list",
@@ -21,7 +21,7 @@ def test_schema():
     assert schema.allOf[0].ref == "#/definitions/TestType"
 
 
-def test_issue_4():
+def test_issue_4() -> None:
     """https://github.com/kuimono/openapi-schema-pydantic/issues/4"""
 
     class TestModel(BaseModel):

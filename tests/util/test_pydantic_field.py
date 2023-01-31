@@ -19,7 +19,7 @@ from openapi_schema_pydantic import (
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 
-def test_pydantic_discriminator_schema_generation():
+def test_pydantic_discriminator_schema_generation() -> None:
     """https://github.com/kuimono/openapi-schema-pydantic/issues/8"""
 
     json_schema = schema([RequestModel])
@@ -56,10 +56,12 @@ def test_pydantic_discriminator_schema_generation():
     }
 
 
-def test_pydantic_discriminator_openapi_generation():
+def test_pydantic_discriminator_openapi_generation() -> None:
     """https://github.com/kuimono/openapi-schema-pydantic/issues/8"""
 
     open_api = construct_open_api_with_schema_class(construct_base_open_api())
+    assert open_api.components is not None
+    assert open_api.components.schemas is not None
     json_schema = open_api.components.schemas["RequestModel"]
     assert json_schema.properties == {
         "data": Schema(

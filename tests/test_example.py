@@ -3,7 +3,7 @@ import logging
 from openapi_schema_pydantic import Info, OpenAPI, Operation, PathItem, Response
 
 
-def test_readme_example():
+def test_readme_example() -> None:
     open_api_1 = readme_example_1()
     assert open_api_1
     open_api_json_1 = open_api_1.json(by_alias=True, exclude_none=True, indent=2)
