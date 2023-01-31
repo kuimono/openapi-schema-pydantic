@@ -86,7 +86,7 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[BaseModel]]:
 
     pydantic_types: Set[Type[BaseModel]] = set()
 
-    def _traverse(obj: Any):
+    def _traverse(obj: Any) -> None:
         if isinstance(obj, BaseModel):
             fields = obj.__fields_set__
             for field in fields:
@@ -118,7 +118,7 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[BaseModel]]:
     return list(pydantic_types)
 
 
-def _construct_ref_obj(pydantic_schema: PydanticSchema):
+def _construct_ref_obj(pydantic_schema: PydanticSchema[PydanticType]) -> Reference:
     ref_obj = Reference(ref=ref_prefix + pydantic_schema.schema_class.__name__)
     logger.debug(f"ref_obj={ref_obj}")
     return ref_obj
