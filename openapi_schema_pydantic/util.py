@@ -1,5 +1,5 @@
 import logging
-from typing import Any, List, Set, Type, TypeVar
+from typing import Any, Generic, List, Optional, Set, Type, TypeVar
 
 from pydantic import BaseModel
 from pydantic.schema import schema
@@ -12,16 +12,16 @@ PydanticType = TypeVar("PydanticType", bound=BaseModel)
 ref_prefix = "#/components/schemas/"
 
 
-class PydanticSchema(Schema):
+class PydanticSchema(Schema, Generic[PydanticType]):
     """Special `Schema` class to indicate a reference from pydantic class"""
 
-    schema_class: Type[PydanticType] = ...
+    schema_class: Type[PydanticType]
     """the class that is used for generate the schema"""
 
 
 def construct_open_api_with_schema_class(
     open_api: OpenAPI,
-    schema_classes: List[Type[PydanticType]] = None,
+    schema_classes: Optional[List[Type[BaseModel]]] = None,
     scan_for_pydantic_schema_reference: bool = True,
     by_alias: bool = True,
 ) -> OpenAPI:
@@ -56,22 +56,22 @@ def construct_open_api_with_schema_class(
         new_open_api.components = Components()
     if new_open_api.components.schemas:
         for existing_key in new_open_api.components.schemas:
-            if existing_key in schema_definitions.get("definitions"):
+            if existing_key in schema_definitions["definitions"]:
                 logger.warning(
                     f'"{existing_key}" already exists in {ref_prefix}. '
                     f'The value of "{ref_prefix}{existing_key}" will be overwritten.'
                 )
         new_open_api.components.schemas.update(
-            {key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions.get("definitions").items()}
+            {key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions["definitions"].items()}
         )
     else:
         new_open_api.components.schemas = {
-            key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions.get("definitions").items()
+            key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions["definitions"].items()
         }
     return new_open_api
 
 
-def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
+def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[BaseModel]]:
     """
     This function traverses the `OpenAPI` object and
 
@@ -84,9 +84,9 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
     :return: a list of schema classes extracted from `PydanticSchema` objects
     """
 
-    pydantic_types: Set[Type[PydanticType]] = set()
+    pydantic_types: Set[Type[BaseModel]] = set()
 
-    def _traverse(obj: Any):
+    def _traverse(obj: Any) -> None:
         if isinstance(obj, BaseModel):
             fields = obj.__fields_set__
             for field in fields:
@@ -118,7 +118,7 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
     return list(pydantic_types)
 
 
-def _construct_ref_obj(pydantic_schema: PydanticSchema):
+def _construct_ref_obj(pydantic_schema: PydanticSchema[PydanticType]) -> Reference:
     ref_obj = Reference(ref=ref_prefix + pydantic_schema.schema_class.__name__)
     logger.debug(f"ref_obj={ref_obj}")
     return ref_obj

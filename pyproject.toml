@@ -19,3 +19,7 @@ exclude = '''
   )/
 )
 '''
+
+[tool.mypy]
+strict = true
+files = ["openapi_schema_pydantic/", "tests/"]

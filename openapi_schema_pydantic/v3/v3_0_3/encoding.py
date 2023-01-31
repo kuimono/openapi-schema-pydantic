@@ -1,8 +1,11 @@
-from typing import Dict, Optional, Union
+from typing import Dict, Optional, TYPE_CHECKING, Union
 
 from pydantic import BaseModel, Extra
 
 from .reference import Reference
+
+if TYPE_CHECKING:
+    from .header import Header
 
 
 class Encoding(BaseModel):
