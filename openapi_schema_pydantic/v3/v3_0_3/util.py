@@ -1,5 +1,5 @@
 import logging
-from typing import Any, List, Set, Type, TypeVar
+from typing import Any, Generic, List, Set, Type, TypeVar
 
 from pydantic import BaseModel
 from pydantic.schema import schema
@@ -12,7 +12,7 @@ PydanticType = TypeVar("PydanticType", bound=BaseModel)
 ref_prefix = "#/components/schemas/"
 
 
-class PydanticSchema(Schema):
+class PydanticSchema(Schema, Generic[PydanticType]):
     """Special `Schema` class to indicate a reference from pydantic class"""
 
     schema_class: Type[PydanticType] = ...
