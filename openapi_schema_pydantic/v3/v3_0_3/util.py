@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Generic, List, Set, Type, TypeVar
+from typing import Any, Generic, List, Optional, Set, Type, TypeVar
 
 from pydantic import BaseModel
 from pydantic.schema import schema
@@ -21,7 +21,7 @@ class PydanticSchema(Schema, Generic[PydanticType]):
 
 def construct_open_api_with_schema_class(
     open_api: OpenAPI,
-    schema_classes: List[Type[PydanticType]] = None,
+    schema_classes: Optional[List[Type[PydanticType]]] = None,
     scan_for_pydantic_schema_reference: bool = True,
     by_alias: bool = True,
 ) -> OpenAPI:
