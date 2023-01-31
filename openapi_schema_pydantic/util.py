@@ -21,7 +21,7 @@ class PydanticSchema(Schema, Generic[PydanticType]):
 
 def construct_open_api_with_schema_class(
     open_api: OpenAPI,
-    schema_classes: Optional[List[Type[PydanticType]]] = None,
+    schema_classes: Optional[List[Type[BaseModel]]] = None,
     scan_for_pydantic_schema_reference: bool = True,
     by_alias: bool = True,
 ) -> OpenAPI:
@@ -71,7 +71,7 @@ def construct_open_api_with_schema_class(
     return new_open_api
 
 
-def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
+def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[BaseModel]]:
     """
     This function traverses the `OpenAPI` object and
 
@@ -84,7 +84,7 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
     :return: a list of schema classes extracted from `PydanticSchema` objects
     """
 
-    pydantic_types: Set[Type[PydanticType]] = set()
+    pydantic_types: Set[Type[BaseModel]] = set()
 
     def _traverse(obj: Any):
         if isinstance(obj, BaseModel):
