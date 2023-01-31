@@ -56,17 +56,17 @@ def construct_open_api_with_schema_class(
         new_open_api.components = Components()
     if new_open_api.components.schemas:
         for existing_key in new_open_api.components.schemas:
-            if existing_key in schema_definitions.get("definitions"):
+            if existing_key in schema_definitions["definitions"]:
                 logger.warning(
                     f'"{existing_key}" already exists in {ref_prefix}. '
                     f'The value of "{ref_prefix}{existing_key}" will be overwritten.'
                 )
         new_open_api.components.schemas.update(
-            {key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions.get("definitions").items()}
+            {key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions["definitions"].items()}
         )
     else:
         new_open_api.components.schemas = {
-            key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions.get("definitions").items()
+            key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions["definitions"].items()
         }
     return new_open_api
 
