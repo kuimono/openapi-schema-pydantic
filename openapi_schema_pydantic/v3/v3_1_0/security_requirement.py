@@ -1,5 +1,6 @@
 from typing import Dict, List
 
+from ._config import DefaultConfig
 
 SecurityRequirement = Dict[str, List[str]]
 """

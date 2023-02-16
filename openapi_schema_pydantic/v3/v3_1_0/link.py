@@ -2,6 +2,7 @@ from typing import Any, Dict, Optional
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
 from .server import Server
 
 
@@ -62,8 +63,7 @@ class Link(BaseModel):
     A server object to be used by the target operation.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {"operationId": "getUserAddressByUUID", "parameters": {"userUuid": "$response.body#/uuid"}},

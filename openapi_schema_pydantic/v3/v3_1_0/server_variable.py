@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from ._config import DefaultConfig
 from pydantic import BaseModel, Extra
 
 
@@ -27,5 +28,5 @@ class ServerVariable(BaseModel):
     [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
+        pass

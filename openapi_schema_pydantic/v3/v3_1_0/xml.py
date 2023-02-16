@@ -2,6 +2,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
+
 
 class XML(BaseModel):
     """
@@ -47,8 +49,7 @@ class XML(BaseModel):
     The definition takes effect only when defined alongside `type` being `array` (outside the `items`).
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {"name": "animal"},

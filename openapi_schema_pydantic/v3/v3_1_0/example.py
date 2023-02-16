@@ -2,9 +2,10 @@ from typing import Any, Optional
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
+
 
 class Example(BaseModel):
-
     summary: Optional[str] = None
     """
     Short description for the example.
@@ -33,8 +34,7 @@ class Example(BaseModel):
     See the rules for resolving [Relative References](#relativeReferencesURI).
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {"summary": "A foo example", "value": {"foo": "bar"}},

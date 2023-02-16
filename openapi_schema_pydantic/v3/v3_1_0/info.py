@@ -2,6 +2,7 @@ from typing import Optional
 
 from pydantic import AnyUrl, BaseModel, Extra
 
+from ._config import DefaultConfig
 from .contact import Contact
 from .license import License
 
@@ -51,8 +52,7 @@ class Info(BaseModel):
     (which is distinct from the [OpenAPI Specification version](#oasVersion) or the API implementation version).
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {

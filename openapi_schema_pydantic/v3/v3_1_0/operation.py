@@ -2,6 +2,7 @@ from typing import Dict, List, Optional, Union
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
 from .callback import Callback
 from .external_documentation import ExternalDocumentation
 from .parameter import Parameter
@@ -106,8 +107,7 @@ class Operation(BaseModel):
     it will be overridden by this value.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {

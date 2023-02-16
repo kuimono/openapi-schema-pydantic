@@ -1,7 +1,8 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel
 
+from ._config import DefaultConfig
 from .callback import Callback
 from .example import Example
 from .header import Header
@@ -52,8 +53,7 @@ class Components(BaseModel):
     pathItems: Optional[Dict[str, Union[PathItem, Reference]]] = None
     """An object to hold reusable [Path Item Object](#pathItemObject)."""
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {

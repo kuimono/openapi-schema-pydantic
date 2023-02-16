@@ -2,6 +2,7 @@ from typing import Dict, Optional, Union
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
 from .header import Header
 from .link import Link
 from .media_type import MediaType
@@ -43,8 +44,7 @@ class Response(BaseModel):
     following the naming constraints of the names for [Component Objects](#componentsObject).
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {

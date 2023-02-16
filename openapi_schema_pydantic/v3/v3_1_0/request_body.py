@@ -2,6 +2,7 @@ from typing import Dict, Optional
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
 from .media_type import MediaType
 
 
@@ -30,8 +31,7 @@ class RequestBody(BaseModel):
     Determines if the request body is required in the request. Defaults to `false`.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {

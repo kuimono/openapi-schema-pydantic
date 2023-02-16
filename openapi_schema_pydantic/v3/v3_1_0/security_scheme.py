@@ -2,6 +2,7 @@ from typing import Optional, Union
 
 from pydantic import AnyUrl, BaseModel, Extra, Field
 
+from ._config import DefaultConfig
 from .oauth_flows import OAuthFlows
 
 
@@ -71,8 +72,7 @@ class SecurityScheme(BaseModel):
     This MUST be in the form of a URL. The OpenID Connect standard requires the use of TLS.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [

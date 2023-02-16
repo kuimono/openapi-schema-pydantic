@@ -1,6 +1,8 @@
 from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, Extra, Field
+
+from ._config import DefaultConfig
 from .discriminator import Discriminator
 from .external_documentation import ExternalDocumentation
 from .reference import Reference
@@ -830,8 +832,7 @@ class Schema(BaseModel):
     Use of example is discouraged, and later versions of this specification may remove it.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [
