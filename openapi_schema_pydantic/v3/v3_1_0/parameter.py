@@ -2,6 +2,7 @@ from typing import Any, Dict, Optional, Union
 
 from pydantic import BaseModel, Field, Extra
 
+from ._config import DefaultConfig
 from .example import Example
 from .media_type import MediaType
 from .reference import Reference
@@ -140,8 +141,7 @@ class Parameter(BaseModel):
     The map MUST only contain one entry.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [

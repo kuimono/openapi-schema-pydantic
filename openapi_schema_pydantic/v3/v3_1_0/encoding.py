@@ -2,6 +2,7 @@ from typing import Dict, Optional, Union
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
 from .reference import Reference
 
 
@@ -67,8 +68,7 @@ class Encoding(BaseModel):
     then the value of [`contentType`](#encodingContentType) (implicit or explicit) SHALL be ignored.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {

@@ -1,5 +1,6 @@
 from typing import Optional
 
+from ._config import DefaultConfig
 from pydantic import AnyUrl, BaseModel, Extra
 
 
@@ -18,6 +19,5 @@ class ExternalDocumentation(BaseModel):
     Value MUST be in the form of a URL.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {"examples": [{"description": "Find more info here", "url": "https://example.com"}]}

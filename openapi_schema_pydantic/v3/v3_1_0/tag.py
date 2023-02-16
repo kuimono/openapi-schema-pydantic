@@ -2,6 +2,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
 from .external_documentation import ExternalDocumentation
 
 
@@ -27,6 +28,5 @@ class Tag(BaseModel):
     Additional external documentation for this tag.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {"examples": [{"name": "pet", "description": "Pets operations"}]}

@@ -1,6 +1,7 @@
 from typing import Optional
 
 from pydantic import AnyUrl, BaseModel, Extra
+from ._config import DefaultConfig
 
 
 class License(BaseModel):
@@ -26,8 +27,7 @@ class License(BaseModel):
     The `url` field is mutually exclusive of the `identifier` field.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {"name": "Apache 2.0", "identifier": "Apache-2.0"},

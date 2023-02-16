@@ -1,5 +1,6 @@
 from typing import Dict, Union
 
+from ._config import DefaultConfig
 from .response import Response
 from .reference import Reference
 

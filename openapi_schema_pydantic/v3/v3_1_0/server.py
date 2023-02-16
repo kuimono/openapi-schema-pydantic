@@ -2,6 +2,7 @@ from typing import Dict, Optional
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
 from .server_variable import ServerVariable
 
 
@@ -30,8 +31,7 @@ class Server(BaseModel):
     The value is used for substitution in the server's URL template.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {"url": "https://development.gigantic-server.com/v1", "description": "Development server"},

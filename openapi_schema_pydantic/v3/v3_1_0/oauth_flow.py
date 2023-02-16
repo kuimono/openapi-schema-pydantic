@@ -2,6 +2,8 @@ from typing import Dict, Optional, Union
 
 from pydantic import AnyUrl, BaseModel, Extra
 
+from ._config import DefaultConfig
+
 
 class OAuthFlow(BaseModel):
     """
@@ -38,8 +40,7 @@ class OAuthFlow(BaseModel):
     The map MAY be empty.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {

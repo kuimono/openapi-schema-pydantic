@@ -2,6 +2,7 @@ from typing import Any, Dict, Optional, Union
 
 from pydantic import BaseModel, Extra, Field
 
+from ._config import DefaultConfig
 from .encoding import Encoding
 from .example import Example
 from .reference import Reference
@@ -48,8 +49,7 @@ class MediaType(BaseModel):
     when the media type is `multipart` or `application/x-www-form-urlencoded`.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [

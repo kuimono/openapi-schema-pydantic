@@ -2,6 +2,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Extra, Field
 
+from ._config import DefaultConfig
+
 
 class Reference(BaseModel):
     """
@@ -29,8 +31,7 @@ class Reference(BaseModel):
     If the referenced object-type does not allow a `description` field, then this field has no effect.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         allow_population_by_field_name = True
         schema_extra = {
             "examples": [{"$ref": "#/components/schemas/Pet"}, {"$ref": "Pet.json"}, {"$ref": "definitions.json#/Pet"}]

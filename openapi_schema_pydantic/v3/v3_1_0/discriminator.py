@@ -2,6 +2,8 @@ from typing import Dict, Optional
 
 from pydantic import BaseModel, Extra
 
+from ._config import DefaultConfig
+
 
 class Discriminator(BaseModel):
     """
@@ -24,8 +26,7 @@ class Discriminator(BaseModel):
     An object to hold mappings between payload values and schema names or references.
     """
 
-    class Config:
-        extra = Extra.ignore
+    class Config(DefaultConfig):
         schema_extra = {
             "examples": [
                 {
