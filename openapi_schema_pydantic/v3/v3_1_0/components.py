@@ -53,7 +53,7 @@ class Components(BaseModel):
     """An object to hold reusable [Path Item Object](#pathItemObject)."""
 
     class Config:
-        extra = Extra.ignore
+        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {

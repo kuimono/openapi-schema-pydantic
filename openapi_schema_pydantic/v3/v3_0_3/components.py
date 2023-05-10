@@ -49,7 +49,7 @@ class Components(BaseModel):
     """An object to hold reusable [Callback Objects](#callbackObject)."""
 
     class Config:
-        extra = Extra.ignore
+        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {

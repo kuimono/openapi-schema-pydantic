@@ -27,7 +27,7 @@ class License(BaseModel):
     """
 
     class Config:
-        extra = Extra.ignore
+        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {"name": "Apache 2.0", "identifier": "Apache-2.0"},

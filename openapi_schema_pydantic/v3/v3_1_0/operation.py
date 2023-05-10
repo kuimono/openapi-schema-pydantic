@@ -107,7 +107,7 @@ class Operation(BaseModel):
     """
 
     class Config:
-        extra = Extra.ignore
+        extra = Extra.allow
         schema_extra = {
             "examples": [
                 {
