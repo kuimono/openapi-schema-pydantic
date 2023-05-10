@@ -1,6 +1,8 @@
 from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, Extra, Field
+
+from .datatype import DataType
 from .discriminator import Discriminator
 from .external_documentation import ExternalDocumentation
 from .reference import Reference
@@ -206,7 +208,7 @@ class Schema(BaseModel):
     but their definitions were adjusted to the OpenAPI Specification.
     """
 
-    type: Optional[str] = None
+    type: Optional[DataType] = None
     """
     **From OpenAPI spec:
     Value MUST be a string. Multiple types via an array are not supported.**
