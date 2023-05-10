@@ -17,7 +17,7 @@ from .paths import Paths
 from .path_item import PathItem
 from .operation import Operation
 from .external_documentation import ExternalDocumentation
-from .parameter import Parameter
+from .parameter import Parameter, ParameterLocation
 from .request_body import RequestBody
 from .media_type import MediaType
 from .encoding import Encoding

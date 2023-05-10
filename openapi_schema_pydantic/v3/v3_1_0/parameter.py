@@ -1,4 +1,5 @@
 from typing import Any, Dict, Optional, Union
+import enum
 
 from pydantic import BaseModel, Field, Extra
 
@@ -6,6 +7,15 @@ from .example import Example
 from .media_type import MediaType
 from .reference import Reference
 from .schema import Schema
+
+
+class ParameterLocation(str, enum.Enum):
+    """The location of a given parameter."""
+
+    QUERY = "query"
+    HEADER = "header"
+    PATH = "path"
+    COOKIE = "cookie"
 
 
 class Parameter(BaseModel):
@@ -30,7 +40,7 @@ class Parameter(BaseModel):
     - For all other cases, the `name` corresponds to the parameter name used by the [`in`](#parameterIn) property.
     """
 
-    param_in: str = Field(alias="in")
+    param_in: ParameterLocation = Field(alias="in")
     """
     **REQUIRED**. The location of the parameter. Possible values are `"query"`, `"header"`, `"path"` or `"cookie"`.
     """
