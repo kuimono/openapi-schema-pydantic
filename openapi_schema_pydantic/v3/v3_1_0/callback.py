@@ -1,6 +1,9 @@
-from typing import Dict, Union
+from typing import Dict, TYPE_CHECKING, Union
 
 from .reference import Reference
+
+if TYPE_CHECKING:
+    from .path_item import PathItem
 
 
 Callback = Dict[str, Union["PathItem", Reference]]

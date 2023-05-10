@@ -24,7 +24,7 @@ class OpenAPI(BaseModel):
     This is *not* related to the API [`info.version`](#infoVersion) string.
     """
 
-    info: Info = ...
+    info: Info
     """
     **REQUIRED**. Provides metadata about the API. The metadata MAY be used by tooling as required.
     """

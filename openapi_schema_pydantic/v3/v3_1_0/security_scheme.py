@@ -21,7 +21,7 @@ class SecurityScheme(BaseModel):
     Recommended for most use case is Authorization Code Grant flow with PKCE.
     """
 
-    type: str = ...
+    type: str
     """
     **REQUIRED**. The type of the security scheme.
     Valid values are `"apiKey"`, `"http"`, "mutualTLS", `"oauth2"`, `"openIdConnect"`.
