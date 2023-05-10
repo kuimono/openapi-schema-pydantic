@@ -5,7 +5,7 @@ from pydantic import Field
 from openapi_schema_pydantic import OpenAPI, Operation, PathItem
 
 
-def test_swagger_openapi_v3():
+def test_swagger_openapi_v3() -> None:
     open_api = ExtendedOpenAPI.parse_file("tests/data/swagger_openapi_v3.0.1.json")
     assert open_api
 
@@ -31,4 +31,4 @@ class ExtendedPathItem(PathItem):
 
 
 class ExtendedOpenAPI(OpenAPI):
-    paths: Dict[str, ExtendedPathItem] = ...
+    paths: Dict[str, ExtendedPathItem]  # type: ignore[assignment]

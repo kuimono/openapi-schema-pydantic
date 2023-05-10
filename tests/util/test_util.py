@@ -6,7 +6,7 @@ from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathIte
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 
-def test_construct_open_api_with_schema_class_1():
+def test_construct_open_api_with_schema_class_1() -> None:
     open_api = construct_base_open_api_1()
     result_open_api_1 = construct_open_api_with_schema_class(open_api)
     result_open_api_2 = construct_open_api_with_schema_class(open_api, [PingRequest, PingResponse])
@@ -17,7 +17,7 @@ def test_construct_open_api_with_schema_class_1():
     logging.debug(open_api_json)
 
 
-def test_construct_open_api_with_schema_class_2():
+def test_construct_open_api_with_schema_class_2() -> None:
     open_api_1 = construct_base_open_api_1()
     open_api_2 = construct_base_open_api_2()
     result_open_api_1 = construct_open_api_with_schema_class(open_api_1)
@@ -25,11 +25,14 @@ def test_construct_open_api_with_schema_class_2():
     assert result_open_api_1 == result_open_api_2
 
 
-def test_construct_open_api_with_schema_class_3():
+def test_construct_open_api_with_schema_class_3() -> None:
     open_api_3 = construct_base_open_api_3()
 
     result_with_alias_1 = construct_open_api_with_schema_class(open_api_3)
+    assert result_with_alias_1.components is not None
+    assert result_with_alias_1.components.schemas is not None
     schema_with_alias = result_with_alias_1.components.schemas["PongResponse"]
+    assert schema_with_alias.properties is not None
     assert "pong_foo" in schema_with_alias.properties
     assert "pong_bar" in schema_with_alias.properties
 
@@ -37,7 +40,10 @@ def test_construct_open_api_with_schema_class_3():
     assert result_with_alias_1 == result_with_alias_2
 
     result_without_alias = construct_open_api_with_schema_class(open_api_3, by_alias=False)
+    assert result_without_alias.components is not None
+    assert result_without_alias.components.schemas is not None
     schema_without_alias = result_without_alias.components.schemas["PongResponse"]
+    assert schema_without_alias.properties is not None
     assert "resp_foo" in schema_without_alias.properties
     assert "resp_bar" in schema_without_alias.properties
 

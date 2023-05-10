@@ -1,4 +1,7 @@
-from typing import Dict
+from typing import Dict, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .path_item import PathItem
 
 
 Callback = Dict[str, "PathItem"]

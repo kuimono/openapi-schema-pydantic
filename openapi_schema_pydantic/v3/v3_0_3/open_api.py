@@ -22,7 +22,7 @@ class OpenAPI(BaseModel):
     This is *not* related to the API [`info.version`](#infoVersion) string.
     """
 
-    info: Info = ...
+    info: Info
     """
     **REQUIRED**. Provides metadata about the API. The metadata MAY be used by tooling as required.
     """
@@ -34,7 +34,7 @@ class OpenAPI(BaseModel):
     the default value would be a [Server Object](#serverObject) with a [url](#serverUrl) value of `/`.
     """
 
-    paths: Paths = ...
+    paths: Paths
     """
     **REQUIRED**. The available paths and operations for the API.
     """
