@@ -7,8 +7,10 @@ from .external_documentation import ExternalDocumentation
 
 class Tag(BaseModel):
     """
-    Adds metadata to a single tag that is used by the [Operation Object](#operationObject).
-    It is not mandatory to have a Tag Object per tag defined in the Operation Object instances.
+    Adds metadata to a single tag that is used by the
+    [Operation Object](#operationObject).
+    It is not mandatory to have a Tag Object per tag defined in the Operation Object
+    instances.
     """
 
     name: str
@@ -19,7 +21,8 @@ class Tag(BaseModel):
     description: Optional[str] = None
     """
     A short description for the tag.
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.
     """
 
     externalDocs: Optional[ExternalDocumentation] = None

@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, Extra, Field
+
 from .datatype import DataType
 from .discriminator import Discriminator
 from .external_documentation import ExternalDocumentation
@@ -21,8 +22,9 @@ class Schema(BaseModel):
 
     Unless stated otherwise, the property definitions follow those of JSON Schema
     and do not add any additional semantics.
-    Where JSON Schema indicates that behavior is defined by the application (e.g. for annotations),
-    OAS also defers the definition of semantics to the application consuming the OpenAPI document.
+    Where JSON Schema indicates that behavior is defined by the application (e.g. for
+    annotations), OAS also defers the definition of semantics to the application
+    consuming the OpenAPI document.
     """
 
     """
@@ -107,7 +109,9 @@ class Schema(BaseModel):
     annotation collection purposes, in such cases.
     """
 
-    schema_else: Optional[Union[Reference, "Schema"]] = Field(default=None, alias="else")
+    schema_else: Optional[Union[Reference, "Schema"]] = Field(
+        default=None, alias="else"
+    )
     """
     This keyword's value MUST be a valid JSON Schema.
 
@@ -591,7 +595,8 @@ class Schema(BaseModel):
     """
     From OpenAPI:
     See [Data Type Formats](#dataTypeFormat) for further details.
-    While relying on JSON Schema's defined formats, the OAS offers a few additional predefined formats.
+    While relying on JSON Schema's defined formats, the OAS offers a few additional 
+    predefined formats.
     
     From JSON Schema:
     Structural validation alone may be insufficient to allow an
@@ -675,7 +680,8 @@ class Schema(BaseModel):
     description: Optional[str] = None
     """
     From OpenAPI:
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.
     
     From JSON Schema:
     The value "description" MUST be a string.
@@ -804,8 +810,8 @@ class Schema(BaseModel):
     discriminator: Optional[Discriminator] = None
     """
     Adds support for polymorphism.
-    The discriminator is an object name that is used to differentiate between other schemas
-    which may satisfy the payload description.
+    The discriminator is an object name that is used to differentiate between other 
+    schemas which may satisfy the payload description.
     See [Composition and Inheritance](#schemaComposition) for more details.
     """
 
@@ -827,8 +833,10 @@ class Schema(BaseModel):
     To represent examples that cannot be naturally represented in JSON or YAML,
     a string value can be used to contain the example with escaping where necessary.
     
-    Deprecated: The example property has been deprecated in favor of the JSON Schema examples keyword.
-    Use of example is discouraged, and later versions of this specification may remove it.
+    Deprecated: The example property has been deprecated in favor of the JSON Schema 
+    examples keyword.
+    Use of example is discouraged, and later versions of this specification may remove 
+    it.
     """
 
     class Config:
@@ -847,10 +855,18 @@ class Schema(BaseModel):
                     },
                 },
                 {"type": "object", "additionalProperties": {"type": "string"}},
-                {"type": "object", "additionalProperties": {"$ref": "#/components/schemas/ComplexModel"}},
                 {
                     "type": "object",
-                    "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+                    "additionalProperties": {
+                        "$ref": "#/components/schemas/ComplexModel"
+                    },
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "integer", "format": "int64"},
+                        "name": {"type": "string"},
+                    },
                     "required": ["name"],
                     "example": {"name": "Puma", "id": 1},
                 },
@@ -865,13 +881,20 @@ class Schema(BaseModel):
                 {
                     "allOf": [
                         {"$ref": "#/components/schemas/ErrorModel"},
-                        {"type": "object", "required": ["rootCause"], "properties": {"rootCause": {"type": "string"}}},
+                        {
+                            "type": "object",
+                            "required": ["rootCause"],
+                            "properties": {"rootCause": {"type": "string"}},
+                        },
                     ]
                 },
                 {
                     "type": "object",
                     "discriminator": {"propertyName": "petType"},
-                    "properties": {"name": {"type": "string"}, "petType": {"type": "string"}},
+                    "properties": {
+                        "name": {"type": "string"},
+                        "petType": {"type": "string"},
+                    },
                     "required": ["name", "petType"],
                 },
                 {
@@ -886,7 +909,12 @@ class Schema(BaseModel):
                                     "type": "string",
                                     "description": "The measured skill for hunting",
                                     "default": "lazy",
-                                    "enum": ["clueless", "lazy", "adventurous", "aggressive"],
+                                    "enum": [
+                                        "clueless",
+                                        "lazy",
+                                        "adventurous",
+                                        "aggressive",
+                                    ],
                                 }
                             },
                             "required": ["huntingSkill"],
@@ -904,7 +932,8 @@ class Schema(BaseModel):
                                 "packSize": {
                                     "type": "integer",
                                     "format": "int32",
-                                    "description": "the size of the pack the dog is from",
+                                    "description": "the size of the pack the dog is "
+                                    "from",
                                     "default": 0,
                                     "minimum": 0,
                                 }

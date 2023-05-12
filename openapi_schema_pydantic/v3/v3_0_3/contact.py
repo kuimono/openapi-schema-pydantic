@@ -29,6 +29,10 @@ class Contact(BaseModel):
         extra = Extra.allow
         schema_extra = {
             "examples": [
-                {"name": "API Support", "url": "http://www.example.com/support", "email": "support@example.com"}
+                {
+                    "name": "API Support",
+                    "url": "http://www.example.com/support",
+                    "email": "support@example.com",
+                }
             ]
         }

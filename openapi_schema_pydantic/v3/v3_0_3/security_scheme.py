@@ -10,8 +10,8 @@ class SecurityScheme(BaseModel):
     Defines a security scheme that can be used by the operations.
     Supported schemes are HTTP authentication,
     an API key (either as a header, a cookie parameter or as a query parameter),
-    OAuth2's common flows (implicit, password, client credentials and authorization code)
-    as defined in [RFC6749](https://tools.ietf.org/html/rfc6749),
+    OAuth2's common flows (implicit, password, client credentials and authorization
+    code) as defined in [RFC6749](https://tools.ietf.org/html/rfc6749),
     and [OpenID Connect Discovery](https://tools.ietf.org/html/draft-ietf-oauth-discovery-06).
     """
 
@@ -24,17 +24,20 @@ class SecurityScheme(BaseModel):
     description: Optional[str] = None
     """
     A short description for security scheme.
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.
     """
 
     name: Optional[str] = None
     """
-    **REQUIRED** for `apiKey`. The name of the header, query or cookie parameter to be used.
+    **REQUIRED** for `apiKey`. The name of the header, query or cookie parameter to be 
+    used.
     """
 
     security_scheme_in: Optional[str] = Field(alias="in", default=None)
     """
-    **REQUIRED** for `apiKey`. The location of the API key. Valid values are `"query"`, `"header"` or `"cookie"`.
+    **REQUIRED** for `apiKey`. The location of the API key. Valid values are `"query"`, 
+    `"header"` or `"cookie"`.
     """
 
     scheme: Optional[str] = None
@@ -56,13 +59,14 @@ class SecurityScheme(BaseModel):
 
     flows: Optional[OAuthFlows] = None
     """
-    **REQUIRED** for `oauth2`. An object containing configuration information for the flow types supported.
+    **REQUIRED** for `oauth2`. An object containing configuration information for the 
+    flow types supported.
     """
 
     openIdConnectUrl: Optional[Union[AnyUrl, str]] = None
     """
-    **REQUIRED** for `openIdConnect`. OpenId Connect URL to discover OAuth2 configuration values.
-    This MUST be in the form of a URL.
+    **REQUIRED** for `openIdConnect`. OpenId Connect URL to discover OAuth2 
+    configuration values. This MUST be in the form of a URL.
     """
 
     class Config:
@@ -78,11 +82,20 @@ class SecurityScheme(BaseModel):
                     "flows": {
                         "implicit": {
                             "authorizationUrl": "https://example.com/api/oauth/dialog",
-                            "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
+                            "scopes": {
+                                "write:pets": "modify pets in your account",
+                                "read:pets": "read your pets",
+                            },
                         }
                     },
                 },
-                {"type": "openIdConnect", "openIdConnectUrl": "https://example.com/openIdConnect"},
-                {"type": "openIdConnect", "openIdConnectUrl": "openIdConnect"},  # #5: allow relative path
+                {
+                    "type": "openIdConnect",
+                    "openIdConnectUrl": "https://example.com/openIdConnect",
+                },
+                {
+                    "type": "openIdConnect",
+                    "openIdConnectUrl": "openIdConnect",
+                },  # #5: allow relative path
             ]
         }

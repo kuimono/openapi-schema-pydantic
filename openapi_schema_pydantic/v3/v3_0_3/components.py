@@ -63,11 +63,17 @@ class Components(BaseModel):
                         },
                         "Category": {
                             "type": "object",
-                            "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+                            "properties": {
+                                "id": {"type": "integer", "format": "int64"},
+                                "name": {"type": "string"},
+                            },
                         },
                         "Tag": {
                             "type": "object",
-                            "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+                            "properties": {
+                                "id": {"type": "integer", "format": "int64"},
+                                "name": {"type": "string"},
+                            },
                         },
                     },
                     "parameters": {
@@ -91,11 +97,21 @@ class Components(BaseModel):
                         "IllegalInput": {"description": "Illegal input for operation."},
                         "GeneralError": {
                             "description": "General Error",
-                            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/GeneralError"}}},
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/GeneralError"
+                                    }
+                                }
+                            },
                         },
                     },
                     "securitySchemes": {
-                        "api_key": {"type": "apiKey", "name": "api_key", "in": "header"},
+                        "api_key": {
+                            "type": "apiKey",
+                            "name": "api_key",
+                            "in": "header",
+                        },
                         "petstore_auth": {
                             "type": "oauth2",
                             "flows": {

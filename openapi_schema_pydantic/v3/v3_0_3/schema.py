@@ -22,7 +22,8 @@ class Schema(BaseModel):
     """
 
     """
-    The following properties are taken directly from the JSON Schema definition and follow the same specifications:
+    The following properties are taken directly from the JSON Schema definition and 
+    follow the same specifications:
     """
 
     title: Optional[str] = None
@@ -228,7 +229,8 @@ class Schema(BaseModel):
     allOf: Optional[List[Union[Reference, "Schema"]]] = None
     """
     **From OpenAPI spec:
-    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.**
+    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a 
+    standard JSON Schema.**
     
     From JSON Schema:
     This keyword's value MUST be an array.  This array MUST have at least
@@ -245,7 +247,8 @@ class Schema(BaseModel):
     oneOf: Optional[List[Union[Reference, "Schema"]]] = None
     """
     **From OpenAPI spec:
-    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.**
+    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a 
+    standard JSON Schema.**
     
     From JSON Schema:
     This keyword's value MUST be an array.  This array MUST have at least
@@ -262,7 +265,8 @@ class Schema(BaseModel):
     anyOf: Optional[List[Union[Reference, "Schema"]]] = None
     """
     **From OpenAPI spec:
-    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.**
+    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a 
+    standard JSON Schema.**
     
     From JSON Schema:
     This keyword's value MUST be an array.  This array MUST have at least
@@ -279,7 +283,8 @@ class Schema(BaseModel):
     schema_not: Optional[Union[Reference, "Schema"]] = Field(default=None, alias="not")
     """
     **From OpenAPI spec:
-    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.**
+    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a 
+    standard JSON Schema.**
     
     From JSON Schema:
     This keyword's value MUST be an object.  This object MUST be a valid
@@ -293,8 +298,8 @@ class Schema(BaseModel):
     """
     **From OpenAPI spec:
     Value MUST be an object and not an array.
-    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.
-    `items` MUST be present if the `type` is `array`.**
+    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a 
+    standard JSON Schema. `items` MUST be present if the `type` is `array`.**
     
     From JSON Schema:
     The value of "items" MUST be either a schema or array of schemas.
@@ -330,7 +335,8 @@ class Schema(BaseModel):
     """
     **From OpenAPI spec:
     Value can be boolean or object.
-    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a standard JSON Schema.
+    Inline or referenced schema MUST be of a [Schema Object](#schemaObject) and not a 
+    standard JSON Schema.
     Consistent with JSON Schema, `additionalProperties` defaults to `true`.**
     
     From JSON Schema:
@@ -353,7 +359,8 @@ class Schema(BaseModel):
     description: Optional[str] = None
     """
     **From OpenAPI spec:
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.**
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.**
     
     From JSON Schema:
     The value "description" MUST be a string.
@@ -368,7 +375,8 @@ class Schema(BaseModel):
     """
     **From OpenAPI spec:
     [Data Type Formats](#dataTypeFormat) for further details.
-    While relying on JSON Schema's defined formats, the OAS offers a few additional predefined formats.**
+    While relying on JSON Schema's defined formats, the OAS offers a few additional 
+    predefined formats.**
     
     From JSON Schema:
     Structural validation alone may be insufficient to validate that an
@@ -390,8 +398,9 @@ class Schema(BaseModel):
     **From OpenAPI spec:
     The default value represents what would be assumed by the consumer of the input
     as the value of the schema if one is not provided.
-    Unlike JSON Schema, the value MUST conform to the defined type for the Schema Object defined at the same level.
-    For example, if `type` is `string`, then `default` can be `"foo"` but cannot be `1`.**
+    Unlike JSON Schema, the value MUST conform to the defined type for the Schema 
+    Object defined at the same level. For example, if `type` is `string`, then 
+    `default` can be `"foo"` but cannot be `1`.**
     
     From JSON Schema:
     There are no restrictions placed on the value of this keyword.
@@ -404,7 +413,8 @@ class Schema(BaseModel):
     """
 
     """
-    Other than the JSON Schema subset fields, the following fields MAY be used for further schema documentation:
+    Other than the JSON Schema subset fields, the following fields MAY be used for 
+    further schema documentation:
     """
 
     nullable: Optional[bool] = None
@@ -420,8 +430,8 @@ class Schema(BaseModel):
     discriminator: Optional[Discriminator] = None
     """
     Adds support for polymorphism.
-    The discriminator is an object name that is used to differentiate between other schemas
-    which may satisfy the payload description.
+    The discriminator is an object name that is used to differentiate between other 
+    schemas which may satisfy the payload description.
     See [Composition and Inheritance](#schemaComposition) for more details.
     """
 
@@ -429,9 +439,9 @@ class Schema(BaseModel):
     """
     Relevant only for Schema `"properties"` definitions.
     Declares the property as "read only".
-    This means that it MAY be sent as part of a response but SHOULD NOT be sent as part of the request.
-    If the property is marked as `readOnly` being `true` and is in the `required` list,
-    the `required` will take effect on the response only.
+    This means that it MAY be sent as part of a response but SHOULD NOT be sent as part 
+    of the request. If the property is marked as `readOnly` being `true` and is in the 
+    `required` list, the `required` will take effect on the response only.
     A property MUST NOT be marked as both `readOnly` and `writeOnly` being `true`.
     Default value is `false`.
     """
@@ -440,9 +450,9 @@ class Schema(BaseModel):
     """
     Relevant only for Schema `"properties"` definitions.
     Declares the property as "write only".
-    Therefore, it MAY be sent as part of a request but SHOULD NOT be sent as part of the response.
-    If the property is marked as `writeOnly` being `true` and is in the `required` list,
-    the `required` will take effect on the request only.
+    Therefore, it MAY be sent as part of a request but SHOULD NOT be sent as part of 
+    the response. If the property is marked as `writeOnly` being `true` and is in the 
+    `required` list, the `required` will take effect on the request only.
     A property MUST NOT be marked as both `readOnly` and `writeOnly` being `true`.
     Default value is `false`.
     """
@@ -488,10 +498,18 @@ class Schema(BaseModel):
                     },
                 },
                 {"type": "object", "additionalProperties": {"type": "string"}},
-                {"type": "object", "additionalProperties": {"$ref": "#/components/schemas/ComplexModel"}},
                 {
                     "type": "object",
-                    "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+                    "additionalProperties": {
+                        "$ref": "#/components/schemas/ComplexModel"
+                    },
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "integer", "format": "int64"},
+                        "name": {"type": "string"},
+                    },
                     "required": ["name"],
                     "example": {"name": "Puma", "id": 1},
                 },
@@ -506,13 +524,20 @@ class Schema(BaseModel):
                 {
                     "allOf": [
                         {"$ref": "#/components/schemas/ErrorModel"},
-                        {"type": "object", "required": ["rootCause"], "properties": {"rootCause": {"type": "string"}}},
+                        {
+                            "type": "object",
+                            "required": ["rootCause"],
+                            "properties": {"rootCause": {"type": "string"}},
+                        },
                     ]
                 },
                 {
                     "type": "object",
                     "discriminator": {"propertyName": "petType"},
-                    "properties": {"name": {"type": "string"}, "petType": {"type": "string"}},
+                    "properties": {
+                        "name": {"type": "string"},
+                        "petType": {"type": "string"},
+                    },
                     "required": ["name", "petType"],
                 },
                 {
@@ -527,7 +552,12 @@ class Schema(BaseModel):
                                     "type": "string",
                                     "description": "The measured skill for hunting",
                                     "default": "lazy",
-                                    "enum": ["clueless", "lazy", "adventurous", "aggressive"],
+                                    "enum": [
+                                        "clueless",
+                                        "lazy",
+                                        "adventurous",
+                                        "aggressive",
+                                    ],
                                 }
                             },
                             "required": ["huntingSkill"],
@@ -545,7 +575,9 @@ class Schema(BaseModel):
                                 "packSize": {
                                     "type": "integer",
                                     "format": "int32",
-                                    "description": "the size of the pack the dog is from",
+                                    "description": (
+                                        "the size of the pack the dog is from"
+                                    ),
                                     "default": 0,
                                     "minimum": 0,
                                 }

@@ -13,7 +13,8 @@ class RequestBody(BaseModel):
     A brief description of the request body.
     This could contain examples of use.  
     
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.
     """
 
     content: Dict[str, MediaType]
@@ -22,7 +23,8 @@ class RequestBody(BaseModel):
     The key is a media type or [media type range](https://tools.ietf.org/html/rfc7231#appendix-D)
     and the value describes it.
     
-    For requests that match multiple keys, only the most specific key is applicable. e.g. text/plain overrides text/*
+    For requests that match multiple keys, only the most specific key is applicable. 
+    e.g. text/plain overrides text/*
     """
 
     required: bool = False
@@ -75,7 +77,11 @@ class RequestBody(BaseModel):
                 },
                 {
                     "description": "user to add to the system",
-                    "content": {"text/plain": {"schema": {"type": "array", "items": {"type": "string"}}}},
+                    "content": {
+                        "text/plain": {
+                            "schema": {"type": "array", "items": {"type": "string"}}
+                        }
+                    },
                 },
             ]
         }
