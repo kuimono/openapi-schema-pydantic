@@ -1,21 +1,21 @@
-# openapi-schema-pydantic
+# openapi-pydantic
 
-[![PyPI](https://img.shields.io/pypi/v/openapi-schema-pydantic)](https://pypi.org/project/openapi-schema-pydantic/)
-[![PyPI - License](https://img.shields.io/pypi/l/openapi-schema-pydantic)](https://github.com/kuimono/openapi-schema-pydantic/blob/master/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/openapi-pydantic)](https://pypi.org/project/openapi-schema-pydantic/)
+[![PyPI - License](https://img.shields.io/pypi/l/openapi-pydantic)](https://github.com/mike-oakley/openapi-pydantic/blob/main/LICENSE)
 
-OpenAPI (v3) specification schema as [Pydantic](https://github.com/samuelcolvin/pydantic) classes.
+OpenAPI schema implemented in [Pydantic](https://github.com/samuelcolvin/pydantic).
 
 The naming of the classes follows the schema in 
 [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.1.0.md#schema).
 
 ## Installation
 
-`pip install openapi-schema-pydantic`
+`pip install openapi-pydantic`
 
 ## Try me
 
 ```python
-from openapi_schema_pydantic import OpenAPI, Info, PathItem, Operation, Response
+from openapi_pydantic import OpenAPI, Info, PathItem, Operation, Response
 
 # Construct OpenAPI by pydantic objects
 open_api = OpenAPI(
@@ -74,7 +74,7 @@ Pydantic is a great tool, allow you to use object / dict / mixed data for for in
 The following examples give the same OpenAPI result as above:
 
 ```python
-from openapi_schema_pydantic import OpenAPI, PathItem, Response
+from openapi_pydantic import OpenAPI, PathItem, Response
 
 # Construct OpenAPI from dict
 open_api = OpenAPI.parse_obj({
@@ -112,8 +112,8 @@ The approach to deal with this:
 ```python
 from pydantic import BaseModel, Field
 
-from openapi_schema_pydantic import OpenAPI
-from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
+from openapi_pydantic import OpenAPI
+from openapi_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 def construct_base_open_api() -> OpenAPI:
     return OpenAPI.parse_obj({
@@ -264,8 +264,8 @@ More info about field alias:
 
 | OpenAPI version | Field alias info |
 | --------------- | ---------------- |
-| 3.1.0 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_1_0/README.md#alias) |
-| 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md#alias) |
+| 3.1.0 | [here](https://github.com/mike-oakley/openapi-pydantic/blob/main/openapi_pydantic/v3/v3_1_0/README.md#alias) |
+| 3.0.3 | [here](https://github.com/mike-oakley/openapi-pydantic/blob/main/openapi_pydantic/v3/v3_0_3/README.md#alias) |
 
 ### Non-pydantic schema types
 
@@ -274,8 +274,8 @@ Please refer to the following for more info:
 
 | OpenAPI version | Non-pydantic schema type info |
 | --------------- | ----------------------------- |
-| 3.1.0 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_1_0/README.md#non-pydantic-schema-types) |
-| 3.0.3 | [here](https://github.com/kuimono/openapi-schema-pydantic/blob/master/openapi_schema_pydantic/v3/v3_0_3/README.md#non-pydantic-schema-types) |
+| 3.1.0 | [here](https://github.com/mike-oakley/openapi-pydantic/blob/main/openapi_pydantic/v3/v3_1_0/README.md#non-pydantic-schema-types) |
+| 3.0.3 | [here](https://github.com/mike-oakley/openapi-pydantic/blob/main/openapi_pydantic/v3/v3_0_3/README.md#non-pydantic-schema-types) |
 
 ### Use OpenAPI 3.0.3 instead of 3.1.0
 
@@ -283,10 +283,10 @@ Some UI renderings (e.g. Swagger) still do not support OpenAPI 3.1.0.
 It is allowed to use the old 3.0.3 version by importing from different paths:
 
 ```python
-from openapi_schema_pydantic.v3.v3_0_3 import OpenAPI, ...
-from openapi_schema_pydantic.v3.v3_0_3.util import PydanticSchema, construct_open_api_with_schema_class
+from openapi_pydantic.v3.v3_0_3 import OpenAPI, ...
+from openapi_pydantic.v3.v3_0_3.util import PydanticSchema, construct_open_api_with_schema_class
 ```
 
 ## License
 
-[MIT License](https://github.com/kuimono/openapi-schema-pydantic/blob/master/LICENSE)
+[MIT License](https://github.com/mike-oakley/openapi-pydantic/blob/main/LICENSE)
