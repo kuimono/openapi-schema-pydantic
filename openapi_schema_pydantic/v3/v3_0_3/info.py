@@ -21,7 +21,8 @@ class Info(BaseModel):
     description: Optional[str] = None
     """
     A short description of the API.
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.
     """
 
     termsOfService: Optional[AnyUrl] = None
@@ -43,7 +44,8 @@ class Info(BaseModel):
     version: str
     """
     **REQUIRED**. The version of the OpenAPI document
-    (which is distinct from the [OpenAPI Specification version](#oasVersion) or the API implementation version).
+    (which is distinct from the [OpenAPI Specification version](#oasVersion) or the API 
+    implementation version).
     """
 
     class Config:
@@ -59,7 +61,10 @@ class Info(BaseModel):
                         "url": "http://www.example.com/support",
                         "email": "support@example.com",
                     },
-                    "license": {"name": "Apache 2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0.html"},
+                    "license": {
+                        "name": "Apache 2.0",
+                        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+                    },
                     "version": "1.0.1",
                 }
             ]

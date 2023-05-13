@@ -9,7 +9,8 @@ class ExternalDocumentation(BaseModel):
     description: Optional[str] = None
     """
     A short description of the target documentation.
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.
     """
 
     url: AnyUrl
@@ -20,4 +21,8 @@ class ExternalDocumentation(BaseModel):
 
     class Config:
         extra = Extra.allow
-        schema_extra = {"examples": [{"description": "Find more info here", "url": "https://example.com"}]}
+        schema_extra = {
+            "examples": [
+                {"description": "Find more info here", "url": "https://example.com"}
+            ]
+        }

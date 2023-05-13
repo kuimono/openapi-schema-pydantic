@@ -4,7 +4,6 @@ from pydantic import BaseModel, Extra
 
 
 class Example(BaseModel):
-
     summary: Optional[str] = None
     """
     Short description for the example.
@@ -13,21 +12,23 @@ class Example(BaseModel):
     description: Optional[str] = None
     """
     Long description for the example.
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.
     """
 
     value: Optional[Any] = None
     """
     Embedded literal example.
     The `value` field and `externalValue` field are mutually exclusive.
-    To represent examples of media types that cannot naturally represented in JSON or YAML,
-    use a string value to contain the example, escaping where necessary.
+    To represent examples of media types that cannot naturally represented in JSON or 
+    YAML, use a string value to contain the example, escaping where necessary.
     """
 
     externalValue: Optional[str] = None
     """
     A URL that points to the literal example.
-    This provides the capability to reference examples that cannot easily be included in JSON or YAML documents.
+    This provides the capability to reference examples that cannot easily be included 
+    in JSON or YAML documents.
     
     The `value` field and `externalValue` field are mutually exclusive.
     """
@@ -41,6 +42,9 @@ class Example(BaseModel):
                     "summary": "This is an example in XML",
                     "externalValue": "http://example.org/examples/address-example.xml",
                 },
-                {"summary": "This is a text example", "externalValue": "http://foo.bar/examples/address-example.txt"},
+                {
+                    "summary": "This is a text example",
+                    "externalValue": "http://foo.bar/examples/address-example.txt",
+                },
             ]
         }

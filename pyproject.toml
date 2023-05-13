@@ -1,25 +1,51 @@
-[tool.black]
-line-length = 120
-target-version = ['py38']
-include = '\.pyi?$'
-exclude = '''
-(
-  /(
-      \.eggs         # exclude a few common directories in the
-    | \.git          # root of the project
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-    | libs           # we have no obligation to format external libraries
-  )/
-)
-'''
+[tool.poetry]
+name = "openapi-schema-pydantic"
+version = "1.0.0"
+description = "OpenAPI Schema Pydantic"
+authors = ["Mike Oakley <mike-oakley@github.io>"]
+readme = "README.md"
+repository = "https://github.com/kuimono/openapi-schema-pydantic"
+license = "MIT"
+keywords = [
+  "openapi",
+  "schema",
+  "parser",
+  "pydantic",
+  "validation",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Framework :: Pydantic",
+]
+include = ["openapi_schema_pydantic/py.typed"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydantic = "^1.8.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+mypy = "^1.2.0"
+pre-commit = "^2.16.0"
+pytest = "^7.3.0"
+pytest-cov = "^4.0.0"
+ruff = "^0.0.265"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unreachable = true
+warn_return_any = true
 strict = true
+disallow_any_generics = false
+implicit_reexport = false
+show_error_codes = true
 files = ["openapi_schema_pydantic/", "tests/"]
+plugins = ["pydantic.mypy"]

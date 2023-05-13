@@ -19,10 +19,11 @@ class PathItem(BaseModel):
     ref: Optional[str] = Field(default=None, alias="$ref")
     """
     Allows for an external definition of this path item.
-    The referenced structure MUST be in the format of a [Path Item Object](#pathItemObject).
+    The referenced structure MUST be in the format of a 
+    [Path Item Object](#pathItemObject).
     
-    In case a Path Item Object field appears both in the defined object and the referenced object,
-    the behavior is undefined.
+    In case a Path Item Object field appears both in the defined object and the 
+    referenced object, the behavior is undefined.
     """
 
     summary: Optional[str] = None
@@ -33,7 +34,8 @@ class PathItem(BaseModel):
     description: Optional[str] = None
     """
     An optional, string description, intended to apply to all operations in this path.
-    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
+    [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text 
+    representation.
     """
 
     get: Optional[Operation] = None
@@ -83,11 +85,12 @@ class PathItem(BaseModel):
 
     parameters: Optional[List[Union[Parameter, Reference]]] = None
     """
-    A list of parameters that are applicable for all the operations described under this path.
-    These parameters can be overridden at the operation level, but cannot be removed there.
-    The list MUST NOT include duplicated parameters.
-    A unique parameter is defined by a combination of a [name](#parameterName) and [location](#parameterIn).
-    The list can use the [Reference Object](#referenceObject) to link to parameters that are defined at the
+    A list of parameters that are applicable for all the operations described under 
+    this path. These parameters can be overridden at the operation level, but cannot be 
+    removed there. The list MUST NOT include duplicated parameters.
+    A unique parameter is defined by a combination of a [name](#parameterName) and 
+    [location](#parameterIn). The list can use the [Reference Object](#referenceObject) 
+    to link to parameters that are defined at the
     [OpenAPI Object's components/parameters](#componentsParameters).
     """
 
@@ -105,12 +108,25 @@ class PathItem(BaseModel):
                             "200": {
                                 "description": "pet response",
                                 "content": {
-                                    "*/*": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/Pet"}}}
+                                    "*/*": {
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Pet"
+                                            },
+                                        }
+                                    }
                                 },
                             },
                             "default": {
                                 "description": "error payload",
-                                "content": {"text/html": {"schema": {"$ref": "#/components/schemas/ErrorModel"}}},
+                                "content": {
+                                    "text/html": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/ErrorModel"
+                                        }
+                                    }
+                                },
                             },
                         },
                     },

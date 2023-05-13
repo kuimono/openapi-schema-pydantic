@@ -40,18 +40,27 @@ class OAuthFlow(BaseModel):
             "examples": [
                 {
                     "authorizationUrl": "https://example.com/api/oauth/dialog",
-                    "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
+                    "scopes": {
+                        "write:pets": "modify pets in your account",
+                        "read:pets": "read your pets",
+                    },
                 },
                 {
                     "authorizationUrl": "https://example.com/api/oauth/dialog",
                     "tokenUrl": "https://example.com/api/oauth/token",
-                    "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
+                    "scopes": {
+                        "write:pets": "modify pets in your account",
+                        "read:pets": "read your pets",
+                    },
                 },
                 {
-                    "authorizationUrl": "/api/oauth/dialog",  # issue #5: allow relative path
-                    "tokenUrl": "/api/oauth/token",  # issue #5: allow relative path
-                    "refreshUrl": "/api/oauth/token",  # issue #5: allow relative path
-                    "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
+                    "authorizationUrl": "/api/oauth/dialog",
+                    "tokenUrl": "/api/oauth/token",
+                    "refreshUrl": "/api/oauth/token",
+                    "scopes": {
+                        "write:pets": "modify pets in your account",
+                        "read:pets": "read your pets",
+                    },
                 },
             ]
         }

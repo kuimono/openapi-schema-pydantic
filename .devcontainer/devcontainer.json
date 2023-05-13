@@ -1,0 +1,23 @@
+{
+	"name": "openapi-schema-pydantic",
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/poetry:2": {
+			"version": "latest"
+		}
+	},
+	"containerEnv": {
+		"POETRY_VIRTUALENVS_IN_PROJECT": "true"
+	},
+	"postCreateCommand": "poetry install",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.black-formatter",
+				"charliermarsh.ruff"
+			]
+		}
+	}
+}
