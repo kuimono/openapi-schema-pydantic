@@ -1,6 +1,6 @@
 import logging
 
-from openapi_schema_pydantic import Info, OpenAPI, Operation, PathItem, Response
+from openapi_pydantic import Info, OpenAPI, Operation, PathItem, Response
 
 
 def test_readme_example() -> None:
@@ -24,7 +24,11 @@ def readme_example_1() -> OpenAPI:
             title="My own API",
             version="v0.0.1",
         ),
-        paths={"/ping": PathItem(get=Operation(responses={"200": Response(description="pong")}))},
+        paths={
+            "/ping": PathItem(
+                get=Operation(responses={"200": Response(description="pong")})
+            )
+        },
     )
 
 
@@ -33,7 +37,9 @@ def readme_example_2() -> OpenAPI:
     return OpenAPI.parse_obj(
         {
             "info": {"title": "My own API", "version": "v0.0.1"},
-            "paths": {"/ping": {"get": {"responses": {"200": {"description": "pong"}}}}},
+            "paths": {
+                "/ping": {"get": {"responses": {"200": {"description": "pong"}}}}
+            },
         }
     )
 
@@ -43,6 +49,10 @@ def readme_example_3() -> OpenAPI:
     return OpenAPI.parse_obj(
         {
             "info": {"title": "My own API", "version": "v0.0.1"},
-            "paths": {"/ping": PathItem(get={"responses": {"200": Response(description="pong")}})},
+            "paths": {
+                "/ping": PathItem(
+                    get={"responses": {"200": Response(description="pong")}}
+                )
+            },
         }
     )

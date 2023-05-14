@@ -25,12 +25,14 @@ include = ["openapi_pydantic/py.typed"]
 python = "^3.8"
 pydantic = "^1.8.2"
 
+[tool.poetry.group.test.dependencies]
+pytest = "^7.3.0"
+pytest-cov = "^4.0.0"
+
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 mypy = "^1.2.0"
 pre-commit = "^2.16.0"
-pytest = "^7.3.0"
-pytest-cov = "^4.0.0"
 ruff = "^0.0.265"
 
 [build-system]

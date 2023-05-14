@@ -1,4 +1,4 @@
-from openapi_schema_pydantic import (
+from openapi_pydantic import (
     OpenAPI,
     Info,
     Contact,
