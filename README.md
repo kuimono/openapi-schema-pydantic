@@ -1,6 +1,6 @@
 # openapi-pydantic
 
-[![PyPI](https://img.shields.io/pypi/v/openapi-pydantic)](https://pypi.org/project/openapi-schema-pydantic/)
+[![PyPI](https://img.shields.io/pypi/v/openapi-pydantic)](https://pypi.org/project/openapi-pydantic/)
 [![PyPI - License](https://img.shields.io/pypi/l/openapi-pydantic)](https://github.com/mike-oakley/openapi-pydantic/blob/main/LICENSE)
 
 OpenAPI schema implemented in [Pydantic](https://github.com/samuelcolvin/pydantic).

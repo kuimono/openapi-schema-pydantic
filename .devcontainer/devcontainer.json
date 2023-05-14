@@ -1,5 +1,5 @@
 {
-	"name": "openapi-schema-pydantic",
+	"name": "openapi-pydantic",
 	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {
