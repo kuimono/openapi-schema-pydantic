@@ -1,9 +1,10 @@
-/*.egg-info
+__pycache__
 /.idea
-/.pytest_cache
 /.mypy_cache
+/.pytest_cache
 /.ruff_cache
+/.tox
+/.venv
+/*.egg-info
 /build
 /dist
-/.venv
-__pycache__
