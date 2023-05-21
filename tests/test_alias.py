@@ -1,4 +1,4 @@
-from openapi_schema_pydantic import (
+from openapi_pydantic import (
     Header,
     MediaType,
     Parameter,
@@ -29,8 +29,12 @@ def test_media_type_alias() -> None:
 def test_parameter_alias() -> None:
     parameter_1 = Parameter(name="test", param_in="path", param_schema=Schema())
     parameter_2 = Parameter(name="test", param_in="path", schema=Schema())
-    parameter_3 = Parameter.parse_obj({"name": "test", "param_in": "path", "param_schema": Schema()})
-    parameter_4 = Parameter.parse_obj({"name": "test", "in": "path", "schema": Schema()})
+    parameter_3 = Parameter.parse_obj(
+        {"name": "test", "param_in": "path", "param_schema": Schema()}
+    )
+    parameter_4 = Parameter.parse_obj(
+        {"name": "test", "in": "path", "schema": Schema()}
+    )
     assert parameter_1 == parameter_2 == parameter_3 == parameter_4
 
 
@@ -50,7 +54,9 @@ def test_reference_alias() -> None:
 
 def test_security_scheme() -> None:
     security_scheme_1 = SecurityScheme(type="apiKey", security_scheme_in="header")
-    security_scheme_2 = SecurityScheme.parse_obj({"type": "apiKey", "security_scheme_in": "header"})
+    security_scheme_2 = SecurityScheme.parse_obj(
+        {"type": "apiKey", "security_scheme_in": "header"}
+    )
     security_scheme_3 = SecurityScheme.parse_obj({"type": "apiKey", "in": "header"})
     assert security_scheme_1 == security_scheme_2 == security_scheme_3
 

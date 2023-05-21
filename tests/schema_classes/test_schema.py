@@ -3,7 +3,7 @@ import logging
 from pydantic import BaseModel, Extra
 from pydantic.schema import schema
 
-from openapi_schema_pydantic import Schema, Reference
+from openapi_pydantic import Reference, Schema
 
 
 def test_schema() -> None:
@@ -21,9 +21,7 @@ def test_schema() -> None:
     assert schema.allOf[0].ref == "#/definitions/TestType"
 
 
-def test_issue_4() -> None:
-    """https://github.com/kuimono/openapi-schema-pydantic/issues/4"""
-
+def test_additional_properties_is_bool() -> None:
     class TestModel(BaseModel):
         test_field: str
 

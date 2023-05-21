@@ -1,6 +1,6 @@
 # openapi-pydantic
 
-[![PyPI](https://img.shields.io/pypi/v/openapi-pydantic)](https://pypi.org/project/openapi-schema-pydantic/)
+[![PyPI](https://img.shields.io/pypi/v/openapi-pydantic)](https://pypi.org/project/openapi-pydantic/)
 [![PyPI - License](https://img.shields.io/pypi/l/openapi-pydantic)](https://github.com/mike-oakley/openapi-pydantic/blob/main/LICENSE)
 
 OpenAPI schema implemented in [Pydantic](https://github.com/samuelcolvin/pydantic).
@@ -286,6 +286,10 @@ It is allowed to use the old 3.0.3 version by importing from different paths:
 from openapi_pydantic.v3.v3_0_3 import OpenAPI, ...
 from openapi_pydantic.v3.v3_0_3.util import PydanticSchema, construct_open_api_with_schema_class
 ```
+
+## Credits
+
+This library is based from the original implementation by Kuimono of [OpenAPI Schema Pydantic](https://github.com/kuimono/openapi-schema-pydantic) which is no longer actively maintained.
 
 ## License
 

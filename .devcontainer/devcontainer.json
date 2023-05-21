@@ -1,5 +1,5 @@
 {
-	"name": "openapi-schema-pydantic",
+	"name": "openapi-pydantic",
 	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {
@@ -9,7 +9,7 @@
 	"containerEnv": {
 		"POETRY_VIRTUALENVS_IN_PROJECT": "true"
 	},
-	"postCreateCommand": "poetry install",
+	"postCreateCommand": "poetry install && pip install --upgrade tox",
 	"customizations": {
 		"vscode": {
 			"extensions": [

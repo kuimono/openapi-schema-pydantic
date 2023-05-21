@@ -2,14 +2,25 @@ import logging
 
 from pydantic import BaseModel, Field
 
-from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathItem, Reference, RequestBody, Response
-from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
+from openapi_pydantic import (
+    Info,
+    MediaType,
+    OpenAPI,
+    Operation,
+    PathItem,
+    Reference,
+    RequestBody,
+    Response,
+)
+from openapi_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 
 def test_construct_open_api_with_schema_class_1() -> None:
     open_api = construct_base_open_api_1()
     result_open_api_1 = construct_open_api_with_schema_class(open_api)
-    result_open_api_2 = construct_open_api_with_schema_class(open_api, [PingRequest, PingResponse])
+    result_open_api_2 = construct_open_api_with_schema_class(
+        open_api, [PingRequest, PingResponse]
+    )
     assert result_open_api_1.components == result_open_api_2.components
     assert result_open_api_1 == result_open_api_2
 
@@ -21,7 +32,9 @@ def test_construct_open_api_with_schema_class_2() -> None:
     open_api_1 = construct_base_open_api_1()
     open_api_2 = construct_base_open_api_2()
     result_open_api_1 = construct_open_api_with_schema_class(open_api_1)
-    result_open_api_2 = construct_open_api_with_schema_class(open_api_2, [PingRequest, PingResponse])
+    result_open_api_2 = construct_open_api_with_schema_class(
+        open_api_2, [PingRequest, PingResponse]
+    )
     assert result_open_api_1 == result_open_api_2
 
 
@@ -36,10 +49,14 @@ def test_construct_open_api_with_schema_class_3() -> None:
     assert "pong_foo" in schema_with_alias.properties
     assert "pong_bar" in schema_with_alias.properties
 
-    result_with_alias_2 = construct_open_api_with_schema_class(open_api_3, by_alias=True)
+    result_with_alias_2 = construct_open_api_with_schema_class(
+        open_api_3, by_alias=True
+    )
     assert result_with_alias_1 == result_with_alias_2
 
-    result_without_alias = construct_open_api_with_schema_class(open_api_3, by_alias=False)
+    result_without_alias = construct_open_api_with_schema_class(
+        open_api_3, by_alias=False
+    )
     assert result_without_alias.components is not None
     assert result_without_alias.components.schemas is not None
     schema_without_alias = result_without_alias.components.schemas["PongResponse"]
@@ -56,12 +73,22 @@ def construct_base_open_api_1() -> OpenAPI:
                 "/ping": {
                     "post": {
                         "requestBody": {
-                            "content": {"application/json": {"schema": PydanticSchema(schema_class=PingRequest)}}
+                            "content": {
+                                "application/json": {
+                                    "schema": PydanticSchema(schema_class=PingRequest)
+                                }
+                            }
                         },
                         "responses": {
                             "200": {
                                 "description": "pong",
-                                "content": {"application/json": {"schema": PydanticSchema(schema_class=PingResponse)}},
+                                "content": {
+                                    "application/json": {
+                                        "schema": PydanticSchema(
+                                            schema_class=PingResponse
+                                        )
+                                    }
+                                },
                             }
                         },
                     }
@@ -83,7 +110,9 @@ def construct_base_open_api_2() -> OpenAPI:
                     requestBody=RequestBody(
                         content={
                             "application/json": MediaType(
-                                media_type_schema=Reference(ref="#/components/schemas/PingRequest")
+                                media_type_schema=Reference(
+                                    ref="#/components/schemas/PingRequest"
+                                )
                             )
                         }
                     ),
@@ -92,7 +121,9 @@ def construct_base_open_api_2() -> OpenAPI:
                             description="pong",
                             content={
                                 "application/json": MediaType(
-                                    media_type_schema=Reference(ref="#/components/schemas/PingResponse")
+                                    media_type_schema=Reference(
+                                        ref="#/components/schemas/PingResponse"
+                                    )
                                 )
                             },
                         )
@@ -114,7 +145,11 @@ def construct_base_open_api_3() -> OpenAPI:
                 post=Operation(
                     requestBody=RequestBody(
                         content={
-                            "application/json": MediaType(media_type_schema=PydanticSchema(schema_class=PingRequest))
+                            "application/json": MediaType(
+                                media_type_schema=PydanticSchema(
+                                    schema_class=PingRequest
+                                )
+                            )
                         }
                     ),
                     responses={
@@ -122,7 +157,9 @@ def construct_base_open_api_3() -> OpenAPI:
                             description="pong",
                             content={
                                 "application/json": MediaType(
-                                    media_type_schema=PydanticSchema(schema_class=PongResponse)
+                                    media_type_schema=PydanticSchema(
+                                        schema_class=PongResponse
+                                    )
                                 )
                             },
                         )

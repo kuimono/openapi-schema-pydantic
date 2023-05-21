@@ -2,7 +2,7 @@ from typing import Dict, Optional
 
 from pydantic import Field
 
-from openapi_schema_pydantic import OpenAPI, Operation, PathItem
+from openapi_pydantic import OpenAPI, Operation, PathItem
 
 
 def test_swagger_openapi_v3() -> None:
@@ -13,7 +13,9 @@ def test_swagger_openapi_v3() -> None:
 class ExtendedOperation(Operation):
     """Override classes to use "x-codegen-request-body-name" in Operation"""
 
-    xCodegenRequestBodyName: Optional[str] = Field(default=None, alias="x-codegen-request-body-name")
+    xCodegenRequestBodyName: Optional[str] = Field(
+        default=None, alias="x-codegen-request-body-name"
+    )
 
     class Config:
         allow_population_by_field_name = True
