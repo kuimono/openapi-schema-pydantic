@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, ConfigDict
 
 
 class ServerVariable(BaseModel):
@@ -12,7 +12,7 @@ class ServerVariable(BaseModel):
     The array SHOULD NOT be empty.
     """
 
-    default: str = ...
+    default: str
     """
     **REQUIRED**. The default value to use for substitution,
     which SHALL be sent if an alternate value is _not_ supplied.
@@ -27,5 +27,4 @@ class ServerVariable(BaseModel):
     [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
     """
 
-    class Config:
-        extra = Extra.ignore
+    model_config = ConfigDict(extra="ignore")

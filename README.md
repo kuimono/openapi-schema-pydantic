@@ -77,7 +77,7 @@ The following examples give the same OpenAPI result as above:
 from openapi_schema_pydantic import OpenAPI, PathItem, Response
 
 # Construct OpenAPI from dict
-open_api = OpenAPI.parse_obj({
+open_api = OpenAPI.model_validate({
     "info": {"title": "My own API", "version": "v0.0.1"},
     "paths": {
         "/ping": {
@@ -87,7 +87,7 @@ open_api = OpenAPI.parse_obj({
 })
 
 # Construct OpenAPI with mix of dict/object
-open_api = OpenAPI.parse_obj({
+open_api = OpenAPI.model_validate({
     "info": {"title": "My own API", "version": "v0.0.1"},
     "paths": {
         "/ping": PathItem(
@@ -116,7 +116,7 @@ from openapi_schema_pydantic import OpenAPI
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 def construct_base_open_api() -> OpenAPI:
-    return OpenAPI.parse_obj({
+    return OpenAPI.model_validate({
         "info": {"title": "My own API", "version": "v0.0.1"},
         "paths": {
             "/ping": {

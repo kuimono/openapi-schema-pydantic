@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Extra
+from pydantic import AnyUrl, BaseModel, ConfigDict
 
 
 class OAuthFlow(BaseModel):
@@ -38,9 +38,9 @@ class OAuthFlow(BaseModel):
     The map MAY be empty.
     """
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
             "examples": [
                 {
                     "authorizationUrl": "https://example.com/api/oauth/dialog",
@@ -58,4 +58,5 @@ class OAuthFlow(BaseModel):
                     "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
                 },
             ]
-        }
+        },
+    )

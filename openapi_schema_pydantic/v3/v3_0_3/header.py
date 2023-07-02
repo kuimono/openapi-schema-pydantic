@@ -1,4 +1,5 @@
-from pydantic import Extra, Field
+from pydantic import ConfigDict, Field
+from typing import Literal
 
 from .parameter import Parameter
 
@@ -13,14 +14,15 @@ class Header(Parameter):
        (for example, [`style`](#parameterStyle)).
     """
 
-    name = Field(default="", const=True)
-    param_in = Field(default="header", const=True, alias="in")
+    name: Literal[""] = Field(default="")
+    param_in: Literal["header"] = Field(default="header", alias="in")
 
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
             "examples": [
                 {"description": "The number of allowed requests in the current period", "schema": {"type": "integer"}}
             ]
-        }
+        },
+    )

@@ -1,24 +1,24 @@
 import logging
 
-from pydantic import BaseModel, Extra
-from pydantic.schema import schema
+from pydantic import BaseModel, ConfigDict
+from pydantic.json_schema import models_json_schema
 
 from openapi_schema_pydantic import Schema, Reference
 
 
 def test_schema():
-    schema = Schema.parse_obj(
+    schema = Schema.model_validate(
         {
             "title": "reference list",
             "description": "schema for list of reference type",
-            "allOf": [{"$ref": "#/definitions/TestType"}],
+            "allOf": [{"$ref": "#/components/schemas/TestType"}],
         }
     )
     logging.debug(f"schema.allOf={schema.allOf}")
     assert schema.allOf
     assert isinstance(schema.allOf, list)
     assert isinstance(schema.allOf[0], Reference)
-    assert schema.allOf[0].ref == "#/definitions/TestType"
+    assert schema.allOf[0].ref == "#/components/schemas/TestType"
 
 
 def test_issue_4():
@@ -27,12 +27,11 @@ def test_issue_4():
     class TestModel(BaseModel):
         test_field: str
 
-        class Config:
-            extra = Extra.forbid
+        model_config = ConfigDict(extra="forbid")
 
-    schema_definition = schema([TestModel])
+    _key_map, schema_definition = models_json_schema([(TestModel, "validation")])
     assert schema_definition == {
-        "definitions": {
+        "$defs": {
             "TestModel": {
                 "title": "TestModel",
                 "type": "object",
@@ -44,5 +43,5 @@ def test_issue_4():
     }
 
     # allow "additionalProperties" to have boolean value
-    result = Schema.parse_obj(schema_definition["definitions"]["TestModel"])
+    result = Schema.model_validate(schema_definition["$defs"]["TestModel"])
     assert result.additionalProperties is False

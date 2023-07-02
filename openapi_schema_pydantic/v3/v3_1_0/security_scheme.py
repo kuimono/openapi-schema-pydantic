@@ -1,6 +1,6 @@
 from typing import Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Extra, Field
+from pydantic import AnyUrl, BaseModel, ConfigDict, Field
 
 from .oauth_flows import OAuthFlows
 
@@ -21,7 +21,7 @@ class SecurityScheme(BaseModel):
     Recommended for most use case is Authorization Code Grant flow with PKCE.
     """
 
-    type: str = ...
+    type: str
     """
     **REQUIRED**. The type of the security scheme.
     Valid values are `"apiKey"`, `"http"`, "mutualTLS", `"oauth2"`, `"openIdConnect"`.
@@ -71,10 +71,10 @@ class SecurityScheme(BaseModel):
     This MUST be in the form of a URL. The OpenID Connect standard requires the use of TLS.
     """
 
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
             "examples": [
                 {"type": "http", "scheme": "basic"},
                 {"type": "apiKey", "name": "api_key", "in": "header"},
@@ -91,4 +91,5 @@ class SecurityScheme(BaseModel):
                 {"type": "openIdConnect", "openIdConnectUrl": "https://example.com/openIdConnect"},
                 {"type": "openIdConnect", "openIdConnectUrl": "openIdConnect"},  # issue #5: allow relative path
             ]
-        }
+        },
+    )

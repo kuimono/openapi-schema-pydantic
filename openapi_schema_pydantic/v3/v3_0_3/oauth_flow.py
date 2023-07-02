@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Extra
+from pydantic import AnyUrl, BaseModel, ConfigDict
 
 
 class OAuthFlow(BaseModel):
@@ -27,16 +27,16 @@ class OAuthFlow(BaseModel):
     The URL to be used for obtaining refresh tokens. This MUST be in the form of a URL.
     """
 
-    scopes: Dict[str, str] = ...
+    scopes: Dict[str, str]
     """
     **REQUIRED**. The available scopes for the OAuth2 security scheme.
     A map between the scope name and a short description for it.
     The map MAY be empty.
     """
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
             "examples": [
                 {
                     "authorizationUrl": "https://example.com/api/oauth/dialog",
@@ -54,4 +54,5 @@ class OAuthFlow(BaseModel):
                     "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
                 },
             ]
-        }
+        },
+    )

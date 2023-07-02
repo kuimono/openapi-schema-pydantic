@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, ConfigDict
 
 from .components import Components
 from .external_documentation import ExternalDocumentation
@@ -24,7 +24,7 @@ class OpenAPI(BaseModel):
     This is *not* related to the API [`info.version`](#infoVersion) string.
     """
 
-    info: Info = ...
+    info: Info
     """
     **REQUIRED**. Provides metadata about the API. The metadata MAY be used by tooling as required.
     """
@@ -86,5 +86,4 @@ class OpenAPI(BaseModel):
     Additional external documentation.
     """
 
-    class Config:
-        extra = Extra.ignore
+    model_config = ConfigDict(extra="ignore")

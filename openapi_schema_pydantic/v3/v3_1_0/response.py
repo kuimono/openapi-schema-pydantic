@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, ConfigDict
 
 from .header import Header
 from .link import Link
@@ -14,7 +14,7 @@ class Response(BaseModel):
     static `links` to operations based on the response.
     """
 
-    description: str = ...
+    description: str
     """
     **REQUIRED**. A short description of the response.
     [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
@@ -43,9 +43,9 @@ class Response(BaseModel):
     following the naming constraints of the names for [Component Objects](#componentsObject).
     """
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
             "examples": [
                 {
                     "description": "A complex object array response",
@@ -76,4 +76,5 @@ class Response(BaseModel):
                 },
                 {"description": "object created"},
             ]
-        }
+        },
+    )

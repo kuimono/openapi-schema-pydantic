@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import AnyUrl, BaseModel, Extra
+from pydantic import AnyUrl, BaseModel, ConfigDict
 
 
 class Contact(BaseModel):
@@ -25,10 +25,11 @@ class Contact(BaseModel):
     MUST be in the format of an email address.
     """
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
             "examples": [
                 {"name": "API Support", "url": "http://www.example.com/support", "email": "support@example.com"}
             ]
-        }
+        },
+    )

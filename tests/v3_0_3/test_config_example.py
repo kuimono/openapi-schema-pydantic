@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from openapi_schema_pydantic.v3.v3_0_3 import (
     OpenAPI,
     Info,
@@ -70,8 +71,11 @@ def test_config_example():
 
 
 def _assert_config_examples(schema_type):
-    if getattr(schema_type, "Config", None) and getattr(schema_type.Config, "schema_extra", None):
-        examples = schema_type.Config.schema_extra.get("examples")
+    if not hasattr(schema_type, "model_config"):
+        return
+    extra = schema_type.model_config.get("json_schema_extra")
+    if extra is not None:
+        examples = extra.get("examples")
         for example_dict in examples:
-            obj = schema_type(**example_dict)
-            assert obj.__fields_set__
+            obj = schema_type.model_validate(example_dict)
+            assert obj.model_fields_set

@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, ConfigDict
 
 from .callback import Callback
 from .example import Example
@@ -48,9 +48,9 @@ class Components(BaseModel):
     callbacks: Optional[Dict[str, Union[Callback, Reference]]] = None
     """An object to hold reusable [Callback Objects](#callbackObject)."""
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
             "examples": [
                 {
                     "schemas": {
@@ -111,4 +111,5 @@ class Components(BaseModel):
                     },
                 }
             ]
-        }
+        },
+    )

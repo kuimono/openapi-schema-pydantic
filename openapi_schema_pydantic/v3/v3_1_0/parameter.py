@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Union
 
-from pydantic import BaseModel, Field, Extra
+from pydantic import BaseModel, Field, ConfigDict
 
 from .example import Example
 from .media_type import MediaType
@@ -17,7 +17,7 @@ class Parameter(BaseModel):
 
     """Fixed Fields"""
 
-    name: str = ...
+    name: str
     """
     **REQUIRED**. The name of the parameter.
     Parameter names are *case sensitive*. 
@@ -140,10 +140,10 @@ class Parameter(BaseModel):
     The map MUST only contain one entry.
     """
 
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
             "examples": [
                 {
                     "name": "token",
@@ -189,4 +189,5 @@ class Parameter(BaseModel):
                     },
                 },
             ]
-        }
+        },
+    )
