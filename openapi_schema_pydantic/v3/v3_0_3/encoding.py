@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, ConfigDict
 
 from .reference import Reference
 
@@ -59,9 +59,9 @@ class Encoding(BaseModel):
     This property SHALL be ignored if the request body media type is not `application/x-www-form-urlencoded`.
     """
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
             "examples": [
                 {
                     "contentType": "image/png, image/jpeg",
@@ -73,4 +73,5 @@ class Encoding(BaseModel):
                     },
                 }
             ]
-        }
+        },
+    )

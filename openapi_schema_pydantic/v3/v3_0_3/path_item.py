@@ -1,6 +1,6 @@
 from typing import List, Optional, Union
 
-from pydantic import BaseModel, Extra, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from .operation import Operation
 from .parameter import Parameter
@@ -91,10 +91,10 @@ class PathItem(BaseModel):
     [OpenAPI Object's components/parameters](#componentsParameters).
     """
 
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
             "examples": [
                 {
                     "get": {
@@ -126,4 +126,5 @@ class PathItem(BaseModel):
                     ],
                 }
             ]
-        }
+        },
+    )

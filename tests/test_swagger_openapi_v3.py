@@ -1,12 +1,13 @@
 from typing import Dict, Optional
 
-from pydantic import Field
+from pydantic import Field, ConfigDict
 
 from openapi_schema_pydantic import OpenAPI, Operation, PathItem
 
 
 def test_swagger_openapi_v3():
-    open_api = ExtendedOpenAPI.parse_file("tests/data/swagger_openapi_v3.0.1.json")
+    with open("tests/data/swagger_openapi_v3.0.1.json") as f:
+        open_api = ExtendedOpenAPI.model_validate_json(f.read())
     assert open_api
 
 
@@ -15,8 +16,7 @@ class ExtendedOperation(Operation):
 
     xCodegenRequestBodyName: Optional[str] = Field(default=None, alias="x-codegen-request-body-name")
 
-    class Config:
-        allow_population_by_field_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class ExtendedPathItem(PathItem):
@@ -31,4 +31,4 @@ class ExtendedPathItem(PathItem):
 
 
 class ExtendedOpenAPI(OpenAPI):
-    paths: Dict[str, ExtendedPathItem] = ...
+    paths: Dict[str, ExtendedPathItem]

@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, ConfigDict
 
 from .external_documentation import ExternalDocumentation
 
@@ -11,7 +11,7 @@ class Tag(BaseModel):
     It is not mandatory to have a Tag Object per tag defined in the Operation Object instances.
     """
 
-    name: str = ...
+    name: str
     """
     **REQUIRED**. The name of the tag.
     """
@@ -27,6 +27,7 @@ class Tag(BaseModel):
     Additional external documentation for this tag.
     """
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {"examples": [{"name": "pet", "description": "Pets operations"}]}
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={"examples": [{"name": "pet", "description": "Pets operations"}]},
+    )

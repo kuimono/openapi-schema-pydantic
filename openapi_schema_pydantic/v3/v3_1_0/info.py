@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import AnyUrl, BaseModel, Extra
+from pydantic import AnyUrl, BaseModel, ConfigDict
 
 from .contact import Contact
 from .license import License
@@ -13,7 +13,7 @@ class Info(BaseModel):
     and MAY be presented in editing or documentation generation tools for convenience.
     """
 
-    title: str = ...
+    title: str
     """
     **REQUIRED**. The title of the API.
     """
@@ -45,15 +45,15 @@ class Info(BaseModel):
     The license information for the exposed API.
     """
 
-    version: str = ...
+    version: str
     """
     **REQUIRED**. The version of the OpenAPI document
     (which is distinct from the [OpenAPI Specification version](#oasVersion) or the API implementation version).
     """
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
             "examples": [
                 {
                     "title": "Sample Pet Store App",
@@ -69,4 +69,5 @@ class Info(BaseModel):
                     "version": "1.0.1",
                 }
             ]
-        }
+        },
+    )

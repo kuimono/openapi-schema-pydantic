@@ -2,7 +2,7 @@ from typing_extensions import Literal
 from typing import Union
 
 from pydantic import BaseModel, Field
-from pydantic.schema import schema
+from pydantic.json_schema import models_json_schema
 
 from openapi_schema_pydantic import (
     OpenAPI,
@@ -22,17 +22,17 @@ from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with
 def test_pydantic_discriminator_schema_generation():
     """https://github.com/kuimono/openapi-schema-pydantic/issues/8"""
 
-    json_schema = schema([RequestModel])
+    _key_map, json_schema = models_json_schema([(RequestModel, "validation")])
     assert json_schema == {
-        "definitions": {
+        "$defs": {
             "DataAModel": {
-                "properties": {"kind": {"enum": ["a"], "title": "Kind", "type": "string"}},
+                "properties": {"kind": {"const": "a", "title": "Kind"}},
                 "required": ["kind"],
                 "title": "DataAModel",
                 "type": "object",
             },
             "DataBModel": {
-                "properties": {"kind": {"enum": ["b"], "title": "Kind", "type": "string"}},
+                "properties": {"kind": {"const": "b", "title": "Kind"}},
                 "required": ["kind"],
                 "title": "DataBModel",
                 "type": "object",
@@ -40,11 +40,11 @@ def test_pydantic_discriminator_schema_generation():
             "RequestModel": {
                 "properties": {
                     "data": {
-                        "anyOf": [{"$ref": "#/definitions/DataAModel"}, {"$ref": "#/definitions/DataBModel"}],
                         "discriminator": {
-                            "mapping": {"a": "#/definitions/DataAModel", "b": "#/definitions/DataBModel"},
+                            "mapping": {"a": "#/$defs/DataAModel", "b": "#/$defs/DataBModel"},
                             "propertyName": "kind",
                         },
+                        "oneOf": [{"$ref": "#/$defs/DataAModel"}, {"$ref": "#/$defs/DataBModel"}],
                         "title": "Data",
                     }
                 },
@@ -60,10 +60,12 @@ def test_pydantic_discriminator_openapi_generation():
     """https://github.com/kuimono/openapi-schema-pydantic/issues/8"""
 
     open_api = construct_open_api_with_schema_class(construct_base_open_api())
+    assert open_api.components is not None
+    assert open_api.components.schemas is not None
     json_schema = open_api.components.schemas["RequestModel"]
     assert json_schema.properties == {
         "data": Schema(
-            anyOf=[
+            oneOf=[
                 Reference(ref="#/components/schemas/DataAModel", summary=None, description=None),
                 Reference(ref="#/components/schemas/DataBModel", summary=None, description=None),
             ],

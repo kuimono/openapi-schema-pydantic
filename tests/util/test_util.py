@@ -1,6 +1,6 @@
 import logging
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, computed_field
 
 from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathItem, Reference, RequestBody, Response
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
@@ -13,7 +13,7 @@ def test_construct_open_api_with_schema_class_1():
     assert result_open_api_1.components == result_open_api_2.components
     assert result_open_api_1 == result_open_api_2
 
-    open_api_json = result_open_api_1.json(by_alias=True, exclude_none=True, indent=2)
+    open_api_json = result_open_api_1.model_dump_json(by_alias=True, exclude_none=True, indent=2)
     logging.debug(open_api_json)
 
 
@@ -43,7 +43,7 @@ def test_construct_open_api_with_schema_class_3():
 
 
 def construct_base_open_api_1() -> OpenAPI:
-    return OpenAPI.parse_obj(
+    return OpenAPI.model_validate(
         {
             "info": {"title": "My own API", "version": "v0.0.1"},
             "paths": {
@@ -146,3 +146,12 @@ class PongResponse(BaseModel):
 
     resp_foo: str = Field(alias="pong_foo", description="foo value of the response")
     resp_bar: str = Field(alias="pong_bar", description="bar value of the response")
+
+
+class ModelWithOptionalAndComputed(BaseModel):
+    enable: bool | None = None
+
+    @computed_field
+    @property
+    def comp(self) -> bool:
+        return True

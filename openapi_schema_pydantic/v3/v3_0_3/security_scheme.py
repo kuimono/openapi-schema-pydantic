@@ -1,6 +1,6 @@
 from typing import Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Extra, Field
+from pydantic import AnyUrl, BaseModel, ConfigDict, Field
 
 from .oauth_flows import OAuthFlows
 
@@ -15,7 +15,7 @@ class SecurityScheme(BaseModel):
     and [OpenID Connect Discovery](https://tools.ietf.org/html/draft-ietf-oauth-discovery-06).
     """
 
-    type: str = ...
+    type: str
     """
     **REQUIRED**. The type of the security scheme.
     Valid values are `"apiKey"`, `"http"`, `"oauth2"`, `"openIdConnect"`.
@@ -65,10 +65,10 @@ class SecurityScheme(BaseModel):
     This MUST be in the form of a URL.
     """
 
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
             "examples": [
                 {"type": "http", "scheme": "basic"},
                 {"type": "apiKey", "name": "api_key", "in": "header"},
@@ -85,4 +85,5 @@ class SecurityScheme(BaseModel):
                 {"type": "openIdConnect", "openIdConnectUrl": "https://example.com/openIdConnect"},
                 {"type": "openIdConnect", "openIdConnectUrl": "openIdConnect"},  # #5: allow relative path
             ]
-        }
+        },
+    )

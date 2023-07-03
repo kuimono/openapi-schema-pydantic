@@ -39,5 +39,7 @@ from .security_requirement import SecurityRequirement
 
 
 # resolve forward references
-Encoding.update_forward_refs(Header=Header)
-Schema.update_forward_refs()
+Encoding.model_rebuild()
+OpenAPI.model_rebuild()
+Components.model_rebuild()
+Operation.model_rebuild()

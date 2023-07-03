@@ -22,7 +22,7 @@ the following fields are used with [alias](https://pydantic-docs.helpmanual.io/u
 > <a name="header_param_in"></a>The "in" field in Header object is actually a constant (`{"in": "header"}`).
 
 > For convenience of object creation, the classes mentioned in above
-> has configured `allow_population_by_field_name=True`.
+> has configured `populate_by_name=True`.
 >
 > Reference: [Pydantic's Model Config](https://pydantic-docs.helpmanual.io/usage/model_config/)
 

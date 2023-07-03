@@ -1,6 +1,6 @@
 from typing import Dict, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, ConfigDict
 
 from .media_type import MediaType
 
@@ -16,7 +16,7 @@ class RequestBody(BaseModel):
     [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
     """
 
-    content: Dict[str, MediaType] = ...
+    content: Dict[str, MediaType]
     """
     **REQUIRED**. The content of the request body.
     The key is a media type or [media type range](https://tools.ietf.org/html/rfc7231#appendix-D)
@@ -30,9 +30,9 @@ class RequestBody(BaseModel):
     Determines if the request body is required in the request. Defaults to `false`.
     """
 
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
             "examples": [
                 {
                     "description": "user to add to the system",
@@ -78,4 +78,5 @@ class RequestBody(BaseModel):
                     "content": {"text/plain": {"schema": {"type": "array", "items": {"type": "string"}}}},
                 },
             ]
-        }
+        },
+    )

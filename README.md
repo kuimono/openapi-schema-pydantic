@@ -35,7 +35,7 @@ open_api = OpenAPI(
         )
     },
 )
-print(open_api.json(by_alias=True, exclude_none=True, indent=2))
+print(open_api.model_dump_json(by_alias=True, exclude_none=True, indent=2))
 ```
 
 Result:
@@ -69,15 +69,14 @@ Result:
 
 ## Take advantage of Pydantic
 
-Pydantic is a great tool, allow you to use object / dict / mixed data for for input.
-
+Pydantic is a great tool. It allows you to use object / dict / mixed data for input.
 The following examples give the same OpenAPI result as above:
 
 ```python
 from openapi_schema_pydantic import OpenAPI, PathItem, Response
 
 # Construct OpenAPI from dict
-open_api = OpenAPI.parse_obj({
+open_api = OpenAPI.model_validate({
     "info": {"title": "My own API", "version": "v0.0.1"},
     "paths": {
         "/ping": {
@@ -87,7 +86,7 @@ open_api = OpenAPI.parse_obj({
 })
 
 # Construct OpenAPI with mix of dict/object
-open_api = OpenAPI.parse_obj({
+open_api = OpenAPI.model_validate({
     "info": {"title": "My own API", "version": "v0.0.1"},
     "paths": {
         "/ping": PathItem(
@@ -100,10 +99,10 @@ open_api = OpenAPI.parse_obj({
 ## Use Pydantic classes as schema
 
 - The [Schema Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schemaObject)
-  in OpenAPI has definitions and tweaks in JSON Schema, which is hard to comprehend and define a good data class
+  in OpenAPI has definitions and tweaks in JSON Schema, which are hard to comprehend and define a good data class
 - Pydantic already has a good way to [create JSON schema](https://pydantic-docs.helpmanual.io/usage/schema/),
   let's not re-invent the wheel
-  
+
 The approach to deal with this:
 
 1. Use `PydanticSchema` objects to represent the `Schema` in `OpenAPI` object
@@ -116,7 +115,7 @@ from openapi_schema_pydantic import OpenAPI
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
 
 def construct_base_open_api() -> OpenAPI:
-    return OpenAPI.parse_obj({
+    return OpenAPI.model_validate({
         "info": {"title": "My own API", "version": "v0.0.1"},
         "paths": {
             "/ping": {
@@ -148,8 +147,8 @@ class PingResponse(BaseModel):
 open_api = construct_base_open_api()
 open_api = construct_open_api_with_schema_class(open_api)
 
-# print the result openapi.json
-print(open_api.json(by_alias=True, exclude_none=True, indent=2))
+# print the result of openapi.model_dump_json()
+print(open_api.model_dump_json(by_alias=True, exclude_none=True, indent=2))
 ```
 
 Result:
@@ -198,45 +197,45 @@ Result:
   "components": {
     "schemas": {
       "PingRequest": {
-        "title": "PingRequest",
+        "properties": {
+          "req_foo": {
+            "type": "string",
+            "title": "Req Foo",
+            "description": "foo value of the request"
+          },
+          "req_bar": {
+            "type": "string",
+            "title": "Req Bar",
+            "description": "bar value of the request"
+          }
+        },
+        "type": "object",
         "required": [
           "req_foo",
           "req_bar"
         ],
-        "type": "object",
-        "properties": {
-          "req_foo": {
-            "title": "Req Foo",
-            "type": "string",
-            "description": "foo value of the request"
-          },
-          "req_bar": {
-            "title": "Req Bar",
-            "type": "string",
-            "description": "bar value of the request"
-          }
-        },
+        "title": "PingRequest",
         "description": "Ping Request"
       },
       "PingResponse": {
-        "title": "PingResponse",
+        "properties": {
+          "resp_foo": {
+            "type": "string",
+            "title": "Resp Foo",
+            "description": "foo value of the response"
+          },
+          "resp_bar": {
+            "type": "string",
+            "title": "Resp Bar",
+            "description": "bar value of the response"
+          }
+        },
+        "type": "object",
         "required": [
           "resp_foo",
           "resp_bar"
         ],
-        "type": "object",
-        "properties": {
-          "resp_foo": {
-            "title": "Resp Foo",
-            "type": "string",
-            "description": "foo value of the response"
-          },
-          "resp_bar": {
-            "title": "Resp Bar",
-            "type": "string",
-            "description": "bar value of the response"
-          }
-        },
+        "title": "PingResponse",
         "description": "Ping response"
       }
     }
@@ -246,21 +245,21 @@ Result:
 
 ## Notes
 
-### Use of OpenAPI.json() / OpenAPI.dict()
+### Use of OpenAPI.model_dump_json() / OpenAPI.model_dump()
 
-When using `OpenAPI.json()` / `OpenAPI.dict()` function,
-arguments `by_alias=True, exclude_none=True` has to be in place.
-Otherwise the result json will not fit the OpenAPI standard.
+When using `OpenAPI.model_dump_json()` / `OpenAPI.model_dump()` functions,
+the arguments `by_alias=True, exclude_none=True` have to be in place,
+otherwise the resulting json will not fit the OpenAPI standard.
 
 ```python
 # OK
-open_api.json(by_alias=True, exclude_none=True, indent=2)
+open_api.model_dump_json(by_alias=True, exclude_none=True, indent=2)
 
 # Not good
-open_api.json(indent=2)
+open_api.model_dump_json(indent=2)
 ```
 
-More info about field alias:
+More info about field aliases:
 
 | OpenAPI version | Field alias info |
 | --------------- | ---------------- |
@@ -280,7 +279,7 @@ Please refer to the following for more info:
 ### Use OpenAPI 3.0.3 instead of 3.1.0
 
 Some UI renderings (e.g. Swagger) still do not support OpenAPI 3.1.0.
-It is allowed to use the old 3.0.3 version by importing from different paths:
+The old 3.0.3 version is available by importing from different paths:
 
 ```python
 from openapi_schema_pydantic.v3.v3_0_3 import OpenAPI, ...
