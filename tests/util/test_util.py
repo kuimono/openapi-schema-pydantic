@@ -1,6 +1,6 @@
 import logging
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, computed_field
 
 from openapi_schema_pydantic import Info, MediaType, OpenAPI, Operation, PathItem, Reference, RequestBody, Response
 from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
@@ -146,3 +146,12 @@ class PongResponse(BaseModel):
 
     resp_foo: str = Field(alias="pong_foo", description="foo value of the response")
     resp_bar: str = Field(alias="pong_bar", description="bar value of the response")
+
+
+class ModelWithOptionalAndComputed(BaseModel):
+    enable: bool | None = None
+
+    @computed_field
+    @property
+    def comp(self) -> bool:
+        return True

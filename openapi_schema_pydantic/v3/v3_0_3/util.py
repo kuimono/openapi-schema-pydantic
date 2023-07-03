@@ -2,7 +2,7 @@ import logging
 from typing import Any, List, Set, Type
 
 from pydantic import BaseModel
-from pydantic.json_schema import models_json_schema
+from pydantic.json_schema import models_json_schema, JsonSchemaMode
 
 from . import Components, OpenAPI, Reference, Schema
 
@@ -18,6 +18,12 @@ class PydanticSchema(Schema):
 
     schema_class: Type[BaseModel]
     """the class that is used for generate the schema"""
+
+
+def get_mode(cls: Type[BaseModel], default: JsonSchemaMode = "validation") -> JsonSchemaMode:
+    if not hasattr(cls, "model_config"):
+        return default
+    return cls.model_config.get("json_schema_mode", default)
 
 
 def construct_open_api_with_schema_class(
@@ -55,7 +61,7 @@ def construct_open_api_with_schema_class(
     # Note: the mode (validation or serialization) affects
     # optional and computed fields.
     key_map, schema_definitions = models_json_schema(
-        [(c, c.model_config.get("open_api_mode", "validation")) for c in schema_classes],
+        [(c, get_mode(c)) for c in schema_classes],
         by_alias=by_alias,
         ref_template=ref_template,
     )
