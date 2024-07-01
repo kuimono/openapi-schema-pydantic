@@ -1,6 +1,6 @@
 import logging
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 from pydantic.schema import schema
 
 from openapi_schema_pydantic import Schema, Reference
@@ -26,9 +26,7 @@ def test_issue_4():
 
     class TestModel(BaseModel):
         test_field: str
-
-        class Config:
-            extra = Extra.forbid
+        model_config = ConfigDict(extra="forbid")
 
     schema_definition = schema([TestModel])
     assert schema_definition == {

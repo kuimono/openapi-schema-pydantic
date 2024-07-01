@@ -1,6 +1,6 @@
 from typing import Dict, Optional
 
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 from openapi_schema_pydantic import OpenAPI, Operation, PathItem
 
@@ -14,9 +14,7 @@ class ExtendedOperation(Operation):
     """Override classes to use "x-codegen-request-body-name" in Operation"""
 
     xCodegenRequestBodyName: Optional[str] = Field(default=None, alias="x-codegen-request-body-name")
-
-    class Config:
-        allow_population_by_field_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class ExtendedPathItem(PathItem):
