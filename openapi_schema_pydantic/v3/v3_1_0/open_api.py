@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 from .components import Components
 from .external_documentation import ExternalDocumentation
@@ -85,6 +85,4 @@ class OpenAPI(BaseModel):
     """
     Additional external documentation.
     """
-
-    class Config:
-        extra = Extra.ignore
+    model_config = ConfigDict(extra="ignore")

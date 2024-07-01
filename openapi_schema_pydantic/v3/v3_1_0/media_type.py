@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Union
 
-from pydantic import BaseModel, Extra, Field
+from pydantic import ConfigDict, BaseModel, Field
 
 from .encoding import Encoding
 from .example import Example
@@ -47,37 +47,33 @@ class MediaType(BaseModel):
     The encoding object SHALL only apply to `requestBody` objects
     when the media type is `multipart` or `application/x-www-form-urlencoded`.
     """
-
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
-            "examples": [
-                {
-                    "schema": {"$ref": "#/components/schemas/Pet"},
-                    "examples": {
-                        "cat": {
-                            "summary": "An example of a cat",
-                            "value": {
-                                "name": "Fluffy",
-                                "petType": "Cat",
-                                "color": "White",
-                                "gender": "male",
-                                "breed": "Persian",
-                            },
+    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
+        "examples": [
+            {
+                "schema": {"$ref": "#/components/schemas/Pet"},
+                "examples": {
+                    "cat": {
+                        "summary": "An example of a cat",
+                        "value": {
+                            "name": "Fluffy",
+                            "petType": "Cat",
+                            "color": "White",
+                            "gender": "male",
+                            "breed": "Persian",
                         },
-                        "dog": {
-                            "summary": "An example of a dog with a cat's name",
-                            "value": {
-                                "name": "Puma",
-                                "petType": "Dog",
-                                "color": "Black",
-                                "gender": "Female",
-                                "breed": "Mixed",
-                            },
-                        },
-                        "frog": {"$ref": "#/components/examples/frog-example"},
                     },
-                }
-            ]
-        }
+                    "dog": {
+                        "summary": "An example of a dog with a cat's name",
+                        "value": {
+                            "name": "Puma",
+                            "petType": "Dog",
+                            "color": "Black",
+                            "gender": "Female",
+                            "breed": "Mixed",
+                        },
+                    },
+                    "frog": {"$ref": "#/components/examples/frog-example"},
+                },
+            }
+        ]
+    })

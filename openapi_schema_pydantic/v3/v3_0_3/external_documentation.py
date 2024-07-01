@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import AnyUrl, BaseModel, Extra
+from pydantic import ConfigDict, AnyUrl, BaseModel
 
 
 class ExternalDocumentation(BaseModel):
@@ -17,7 +17,4 @@ class ExternalDocumentation(BaseModel):
     **REQUIRED**. The URL for the target documentation.
     Value MUST be in the format of a URL.
     """
-
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {"examples": [{"description": "Find more info here", "url": "https://example.com"}]}
+    model_config = ConfigDict(extra="ignore", json_schema_extra={"examples": [{"description": "Find more info here", "url": "https://example.com"}]})

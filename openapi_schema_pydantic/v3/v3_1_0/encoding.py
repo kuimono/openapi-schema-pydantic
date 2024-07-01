@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 from .reference import Reference
 
@@ -66,19 +66,16 @@ class Encoding(BaseModel):
     If a value is explicitly defined,
     then the value of [`contentType`](#encodingContentType) (implicit or explicit) SHALL be ignored.
     """
-
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
-            "examples": [
-                {
-                    "contentType": "image/png, image/jpeg",
-                    "headers": {
-                        "X-Rate-Limit-Limit": {
-                            "description": "The number of allowed requests in the current period",
-                            "schema": {"type": "integer"},
-                        }
-                    },
-                }
-            ]
-        }
+    model_config = ConfigDict(extra="ignore", json_schema_extra={
+        "examples": [
+            {
+                "contentType": "image/png, image/jpeg",
+                "headers": {
+                    "X-Rate-Limit-Limit": {
+                        "description": "The number of allowed requests in the current period",
+                        "schema": {"type": "integer"},
+                    }
+                },
+            }
+        ]
+    })

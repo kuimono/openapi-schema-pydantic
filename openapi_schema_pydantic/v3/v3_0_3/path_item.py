@@ -1,6 +1,6 @@
 from typing import List, Optional, Union
 
-from pydantic import BaseModel, Extra, Field
+from pydantic import ConfigDict, BaseModel, Field
 
 from .operation import Operation
 from .parameter import Parameter
@@ -90,40 +90,36 @@ class PathItem(BaseModel):
     The list can use the [Reference Object](#referenceObject) to link to parameters that are defined at the
     [OpenAPI Object's components/parameters](#componentsParameters).
     """
-
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
-            "examples": [
-                {
-                    "get": {
-                        "description": "Returns pets based on ID",
-                        "summary": "Find pets by ID",
-                        "operationId": "getPetsById",
-                        "responses": {
-                            "200": {
-                                "description": "pet response",
-                                "content": {
-                                    "*/*": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/Pet"}}}
-                                },
-                            },
-                            "default": {
-                                "description": "error payload",
-                                "content": {"text/html": {"schema": {"$ref": "#/components/schemas/ErrorModel"}}},
+    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
+        "examples": [
+            {
+                "get": {
+                    "description": "Returns pets based on ID",
+                    "summary": "Find pets by ID",
+                    "operationId": "getPetsById",
+                    "responses": {
+                        "200": {
+                            "description": "pet response",
+                            "content": {
+                                "*/*": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/Pet"}}}
                             },
                         },
+                        "default": {
+                            "description": "error payload",
+                            "content": {"text/html": {"schema": {"$ref": "#/components/schemas/ErrorModel"}}},
+                        },
                     },
-                    "parameters": [
-                        {
-                            "name": "id",
-                            "in": "path",
-                            "description": "ID of pet to use",
-                            "required": True,
-                            "schema": {"type": "array", "items": {"type": "string"}},
-                            "style": "simple",
-                        }
-                    ],
-                }
-            ]
-        }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of pet to use",
+                        "required": True,
+                        "schema": {"type": "array", "items": {"type": "string"}},
+                        "style": "simple",
+                    }
+                ],
+            }
+        ]
+    })

@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 from .callback import Callback
 from .external_documentation import ExternalDocumentation
@@ -105,49 +105,46 @@ class Operation(BaseModel):
     If an alternative `server` object is specified at the Path Item Object or Root level, 
     it will be overridden by this value.
     """
-
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
-            "examples": [
-                {
-                    "tags": ["pet"],
-                    "summary": "Updates a pet in the store with form data",
-                    "operationId": "updatePetWithForm",
-                    "parameters": [
-                        {
-                            "name": "petId",
-                            "in": "path",
-                            "description": "ID of pet that needs to be updated",
-                            "required": True,
-                            "schema": {"type": "string"},
-                        }
-                    ],
-                    "requestBody": {
-                        "content": {
-                            "application/x-www-form-urlencoded": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {"description": "Updated name of the pet", "type": "string"},
-                                        "status": {"description": "Updated status of the pet", "type": "string"},
-                                    },
-                                    "required": ["status"],
-                                }
+    model_config = ConfigDict(extra="ignore", json_schema_extra={
+        "examples": [
+            {
+                "tags": ["pet"],
+                "summary": "Updates a pet in the store with form data",
+                "operationId": "updatePetWithForm",
+                "parameters": [
+                    {
+                        "name": "petId",
+                        "in": "path",
+                        "description": "ID of pet that needs to be updated",
+                        "required": True,
+                        "schema": {"type": "string"},
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {"description": "Updated name of the pet", "type": "string"},
+                                    "status": {"description": "Updated status of the pet", "type": "string"},
+                                },
+                                "required": ["status"],
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pet updated.",
+                        "content": {"application/json": {}, "application/xml": {}},
                     },
-                    "responses": {
-                        "200": {
-                            "description": "Pet updated.",
-                            "content": {"application/json": {}, "application/xml": {}},
-                        },
-                        "405": {
-                            "description": "Method Not Allowed",
-                            "content": {"application/json": {}, "application/xml": {}},
-                        },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "content": {"application/json": {}, "application/xml": {}},
                     },
-                    "security": [{"petstore_auth": ["write:pets", "read:pets"]}],
-                }
-            ]
-        }
+                },
+                "security": [{"petstore_auth": ["write:pets", "read:pets"]}],
+            }
+        ]
+    })

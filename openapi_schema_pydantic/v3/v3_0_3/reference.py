@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Extra, Field
+from pydantic import ConfigDict, BaseModel, Field
 
 
 class Reference(BaseModel):
@@ -14,10 +14,6 @@ class Reference(BaseModel):
 
     ref: str = Field(alias="$ref")
     """**REQUIRED**. The reference string."""
-
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
-            "examples": [{"$ref": "#/components/schemas/Pet"}, {"$ref": "Pet.json"}, {"$ref": "definitions.json#/Pet"}]
-        }
+    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
+        "examples": [{"$ref": "#/components/schemas/Pet"}, {"$ref": "Pet.json"}, {"$ref": "definitions.json#/Pet"}]
+    })

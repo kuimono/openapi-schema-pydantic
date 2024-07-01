@@ -1,6 +1,6 @@
 from typing import Dict, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 
 class Discriminator(BaseModel):
@@ -23,17 +23,14 @@ class Discriminator(BaseModel):
     """
     An object to hold mappings between payload values and schema names or references.
     """
-
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
-            "examples": [
-                {
-                    "propertyName": "petType",
-                    "mapping": {
-                        "dog": "#/components/schemas/Dog",
-                        "monster": "https://gigantic-server.com/schemas/Monster/schema.json",
-                    },
-                }
-            ]
-        }
+    model_config = ConfigDict(extra="ignore", json_schema_extra={
+        "examples": [
+            {
+                "propertyName": "petType",
+                "mapping": {
+                    "dog": "#/components/schemas/Dog",
+                    "monster": "https://gigantic-server.com/schemas/Monster/schema.json",
+                },
+            }
+        ]
+    })

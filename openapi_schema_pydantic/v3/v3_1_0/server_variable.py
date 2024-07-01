@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 
 class ServerVariable(BaseModel):
@@ -26,6 +26,4 @@ class ServerVariable(BaseModel):
     An optional description for the server variable.
     [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
     """
-
-    class Config:
-        extra = Extra.ignore
+    model_config = ConfigDict(extra="ignore")

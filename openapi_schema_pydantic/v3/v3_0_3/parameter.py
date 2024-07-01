@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Union
 
-from pydantic import BaseModel, Field, Extra
+from pydantic import ConfigDict, BaseModel, Field
 
 from .example import Example
 from .media_type import MediaType
@@ -139,54 +139,50 @@ class Parameter(BaseModel):
     The key is the media type and the value describes it.
     The map MUST only contain one entry.
     """
-
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
-            "examples": [
-                {
-                    "name": "token",
-                    "in": "header",
-                    "description": "token to be passed as a header",
-                    "required": True,
-                    "schema": {"type": "array", "items": {"type": "integer", "format": "int64"}},
-                    "style": "simple",
-                },
-                {
-                    "name": "username",
-                    "in": "path",
-                    "description": "username to fetch",
-                    "required": True,
-                    "schema": {"type": "string"},
-                },
-                {
-                    "name": "id",
-                    "in": "query",
-                    "description": "ID of the object to fetch",
-                    "required": False,
-                    "schema": {"type": "array", "items": {"type": "string"}},
-                    "style": "form",
-                    "explode": True,
-                },
-                {
-                    "in": "query",
-                    "name": "freeForm",
-                    "schema": {"type": "object", "additionalProperties": {"type": "integer"}},
-                    "style": "form",
-                },
-                {
-                    "in": "query",
-                    "name": "coordinates",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": ["lat", "long"],
-                                "properties": {"lat": {"type": "number"}, "long": {"type": "number"}},
-                            }
+    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
+        "examples": [
+            {
+                "name": "token",
+                "in": "header",
+                "description": "token to be passed as a header",
+                "required": True,
+                "schema": {"type": "array", "items": {"type": "integer", "format": "int64"}},
+                "style": "simple",
+            },
+            {
+                "name": "username",
+                "in": "path",
+                "description": "username to fetch",
+                "required": True,
+                "schema": {"type": "string"},
+            },
+            {
+                "name": "id",
+                "in": "query",
+                "description": "ID of the object to fetch",
+                "required": False,
+                "schema": {"type": "array", "items": {"type": "string"}},
+                "style": "form",
+                "explode": True,
+            },
+            {
+                "in": "query",
+                "name": "freeForm",
+                "schema": {"type": "object", "additionalProperties": {"type": "integer"}},
+                "style": "form",
+            },
+            {
+                "in": "query",
+                "name": "coordinates",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "required": ["lat", "long"],
+                            "properties": {"lat": {"type": "number"}, "long": {"type": "number"}},
                         }
-                    },
+                    }
                 },
-            ]
-        }
+            },
+        ]
+    })

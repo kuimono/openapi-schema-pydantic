@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import BaseModel, Extra, Field
+from pydantic import ConfigDict, BaseModel, Field
 from .discriminator import Discriminator
 from .external_documentation import ExternalDocumentation
 from .reference import Reference
@@ -180,7 +180,7 @@ class Schema(BaseModel):
     value of 0.
     """
 
-    required: Optional[List[str]] = Field(default=None, min_items=1)
+    required: Optional[List[str]] = Field(default=None, min_length=1)
     """
     The value of this keyword MUST be an array.  This array MUST have at
     least one element.  Elements of this array MUST be strings, and MUST
@@ -190,7 +190,7 @@ class Schema(BaseModel):
     contains all elements in this keyword's array value.
     """
 
-    enum: Optional[List[Any]] = Field(default=None, min_items=1)
+    enum: Optional[List[Any]] = Field(default=None, min_length=1)
     """
     The value of this keyword MUST be an array.  This array SHOULD have
     at least one element.  Elements in the array SHOULD be unique.
@@ -469,88 +469,84 @@ class Schema(BaseModel):
     Specifies that a schema is deprecated and SHOULD be transitioned out of usage.
     Default value is `false`.
     """
-
-    class Config:
-        extra = Extra.ignore
-        allow_population_by_field_name = True
-        schema_extra = {
-            "examples": [
-                {"type": "string", "format": "email"},
-                {
-                    "type": "object",
-                    "required": ["name"],
-                    "properties": {
-                        "name": {"type": "string"},
-                        "address": {"$ref": "#/components/schemas/Address"},
-                        "age": {"type": "integer", "format": "int32", "minimum": 0},
-                    },
+    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
+        "examples": [
+            {"type": "string", "format": "email"},
+            {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                    "name": {"type": "string"},
+                    "address": {"$ref": "#/components/schemas/Address"},
+                    "age": {"type": "integer", "format": "int32", "minimum": 0},
                 },
-                {"type": "object", "additionalProperties": {"type": "string"}},
-                {"type": "object", "additionalProperties": {"$ref": "#/components/schemas/ComplexModel"}},
-                {
-                    "type": "object",
-                    "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
-                    "required": ["name"],
-                    "example": {"name": "Puma", "id": 1},
+            },
+            {"type": "object", "additionalProperties": {"type": "string"}},
+            {"type": "object", "additionalProperties": {"$ref": "#/components/schemas/ComplexModel"}},
+            {
+                "type": "object",
+                "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+                "required": ["name"],
+                "example": {"name": "Puma", "id": 1},
+            },
+            {
+                "type": "object",
+                "required": ["message", "code"],
+                "properties": {
+                    "message": {"type": "string"},
+                    "code": {"type": "integer", "minimum": 100, "maximum": 600},
                 },
-                {
-                    "type": "object",
-                    "required": ["message", "code"],
-                    "properties": {
-                        "message": {"type": "string"},
-                        "code": {"type": "integer", "minimum": 100, "maximum": 600},
-                    },
-                },
-                {
-                    "allOf": [
-                        {"$ref": "#/components/schemas/ErrorModel"},
-                        {"type": "object", "required": ["rootCause"], "properties": {"rootCause": {"type": "string"}}},
-                    ]
-                },
-                {
-                    "type": "object",
-                    "discriminator": {"propertyName": "petType"},
-                    "properties": {"name": {"type": "string"}, "petType": {"type": "string"}},
-                    "required": ["name", "petType"],
-                },
-                {
-                    "description": "A representation of a cat. "
-                    "Note that `Cat` will be used as the discriminator value.",
-                    "allOf": [
-                        {"$ref": "#/components/schemas/Pet"},
-                        {
-                            "type": "object",
-                            "properties": {
-                                "huntingSkill": {
-                                    "type": "string",
-                                    "description": "The measured skill for hunting",
-                                    "default": "lazy",
-                                    "enum": ["clueless", "lazy", "adventurous", "aggressive"],
-                                }
-                            },
-                            "required": ["huntingSkill"],
+            },
+            {
+                "allOf": [
+                    {"$ref": "#/components/schemas/ErrorModel"},
+                    {"type": "object", "required": ["rootCause"], "properties": {"rootCause": {"type": "string"}}},
+                ]
+            },
+            {
+                "type": "object",
+                "discriminator": {"propertyName": "petType"},
+                "properties": {"name": {"type": "string"}, "petType": {"type": "string"}},
+                "required": ["name", "petType"],
+            },
+            {
+                "description": "A representation of a cat. "
+                "Note that `Cat` will be used as the discriminator value.",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Pet"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "huntingSkill": {
+                                "type": "string",
+                                "description": "The measured skill for hunting",
+                                "default": "lazy",
+                                "enum": ["clueless", "lazy", "adventurous", "aggressive"],
+                            }
                         },
-                    ],
-                },
-                {
-                    "description": "A representation of a dog. "
-                    "Note that `Dog` will be used as the discriminator value.",
-                    "allOf": [
-                        {"$ref": "#/components/schemas/Pet"},
-                        {
-                            "type": "object",
-                            "properties": {
-                                "packSize": {
-                                    "type": "integer",
-                                    "format": "int32",
-                                    "description": "the size of the pack the dog is from",
-                                    "default": 0,
-                                    "minimum": 0,
-                                }
-                            },
-                            "required": ["packSize"],
+                        "required": ["huntingSkill"],
+                    },
+                ],
+            },
+            {
+                "description": "A representation of a dog. "
+                "Note that `Dog` will be used as the discriminator value.",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Pet"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "packSize": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "the size of the pack the dog is from",
+                                "default": 0,
+                                "minimum": 0,
+                            }
                         },
-                    ],
-                },
-            ]
-        }
+                        "required": ["packSize"],
+                    },
+                ],
+            },
+        ]
+    })

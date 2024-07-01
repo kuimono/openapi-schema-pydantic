@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 
 class Example(BaseModel):
@@ -32,16 +32,13 @@ class Example(BaseModel):
     The `value` field and `externalValue` field are mutually exclusive.
     See the rules for resolving [Relative References](#relativeReferencesURI).
     """
-
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
-            "examples": [
-                {"summary": "A foo example", "value": {"foo": "bar"}},
-                {
-                    "summary": "This is an example in XML",
-                    "externalValue": "http://example.org/examples/address-example.xml",
-                },
-                {"summary": "This is a text example", "externalValue": "http://foo.bar/examples/address-example.txt"},
-            ]
-        }
+    model_config = ConfigDict(extra="ignore", json_schema_extra={
+        "examples": [
+            {"summary": "A foo example", "value": {"foo": "bar"}},
+            {
+                "summary": "This is an example in XML",
+                "externalValue": "http://example.org/examples/address-example.xml",
+            },
+            {"summary": "This is a text example", "externalValue": "http://foo.bar/examples/address-example.txt"},
+        ]
+    })

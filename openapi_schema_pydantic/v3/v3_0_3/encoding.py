@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 from .reference import Reference
 
@@ -58,19 +58,16 @@ class Encoding(BaseModel):
     The default value is `false`.
     This property SHALL be ignored if the request body media type is not `application/x-www-form-urlencoded`.
     """
-
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
-            "examples": [
-                {
-                    "contentType": "image/png, image/jpeg",
-                    "headers": {
-                        "X-Rate-Limit-Limit": {
-                            "description": "The number of allowed requests in the current period",
-                            "schema": {"type": "integer"},
-                        }
-                    },
-                }
-            ]
-        }
+    model_config = ConfigDict(extra="ignore", json_schema_extra={
+        "examples": [
+            {
+                "contentType": "image/png, image/jpeg",
+                "headers": {
+                    "X-Rate-Limit-Limit": {
+                        "description": "The number of allowed requests in the current period",
+                        "schema": {"type": "integer"},
+                    }
+                },
+            }
+        ]
+    })

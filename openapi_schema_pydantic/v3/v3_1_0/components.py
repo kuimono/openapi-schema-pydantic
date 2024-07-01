@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 from .callback import Callback
 from .example import Example
@@ -51,68 +51,65 @@ class Components(BaseModel):
 
     pathItems: Optional[Dict[str, Union[PathItem, Reference]]] = None
     """An object to hold reusable [Path Item Object](#pathItemObject)."""
-
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
-            "examples": [
-                {
-                    "schemas": {
-                        "GeneralError": {
-                            "type": "object",
-                            "properties": {
-                                "code": {"type": "integer", "format": "int32"},
-                                "message": {"type": "string"},
-                            },
-                        },
-                        "Category": {
-                            "type": "object",
-                            "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
-                        },
-                        "Tag": {
-                            "type": "object",
-                            "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+    model_config = ConfigDict(extra="ignore", json_schema_extra={
+        "examples": [
+            {
+                "schemas": {
+                    "GeneralError": {
+                        "type": "object",
+                        "properties": {
+                            "code": {"type": "integer", "format": "int32"},
+                            "message": {"type": "string"},
                         },
                     },
-                    "parameters": {
-                        "skipParam": {
-                            "name": "skip",
-                            "in": "query",
-                            "description": "number of items to skip",
-                            "required": True,
-                            "schema": {"type": "integer", "format": "int32"},
-                        },
-                        "limitParam": {
-                            "name": "limit",
-                            "in": "query",
-                            "description": "max records to return",
-                            "required": True,
-                            "schema": {"type": "integer", "format": "int32"},
+                    "Category": {
+                        "type": "object",
+                        "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+                    },
+                    "Tag": {
+                        "type": "object",
+                        "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
+                    },
+                },
+                "parameters": {
+                    "skipParam": {
+                        "name": "skip",
+                        "in": "query",
+                        "description": "number of items to skip",
+                        "required": True,
+                        "schema": {"type": "integer", "format": "int32"},
+                    },
+                    "limitParam": {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max records to return",
+                        "required": True,
+                        "schema": {"type": "integer", "format": "int32"},
+                    },
+                },
+                "responses": {
+                    "NotFound": {"description": "Entity not found."},
+                    "IllegalInput": {"description": "Illegal input for operation."},
+                    "GeneralError": {
+                        "description": "General Error",
+                        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/GeneralError"}}},
+                    },
+                },
+                "securitySchemes": {
+                    "api_key": {"type": "apiKey", "name": "api_key", "in": "header"},
+                    "petstore_auth": {
+                        "type": "oauth2",
+                        "flows": {
+                            "implicit": {
+                                "authorizationUrl": "http://example.org/api/oauth/dialog",
+                                "scopes": {
+                                    "write:pets": "modify pets in your account",
+                                    "read:pets": "read your pets",
+                                },
+                            }
                         },
                     },
-                    "responses": {
-                        "NotFound": {"description": "Entity not found."},
-                        "IllegalInput": {"description": "Illegal input for operation."},
-                        "GeneralError": {
-                            "description": "General Error",
-                            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/GeneralError"}}},
-                        },
-                    },
-                    "securitySchemes": {
-                        "api_key": {"type": "apiKey", "name": "api_key", "in": "header"},
-                        "petstore_auth": {
-                            "type": "oauth2",
-                            "flows": {
-                                "implicit": {
-                                    "authorizationUrl": "http://example.org/api/oauth/dialog",
-                                    "scopes": {
-                                        "write:pets": "modify pets in your account",
-                                        "read:pets": "read your pets",
-                                    },
-                                }
-                            },
-                        },
-                    },
-                }
-            ]
-        }
+                },
+            }
+        ]
+    })

@@ -1,6 +1,6 @@
 from typing import Dict, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Extra
+from pydantic import ConfigDict, AnyUrl, BaseModel
 
 
 class OAuthFlow(BaseModel):
@@ -33,25 +33,22 @@ class OAuthFlow(BaseModel):
     A map between the scope name and a short description for it.
     The map MAY be empty.
     """
-
-    class Config:
-        extra = Extra.ignore
-        schema_extra = {
-            "examples": [
-                {
-                    "authorizationUrl": "https://example.com/api/oauth/dialog",
-                    "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
-                },
-                {
-                    "authorizationUrl": "https://example.com/api/oauth/dialog",
-                    "tokenUrl": "https://example.com/api/oauth/token",
-                    "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
-                },
-                {
-                    "authorizationUrl": "/api/oauth/dialog",  # issue #5: allow relative path
-                    "tokenUrl": "/api/oauth/token",  # issue #5: allow relative path
-                    "refreshUrl": "/api/oauth/token",  # issue #5: allow relative path
-                    "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
-                },
-            ]
-        }
+    model_config = ConfigDict(extra="ignore", json_schema_extra={
+        "examples": [
+            {
+                "authorizationUrl": "https://example.com/api/oauth/dialog",
+                "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
+            },
+            {
+                "authorizationUrl": "https://example.com/api/oauth/dialog",
+                "tokenUrl": "https://example.com/api/oauth/token",
+                "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
+            },
+            {
+                "authorizationUrl": "/api/oauth/dialog",  # issue #5: allow relative path
+                "tokenUrl": "/api/oauth/token",  # issue #5: allow relative path
+                "refreshUrl": "/api/oauth/token",  # issue #5: allow relative path
+                "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
+            },
+        ]
+    })
