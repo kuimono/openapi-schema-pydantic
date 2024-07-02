@@ -4,7 +4,6 @@ from pydantic import ConfigDict, BaseModel
 
 
 class Example(BaseModel):
-
     summary: Optional[str] = None
     """
     Short description for the example.
@@ -31,13 +30,19 @@ class Example(BaseModel):
     
     The `value` field and `externalValue` field are mutually exclusive.
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={
-        "examples": [
-            {"summary": "A foo example", "value": {"foo": "bar"}},
-            {
-                "summary": "This is an example in XML",
-                "externalValue": "http://example.org/examples/address-example.xml",
-            },
-            {"summary": "This is a text example", "externalValue": "http://foo.bar/examples/address-example.txt"},
-        ]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [
+                {"summary": "A foo example", "value": {"foo": "bar"}},
+                {
+                    "summary": "This is an example in XML",
+                    "externalValue": "http://example.org/examples/address-example.xml",
+                },
+                {
+                    "summary": "This is a text example",
+                    "externalValue": "http://foo.bar/examples/address-example.txt",
+                },
+            ]
+        },
+    )

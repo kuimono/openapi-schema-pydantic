@@ -61,12 +61,18 @@ class Link(BaseModel):
     """
     A server object to be used by the target operation.
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={
-        "examples": [
-            {"operationId": "getUserAddressByUUID", "parameters": {"userUuid": "$response.body#/uuid"}},
-            {
-                "operationRef": "#/paths/~12.0~1repositories~1{username}/get",
-                "parameters": {"username": "$response.body#/username"},
-            },
-        ]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [
+                {
+                    "operationId": "getUserAddressByUUID",
+                    "parameters": {"userUuid": "$response.body#/uuid"},
+                },
+                {
+                    "operationRef": "#/paths/~12.0~1repositories~1{username}/get",
+                    "parameters": {"username": "$response.body#/username"},
+                },
+            ]
+        },
+    )

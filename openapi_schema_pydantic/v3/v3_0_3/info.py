@@ -45,19 +45,25 @@ class Info(BaseModel):
     **REQUIRED**. The version of the OpenAPI document
     (which is distinct from the [OpenAPI Specification version](#oasVersion) or the API implementation version).
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={
-        "examples": [
-            {
-                "title": "Sample Pet Store App",
-                "description": "This is a sample server for a pet store.",
-                "termsOfService": "http://example.com/terms/",
-                "contact": {
-                    "name": "API Support",
-                    "url": "http://www.example.com/support",
-                    "email": "support@example.com",
-                },
-                "license": {"name": "Apache 2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0.html"},
-                "version": "1.0.1",
-            }
-        ]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [
+                {
+                    "title": "Sample Pet Store App",
+                    "description": "This is a sample server for a pet store.",
+                    "termsOfService": "http://example.com/terms/",
+                    "contact": {
+                        "name": "API Support",
+                        "url": "http://www.example.com/support",
+                        "email": "support@example.com",
+                    },
+                    "license": {
+                        "name": "Apache 2.0",
+                        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+                    },
+                    "version": "1.0.1",
+                }
+            ]
+        },
+    )

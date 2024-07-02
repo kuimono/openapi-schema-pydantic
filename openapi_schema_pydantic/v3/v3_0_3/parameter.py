@@ -100,7 +100,9 @@ class Parameter(BaseModel):
     The default value is `false`.
     """
 
-    param_schema: Optional[Union[Reference, Schema]] = Field(default=None, alias="schema")
+    param_schema: Optional[Union[Reference, Schema]] = Field(
+        default=None, alias="schema"
+    )
     """
     The schema defining the type used for the parameter.
     """
@@ -139,50 +141,63 @@ class Parameter(BaseModel):
     The key is the media type and the value describes it.
     The map MUST only contain one entry.
     """
-    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
-        "examples": [
-            {
-                "name": "token",
-                "in": "header",
-                "description": "token to be passed as a header",
-                "required": True,
-                "schema": {"type": "array", "items": {"type": "integer", "format": "int64"}},
-                "style": "simple",
-            },
-            {
-                "name": "username",
-                "in": "path",
-                "description": "username to fetch",
-                "required": True,
-                "schema": {"type": "string"},
-            },
-            {
-                "name": "id",
-                "in": "query",
-                "description": "ID of the object to fetch",
-                "required": False,
-                "schema": {"type": "array", "items": {"type": "string"}},
-                "style": "form",
-                "explode": True,
-            },
-            {
-                "in": "query",
-                "name": "freeForm",
-                "schema": {"type": "object", "additionalProperties": {"type": "integer"}},
-                "style": "form",
-            },
-            {
-                "in": "query",
-                "name": "coordinates",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "required": ["lat", "long"],
-                            "properties": {"lat": {"type": "number"}, "long": {"type": "number"}},
-                        }
-                    }
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
+            "examples": [
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "token to be passed as a header",
+                    "required": True,
+                    "schema": {
+                        "type": "array",
+                        "items": {"type": "integer", "format": "int64"},
+                    },
+                    "style": "simple",
                 },
-            },
-        ]
-    })
+                {
+                    "name": "username",
+                    "in": "path",
+                    "description": "username to fetch",
+                    "required": True,
+                    "schema": {"type": "string"},
+                },
+                {
+                    "name": "id",
+                    "in": "query",
+                    "description": "ID of the object to fetch",
+                    "required": False,
+                    "schema": {"type": "array", "items": {"type": "string"}},
+                    "style": "form",
+                    "explode": True,
+                },
+                {
+                    "in": "query",
+                    "name": "freeForm",
+                    "schema": {
+                        "type": "object",
+                        "additionalProperties": {"type": "integer"},
+                    },
+                    "style": "form",
+                },
+                {
+                    "in": "query",
+                    "name": "coordinates",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["lat", "long"],
+                                "properties": {
+                                    "lat": {"type": "number"},
+                                    "long": {"type": "number"},
+                                },
+                            }
+                        }
+                    },
+                },
+            ]
+        },
+    )

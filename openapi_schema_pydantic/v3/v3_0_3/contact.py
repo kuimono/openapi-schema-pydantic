@@ -24,8 +24,15 @@ class Contact(BaseModel):
     The email address of the contact person/organization.
     MUST be in the format of an email address.
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={
-        "examples": [
-            {"name": "API Support", "url": "http://www.example.com/support", "email": "support@example.com"}
-        ]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [
+                {
+                    "name": "API Support",
+                    "url": "http://www.example.com/support",
+                    "email": "support@example.com",
+                }
+            ]
+        },
+    )

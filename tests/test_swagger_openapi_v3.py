@@ -6,14 +6,19 @@ from openapi_schema_pydantic import OpenAPI, Operation, PathItem
 
 
 def test_swagger_openapi_v3():
-    open_api = ExtendedOpenAPI.parse_file("tests/data/swagger_openapi_v3.0.1.json")
-    assert open_api
+    with open("tests/data/swagger_openapi_v3.0.1.json", "r") as file:
+        data = file.read()
+
+    data_as_json = ExtendedOpenAPI.model_validate_json(data)
+    assert data_as_json
 
 
 class ExtendedOperation(Operation):
     """Override classes to use "x-codegen-request-body-name" in Operation"""
 
-    xCodegenRequestBodyName: Optional[str] = Field(default=None, alias="x-codegen-request-body-name")
+    xCodegenRequestBodyName: Optional[str] = Field(
+        default=None, alias="x-codegen-request-body-name"
+    )
     model_config = ConfigDict(populate_by_name=True)
 
 

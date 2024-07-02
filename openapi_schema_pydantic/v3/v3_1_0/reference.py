@@ -28,6 +28,14 @@ class Reference(BaseModel):
     [CommonMark syntax](https://spec.commonmark.org/) MAY be used for rich text representation.
     If the referenced object-type does not allow a `description` field, then this field has no effect.
     """
-    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
-        "examples": [{"$ref": "#/components/schemas/Pet"}, {"$ref": "Pet.json"}, {"$ref": "definitions.json#/Pet"}]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
+            "examples": [
+                {"$ref": "#/components/schemas/Pet"},
+                {"$ref": "Pet.json"},
+                {"$ref": "definitions.json#/Pet"},
+            ]
+        },
+    )

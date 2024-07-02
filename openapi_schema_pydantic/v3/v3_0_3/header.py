@@ -1,3 +1,4 @@
+from typing import Literal
 from pydantic import ConfigDict, Field
 
 from .parameter import Parameter
@@ -13,10 +14,17 @@ class Header(Parameter):
        (for example, [`style`](#parameterStyle)).
     """
 
-    name = Field(default="", const=True)
-    param_in = Field(default="header", const=True, alias="in")
-    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
-        "examples": [
-            {"description": "The number of allowed requests in the current period", "schema": {"type": "integer"}}
-        ]
-    })
+    name: Literal[""] = Field(default="", alias="name")
+    param_in: Literal["header"] = Field(default="header", alias="in")
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
+            "examples": [
+                {
+                    "description": "The number of allowed requests in the current period",
+                    "schema": {"type": "integer"},
+                }
+            ]
+        },
+    )

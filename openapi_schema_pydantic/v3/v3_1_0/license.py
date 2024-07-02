@@ -25,9 +25,15 @@ class License(BaseModel):
     This MUST be in the form of a URL.
     The `url` field is mutually exclusive of the `identifier` field.
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={
-        "examples": [
-            {"name": "Apache 2.0", "identifier": "Apache-2.0"},
-            {"name": "Apache 2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0.html"},
-        ]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [
+                {"name": "Apache 2.0", "identifier": "Apache-2.0"},
+                {
+                    "name": "Apache 2.0",
+                    "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+                },
+            ]
+        },
+    )

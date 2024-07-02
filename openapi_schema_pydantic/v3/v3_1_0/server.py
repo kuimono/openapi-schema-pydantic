@@ -29,21 +29,27 @@ class Server(BaseModel):
     
     The value is used for substitution in the server's URL template.
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={
-        "examples": [
-            {"url": "https://development.gigantic-server.com/v1", "description": "Development server"},
-            {
-                "url": "https://{username}.gigantic-server.com:{port}/{basePath}",
-                "description": "The production API server",
-                "variables": {
-                    "username": {
-                        "default": "demo",
-                        "description": "this value is assigned by the service provider, "
-                        "in this example `gigantic-server.com`",
-                    },
-                    "port": {"enum": ["8443", "443"], "default": "8443"},
-                    "basePath": {"default": "v2"},
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [
+                {
+                    "url": "https://development.gigantic-server.com/v1",
+                    "description": "Development server",
                 },
-            },
-        ]
-    })
+                {
+                    "url": "https://{username}.gigantic-server.com:{port}/{basePath}",
+                    "description": "The production API server",
+                    "variables": {
+                        "username": {
+                            "default": "demo",
+                            "description": "this value is assigned by the service provider, "
+                            "in this example `gigantic-server.com`",
+                        },
+                        "port": {"enum": ["8443", "443"], "default": "8443"},
+                        "basePath": {"default": "v2"},
+                    },
+                },
+            ]
+        },
+    )

@@ -46,12 +46,15 @@ class XML(BaseModel):
     Default value is `false`.
     The definition takes effect only when defined alongside `type` being `array` (outside the `items`).
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={
-        "examples": [
-            {"name": "animal"},
-            {"attribute": True},
-            {"wrapped": True},
-            {"namespace": "http://example.com/schema/sample", "prefix": "sample"},
-            {"name": "aliens", "wrapped": True},
-        ]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [
+                {"name": "animal"},
+                {"attribute": True},
+                {"wrapped": True},
+                {"namespace": "http://example.com/schema/sample", "prefix": "sample"},
+                {"name": "aliens", "wrapped": True},
+            ]
+        },
+    )

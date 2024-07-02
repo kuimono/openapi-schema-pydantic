@@ -26,4 +26,9 @@ class Tag(BaseModel):
     """
     Additional external documentation for this tag.
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={"examples": [{"name": "pet", "description": "Pets operations"}]})
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [{"name": "pet", "description": "Pets operations"}]
+        },
+    )

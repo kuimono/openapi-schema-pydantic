@@ -64,21 +64,34 @@ class SecurityScheme(BaseModel):
     **REQUIRED** for `openIdConnect`. OpenId Connect URL to discover OAuth2 configuration values.
     This MUST be in the form of a URL.
     """
-    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
-        "examples": [
-            {"type": "http", "scheme": "basic"},
-            {"type": "apiKey", "name": "api_key", "in": "header"},
-            {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"},
-            {
-                "type": "oauth2",
-                "flows": {
-                    "implicit": {
-                        "authorizationUrl": "https://example.com/api/oauth/dialog",
-                        "scopes": {"write:pets": "modify pets in your account", "read:pets": "read your pets"},
-                    }
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
+            "examples": [
+                {"type": "http", "scheme": "basic"},
+                {"type": "apiKey", "name": "api_key", "in": "header"},
+                {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"},
+                {
+                    "type": "oauth2",
+                    "flows": {
+                        "implicit": {
+                            "authorizationUrl": "https://example.com/api/oauth/dialog",
+                            "scopes": {
+                                "write:pets": "modify pets in your account",
+                                "read:pets": "read your pets",
+                            },
+                        }
+                    },
                 },
-            },
-            {"type": "openIdConnect", "openIdConnectUrl": "https://example.com/openIdConnect"},
-            {"type": "openIdConnect", "openIdConnectUrl": "openIdConnect"},  # #5: allow relative path
-        ]
-    })
+                {
+                    "type": "openIdConnect",
+                    "openIdConnectUrl": "https://example.com/openIdConnect",
+                },
+                {
+                    "type": "openIdConnect",
+                    "openIdConnectUrl": "openIdConnect",
+                },  # #5: allow relative path
+            ]
+        },
+    )

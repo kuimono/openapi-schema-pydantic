@@ -70,8 +70,10 @@ def test_config_example():
 
 
 def _assert_config_examples(schema_type):
-    if getattr(schema_type, "Config", None) and getattr(schema_type.Config, "schema_extra", None):
+    if getattr(schema_type, "Config", None) and getattr(
+        schema_type.Config, "schema_extra", None
+    ):
         examples = schema_type.Config.schema_extra.get("examples")
         for example_dict in examples:
             obj = schema_type(**example_dict)
-            assert obj.__fields_set__
+            assert obj.model_fields_set

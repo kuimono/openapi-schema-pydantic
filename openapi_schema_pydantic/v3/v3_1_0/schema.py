@@ -106,7 +106,9 @@ class Schema(BaseModel):
     annotation collection purposes, in such cases.
     """
 
-    schema_else: Optional[Union[Reference, "Schema"]] = Field(default=None, alias="else")
+    schema_else: Optional[Union[Reference, "Schema"]] = Field(
+        default=None, alias="else"
+    )
     """
     This keyword's value MUST be a valid JSON Schema.
 
@@ -829,84 +831,108 @@ class Schema(BaseModel):
     Deprecated: The example property has been deprecated in favor of the JSON Schema examples keyword.
     Use of example is discouraged, and later versions of this specification may remove it.
     """
-    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
-        "examples": [
-            {"type": "string", "format": "email"},
-            {
-                "type": "object",
-                "required": ["name"],
-                "properties": {
-                    "name": {"type": "string"},
-                    "address": {"$ref": "#/components/schemas/Address"},
-                    "age": {"type": "integer", "format": "int32", "minimum": 0},
-                },
-            },
-            {"type": "object", "additionalProperties": {"type": "string"}},
-            {"type": "object", "additionalProperties": {"$ref": "#/components/schemas/ComplexModel"}},
-            {
-                "type": "object",
-                "properties": {"id": {"type": "integer", "format": "int64"}, "name": {"type": "string"}},
-                "required": ["name"],
-                "example": {"name": "Puma", "id": 1},
-            },
-            {
-                "type": "object",
-                "required": ["message", "code"],
-                "properties": {
-                    "message": {"type": "string"},
-                    "code": {"type": "integer", "minimum": 100, "maximum": 600},
-                },
-            },
-            {
-                "allOf": [
-                    {"$ref": "#/components/schemas/ErrorModel"},
-                    {"type": "object", "required": ["rootCause"], "properties": {"rootCause": {"type": "string"}}},
-                ]
-            },
-            {
-                "type": "object",
-                "discriminator": {"propertyName": "petType"},
-                "properties": {"name": {"type": "string"}, "petType": {"type": "string"}},
-                "required": ["name", "petType"],
-            },
-            {
-                "description": "A representation of a cat. "
-                "Note that `Cat` will be used as the discriminator value.",
-                "allOf": [
-                    {"$ref": "#/components/schemas/Pet"},
-                    {
-                        "type": "object",
-                        "properties": {
-                            "huntingSkill": {
-                                "type": "string",
-                                "description": "The measured skill for hunting",
-                                "default": "lazy",
-                                "enum": ["clueless", "lazy", "adventurous", "aggressive"],
-                            }
-                        },
-                        "required": ["huntingSkill"],
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
+            "examples": [
+                {"type": "string", "format": "email"},
+                {
+                    "type": "object",
+                    "required": ["name"],
+                    "properties": {
+                        "name": {"type": "string"},
+                        "address": {"$ref": "#/components/schemas/Address"},
+                        "age": {"type": "integer", "format": "int32", "minimum": 0},
                     },
-                ],
-            },
-            {
-                "description": "A representation of a dog. "
-                "Note that `Dog` will be used as the discriminator value.",
-                "allOf": [
-                    {"$ref": "#/components/schemas/Pet"},
-                    {
-                        "type": "object",
-                        "properties": {
-                            "packSize": {
-                                "type": "integer",
-                                "format": "int32",
-                                "description": "the size of the pack the dog is from",
-                                "default": 0,
-                                "minimum": 0,
-                            }
-                        },
-                        "required": ["packSize"],
+                },
+                {"type": "object", "additionalProperties": {"type": "string"}},
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/components/schemas/ComplexModel"
                     },
-                ],
-            },
-        ]
-    })
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "integer", "format": "int64"},
+                        "name": {"type": "string"},
+                    },
+                    "required": ["name"],
+                    "example": {"name": "Puma", "id": 1},
+                },
+                {
+                    "type": "object",
+                    "required": ["message", "code"],
+                    "properties": {
+                        "message": {"type": "string"},
+                        "code": {"type": "integer", "minimum": 100, "maximum": 600},
+                    },
+                },
+                {
+                    "allOf": [
+                        {"$ref": "#/components/schemas/ErrorModel"},
+                        {
+                            "type": "object",
+                            "required": ["rootCause"],
+                            "properties": {"rootCause": {"type": "string"}},
+                        },
+                    ]
+                },
+                {
+                    "type": "object",
+                    "discriminator": {"propertyName": "petType"},
+                    "properties": {
+                        "name": {"type": "string"},
+                        "petType": {"type": "string"},
+                    },
+                    "required": ["name", "petType"],
+                },
+                {
+                    "description": "A representation of a cat. "
+                    "Note that `Cat` will be used as the discriminator value.",
+                    "allOf": [
+                        {"$ref": "#/components/schemas/Pet"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "huntingSkill": {
+                                    "type": "string",
+                                    "description": "The measured skill for hunting",
+                                    "default": "lazy",
+                                    "enum": [
+                                        "clueless",
+                                        "lazy",
+                                        "adventurous",
+                                        "aggressive",
+                                    ],
+                                }
+                            },
+                            "required": ["huntingSkill"],
+                        },
+                    ],
+                },
+                {
+                    "description": "A representation of a dog. "
+                    "Note that `Dog` will be used as the discriminator value.",
+                    "allOf": [
+                        {"$ref": "#/components/schemas/Pet"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "packSize": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": "the size of the pack the dog is from",
+                                    "default": 0,
+                                    "minimum": 0,
+                                }
+                            },
+                            "required": ["packSize"],
+                        },
+                    ],
+                },
+            ]
+        },
+    )

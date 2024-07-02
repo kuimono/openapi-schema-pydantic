@@ -23,14 +23,17 @@ class Discriminator(BaseModel):
     """
     An object to hold mappings between payload values and schema names or references.
     """
-    model_config = ConfigDict(extra="ignore", json_schema_extra={
-        "examples": [
-            {
-                "propertyName": "petType",
-                "mapping": {
-                    "dog": "#/components/schemas/Dog",
-                    "monster": "https://gigantic-server.com/schemas/Monster/schema.json",
-                },
-            }
-        ]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        json_schema_extra={
+            "examples": [
+                {
+                    "propertyName": "petType",
+                    "mapping": {
+                        "dog": "#/components/schemas/Dog",
+                        "monster": "https://gigantic-server.com/schemas/Monster/schema.json",
+                    },
+                }
+            ]
+        },
+    )

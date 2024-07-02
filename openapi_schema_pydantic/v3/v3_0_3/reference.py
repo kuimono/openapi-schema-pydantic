@@ -14,6 +14,14 @@ class Reference(BaseModel):
 
     ref: str = Field(alias="$ref")
     """**REQUIRED**. The reference string."""
-    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
-        "examples": [{"$ref": "#/components/schemas/Pet"}, {"$ref": "Pet.json"}, {"$ref": "definitions.json#/Pet"}]
-    })
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
+            "examples": [
+                {"$ref": "#/components/schemas/Pet"},
+                {"$ref": "Pet.json"},
+                {"$ref": "definitions.json#/Pet"},
+            ]
+        },
+    )

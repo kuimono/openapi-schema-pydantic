@@ -5,7 +5,7 @@ from pydantic import ConfigDict, BaseModel
 from .components import Components
 from .external_documentation import ExternalDocumentation
 from .info import Info
-from .paths import Paths
+from .paths import Paths, PathItem
 from .security_requirement import SecurityRequirement
 from .server import Server
 from .tag import Tag
@@ -67,3 +67,7 @@ class OpenAPI(BaseModel):
     Additional external documentation.
     """
     model_config = ConfigDict(extra="ignore")
+
+
+OpenAPI.model_rebuild()
+PathItem.model_rebuild()

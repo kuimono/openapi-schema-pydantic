@@ -11,7 +11,9 @@ from .schema import Schema
 class MediaType(BaseModel):
     """Each Media Type Object provides schema and examples for the media type identified by its key."""
 
-    media_type_schema: Optional[Union[Reference, Schema]] = Field(default=None, alias="schema")
+    media_type_schema: Optional[Union[Reference, Schema]] = Field(
+        default=None, alias="schema"
+    )
     """
     The schema defining the content of the request, response, or parameter.
     """
@@ -47,33 +49,37 @@ class MediaType(BaseModel):
     The encoding object SHALL only apply to `requestBody` objects
     when the media type is `multipart` or `application/x-www-form-urlencoded`.
     """
-    model_config = ConfigDict(extra="ignore", populate_by_name=True, json_schema_extra={
-        "examples": [
-            {
-                "schema": {"$ref": "#/components/schemas/Pet"},
-                "examples": {
-                    "cat": {
-                        "summary": "An example of a cat",
-                        "value": {
-                            "name": "Fluffy",
-                            "petType": "Cat",
-                            "color": "White",
-                            "gender": "male",
-                            "breed": "Persian",
+    model_config = ConfigDict(
+        extra="ignore",
+        populate_by_name=True,
+        json_schema_extra={
+            "examples": [
+                {
+                    "schema": {"$ref": "#/components/schemas/Pet"},
+                    "examples": {
+                        "cat": {
+                            "summary": "An example of a cat",
+                            "value": {
+                                "name": "Fluffy",
+                                "petType": "Cat",
+                                "color": "White",
+                                "gender": "male",
+                                "breed": "Persian",
+                            },
                         },
-                    },
-                    "dog": {
-                        "summary": "An example of a dog with a cat's name",
-                        "value": {
-                            "name": "Puma",
-                            "petType": "Dog",
-                            "color": "Black",
-                            "gender": "Female",
-                            "breed": "Mixed",
+                        "dog": {
+                            "summary": "An example of a dog with a cat's name",
+                            "value": {
+                                "name": "Puma",
+                                "petType": "Dog",
+                                "color": "Black",
+                                "gender": "Female",
+                                "breed": "Mixed",
+                            },
                         },
+                        "frog": {"$ref": "#/components/examples/frog-example"},
                     },
-                    "frog": {"$ref": "#/components/examples/frog-example"},
-                },
-            }
-        ]
-    })
+                }
+            ]
+        },
+    )

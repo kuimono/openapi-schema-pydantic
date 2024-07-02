@@ -1,13 +1,12 @@
 import logging
 
-from pydantic import ConfigDict, BaseModel
-from pydantic.schema import schema
+from pydantic import BaseModel, ConfigDict
 
 from openapi_schema_pydantic import Schema, Reference
 
 
 def test_schema():
-    schema = Schema.parse_obj(
+    schema = Schema.model_validate(
         {
             "title": "reference list",
             "description": "schema for list of reference type",
@@ -26,21 +25,36 @@ def test_issue_4():
 
     class TestModel(BaseModel):
         test_field: str
+
         model_config = ConfigDict(extra="forbid")
 
-    schema_definition = schema([TestModel])
-    assert schema_definition == {
-        "definitions": {
-            "TestModel": {
-                "title": "TestModel",
-                "type": "object",
-                "properties": {"test_field": {"title": "Test Field", "type": "string"}},
-                "required": ["test_field"],
-                "additionalProperties": False,
-            }
-        }
+    # Generate the schema using the schema() method of the model class
+    schema_definition = TestModel.model_json_schema()
+
+    expected_schema = {
+        "title": "TestModel",
+        "type": "object",
+        "properties": {"test_field": {"title": "Test Field", "type": "string"}},
+        "required": ["test_field"],
+        "additionalProperties": False,
     }
 
-    # allow "additionalProperties" to have boolean value
-    result = Schema.parse_obj(schema_definition["definitions"]["TestModel"])
-    assert result.additionalProperties is False
+    # Check if the generated schema matches the expected schema
+    assert schema_definition["properties"] == expected_schema["properties"]
+    assert schema_definition["required"] == expected_schema["required"]
+    assert (
+        schema_definition["additionalProperties"]
+        == expected_schema["additionalProperties"]
+    )
+    assert schema_definition["title"] == expected_schema["title"]
+
+    # Validate the schema behavior using Pydantic's BaseModel.model_validate
+    # This simulates loading and validating an object against the schema
+    result = TestModel.model_validate({"test_field": "Example"})
+    assert result.test_field == "Example"
+
+    # Asserting no additional properties are allowed
+    try:
+        TestModel.model_validate({"test_field": "Example", "extra_field": "Not allowed"})
+    except Exception as e:
+        assert isinstance(e, ValueError)

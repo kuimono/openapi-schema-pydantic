@@ -1,8 +1,7 @@
 import logging
-from typing import Any, List, Set, Type, TypeVar
+from typing import Any, List, Set, Type, TypeVar, Optional
 
 from pydantic import BaseModel
-from pydantic.schema import schema
 
 from . import Components, OpenAPI, Reference, Schema
 
@@ -21,53 +20,55 @@ class PydanticSchema(Schema):
 
 def construct_open_api_with_schema_class(
     open_api: OpenAPI,
-    schema_classes: List[Type[PydanticType]] = None,
+    schema_classes: Optional[List[Type[BaseModel]]] = None,
     scan_for_pydantic_schema_reference: bool = True,
     by_alias: bool = True,
+    ref_prefix: str = "#/components/schemas/",
 ) -> OpenAPI:
     """
-    Construct a new OpenAPI object, with the use of pydantic classes to produce JSON schemas
+    Construct a new OpenAPI object, using Pydantic classes to produce JSON schemas.
 
     :param open_api: the base `OpenAPI` object
-    :param schema_classes: pydanitic classes that their schema will be used "#/components/schemas" values
-    :param scan_for_pydantic_schema_reference: flag to indicate if scanning for `PydanticSchemaReference` class
-                                               is needed for "#/components/schemas" value updates
-    :param by_alias: construct schema by alias (default is True)
-    :return: new OpenAPI object with "#/components/schemas" values updated.
-             If there is no update in "#/components/schemas" values, the original `open_api` will be returned.
+    :param schema_classes: list of Pydantic classes whose schemas will be used in "#/components/schemas"
+    :param scan_for_pydantic_schema_reference: flag to indicate if scanning for additional schema references is needed
+    :param by_alias: whether to construct schema by alias (default is True)
+    :param ref_prefix: reference prefix for schema IDs
+    :return: new OpenAPI object with updated "#/components/schemas".
     """
-    new_open_api: OpenAPI = open_api.copy(deep=True)
+    new_open_api: OpenAPI = open_api.model_copy(deep=True)
+    components_schemas = {}
+
     if scan_for_pydantic_schema_reference:
+        # Suppose _handle_pydantic_schema is a function to extract Pydantic classes from new_open_api
         extracted_schema_classes = _handle_pydantic_schema(new_open_api)
-        if schema_classes:
-            schema_classes = list({*schema_classes, *_handle_pydantic_schema(new_open_api)})
-        else:
-            schema_classes = extracted_schema_classes
+        schema_classes = list(set(schema_classes or []) | set(extracted_schema_classes))
 
     if not schema_classes:
         return open_api
 
+    # Sort classes by name for consistent ordering
     schema_classes.sort(key=lambda x: x.__name__)
-    logger.debug(f"schema_classes{schema_classes}")
 
-    # update new_open_api with new #/components/schemas
-    schema_definitions = schema(schema_classes, by_alias=by_alias, ref_prefix=ref_prefix)
+    # Generate schema for each class and update the OpenAPI components
+    for cls in schema_classes:
+        schema = cls.model_json_schema(by_alias=by_alias)
+        definition_name = cls.__name__
+        components_schemas[definition_name] = Schema.model_validate(schema)
+
     if not new_open_api.components:
         new_open_api.components = Components()
+
     if new_open_api.components.schemas:
-        for existing_key in new_open_api.components.schemas:
-            if existing_key in schema_definitions.get("definitions"):
+        for key, value in components_schemas.items():
+            if key in new_open_api.components.schemas:
                 logger.warning(
-                    f'"{existing_key}" already exists in {ref_prefix}. '
-                    f'The value of "{ref_prefix}{existing_key}" will be overwritten.'
+                    f'"{key}" already exists in {ref_prefix}. '
+                    f'The value of "{ref_prefix}{key}" will be overwritten.'
                 )
-        new_open_api.components.schemas.update(
-            {key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions.get("definitions").items()}
-        )
+        new_open_api.components.schemas.update(components_schemas)
     else:
-        new_open_api.components.schemas = {
-            key: Schema.parse_obj(schema_dict) for key, schema_dict in schema_definitions.get("definitions").items()
-        }
+        new_open_api.components.schemas = components_schemas
+
     return new_open_api
 
 
@@ -88,11 +89,13 @@ def _handle_pydantic_schema(open_api: OpenAPI) -> List[Type[PydanticType]]:
 
     def _traverse(obj: Any):
         if isinstance(obj, BaseModel):
-            fields = obj.__fields_set__
+            fields = obj.model_fields_set
             for field in fields:
                 child_obj = obj.__getattribute__(field)
                 if isinstance(child_obj, PydanticSchema):
-                    logger.debug(f"PydanticSchema found in {obj.__repr_name__()}: {child_obj}")
+                    logger.debug(
+                        f"PydanticSchema found in {obj.__repr_name__()}: {child_obj}"
+                    )
                     obj.__setattr__(field, _construct_ref_obj(child_obj))
                     pydantic_types.add(child_obj.schema_class)
                 else:
