@@ -3,7 +3,7 @@ from typing import Union
 
 from pydantic import BaseModel, Field
 
-from openapi_schema_pydantic import (
+from openapi_schema_pydantic_v2 import (
     OpenAPI,
     Info,
     PathItem,
@@ -15,7 +15,7 @@ from openapi_schema_pydantic import (
     Reference,
     Discriminator,
 )
-from openapi_schema_pydantic.util import (
+from openapi_schema_pydantic_v2.util import (
     PydanticSchema,
     construct_open_api_with_schema_class,
 )

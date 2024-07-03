@@ -2,7 +2,7 @@ import logging
 
 from pydantic import BaseModel, ConfigDict
 
-from openapi_schema_pydantic import Schema, Reference
+from openapi_schema_pydantic_v2 import Schema, Reference
 
 
 def test_schema():

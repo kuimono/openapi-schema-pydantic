@@ -15,7 +15,7 @@ The naming of the classes follows the schema in
 ## Try me
 
 ```python
-from openapi_schema_pydantic import OpenAPI, Info, PathItem, Operation, Response
+from openapi_schema_pydantic_v2 import OpenAPI, Info, PathItem, Operation, Response
 
 # Construct OpenAPI by pydantic objects
 open_api = OpenAPI(
@@ -74,7 +74,7 @@ Pydantic is a great tool, allow you to use object / dict / mixed data for for in
 The following examples give the same OpenAPI result as above:
 
 ```python
-from openapi_schema_pydantic import OpenAPI, PathItem, Response
+from openapi_schema_pydantic_v2 import OpenAPI, PathItem, Response
 
 # Construct OpenAPI from dict
 open_api = OpenAPI.parse_obj({
@@ -112,8 +112,8 @@ The approach to deal with this:
 ```python
 from pydantic import BaseModel, Field
 
-from openapi_schema_pydantic import OpenAPI
-from openapi_schema_pydantic.util import PydanticSchema, construct_open_api_with_schema_class
+from openapi_schema_pydantic_v2 import OpenAPI
+from openapi_schema_pydantic_v2.util import PydanticSchema, construct_open_api_with_schema_class
 
 def construct_base_open_api() -> OpenAPI:
     return OpenAPI.parse_obj({
@@ -283,8 +283,8 @@ Some UI renderings (e.g. Swagger) still do not support OpenAPI 3.1.0.
 It is allowed to use the old 3.0.3 version by importing from different paths:
 
 ```python
-from openapi_schema_pydantic.v3.v3_0_3 import OpenAPI, ...
-from openapi_schema_pydantic.v3.v3_0_3.util import PydanticSchema, construct_open_api_with_schema_class
+from openapi_schema_pydantic_v2.v3.v3_0_3 import OpenAPI, ...
+from openapi_schema_pydantic_v2.v3.v3_0_3.util import PydanticSchema, construct_open_api_with_schema_class
 ```
 
 ## License

@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="openapi-schema-pydantic2",
+    name="openapi-schema-pydantic-v2",
     version="0.0.1",
     author="0xsirsaif",
     description="OpenAPI (v3) specification schema as pydantic V2 class",

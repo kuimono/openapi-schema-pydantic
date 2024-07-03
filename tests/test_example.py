@@ -1,6 +1,6 @@
 import logging
 
-from openapi_schema_pydantic import Info, OpenAPI, Operation, PathItem, Response
+from openapi_schema_pydantic_v2 import Info, OpenAPI, Operation, PathItem, Response
 
 
 def test_readme_example():

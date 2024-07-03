@@ -2,7 +2,7 @@ import logging
 
 from pydantic import BaseModel, Field
 
-from openapi_schema_pydantic import (
+from openapi_schema_pydantic_v2 import (
     Info,
     MediaType,
     OpenAPI,
@@ -12,7 +12,7 @@ from openapi_schema_pydantic import (
     RequestBody,
     Response,
 )
-from openapi_schema_pydantic.util import (
+from openapi_schema_pydantic_v2.util import (
     PydanticSchema,
     construct_open_api_with_schema_class,
 )
